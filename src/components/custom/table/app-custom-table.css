@@ -1,0 +1,51 @@
+th,
+.th {
+  padding: 2px 4px;
+  position: relative;
+  font-weight: bold;
+  text-align: center;
+  height: 30px;
+}
+
+.resizer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 6px;
+  background: #d1d5db;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  transition: all 0.1s ease-in-out;
+}
+
+.dark .resizer {
+  background: #374151;
+}
+
+.resizer.ltr {
+  right: 0;
+}
+
+.resizer.rtl {
+  left: 0;
+}
+
+.resizer.isResizing {
+  background: #2041cc;
+  opacity: 1;
+}
+
+.dark .resizer.isResizing {
+  background: #3b82f6;
+}
+
+@media (hover: hover) {
+  .resizer {
+    opacity: 0;
+  }
+
+  *:hover > .resizer {
+    opacity: 1;
+  }
+}
