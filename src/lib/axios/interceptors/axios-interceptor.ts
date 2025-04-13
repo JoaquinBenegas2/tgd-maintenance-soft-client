@@ -3,7 +3,7 @@ import { getSession } from "next-auth/react";
 import { getValidationError } from "../utils/get-validation-error";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACK_END_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
   withCredentials: true,
 });
 
