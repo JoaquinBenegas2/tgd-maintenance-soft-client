@@ -28,10 +28,10 @@ export default function AppSidebar() {
       <SidebarContent>
         <SidebarItem
           icon={<TbBuildingFactory className="h-5 w-5" />}
-          text="Factories"
-          tooltip="Factories"
-          href="/factories"
-          isActive={pathname === "/factories"}
+          text="Plants"
+          tooltip="Plants"
+          href="/plants"
+          isActive={pathname === "/plants"}
         />
         <SidebarItem
           icon={<MdPeople className="h-5 w-5" />}

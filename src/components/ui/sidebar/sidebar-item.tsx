@@ -26,11 +26,12 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
 
   const content = (
     <button
-      className={`flex w-full items-center rounded-none py-2 px-3 font-normal transition-all duration-300 text-sm text-sidebar-foreground hover:text-sidebar-primary cursor-pointer border-sidebar hover:bg-sidebar-accent/25 ${
+      className={`flex w-full items-center rounded-none py-2 px-3 font-normal  duration-150 text-sm text-sidebar-foreground hover:text-sidebar-primary cursor-pointer border-sidebar hover:bg-sidebar-accent/25 ${
         isActive &&
         "shadow-[inset_6px_0_0_0_var(--tw-shadow-color)] shadow-sidebar-primary text-sidebar-primary "
       } ${className}`}
       onClick={onClick}
+      style={{ transitionProperty: "background-color, color" }}
     >
       {icon && <span className="inline-flex w-5 h-5 justify-center items-center mr-3">{icon}</span>}
       <span className={`overflow-hidden whitespace-nowrap`}>{text}</span>
