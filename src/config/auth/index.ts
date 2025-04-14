@@ -32,11 +32,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     //-- JWT Callback
-    jwt: async ({ token, account, user }) => {
-      if (account && user) {
+    jwt: async ({ token, account, user, profile }) => {
+      if (account && user && profile) {
         token.accessToken = account.access_token;
         token.expiresAt = account.expires_at && account.expires_at * 1000; // Convertir a milisegundos
         token.user = user;
+        token.user.auth0Id = profile.sub;
+        token.user.roles = profile["https://tgd-maintenance-soft-api/roles"] as string[];
       }
 
       return token;
@@ -46,6 +48,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     session: async ({ session, token }) => {
       session.accessToken = token.accessToken;
       session.expiresAt = token.expiresAt;
+      session.user.auth0Id = token.user.auth0Id;
+      session.user.roles = token.user.roles;
 
       return session;
     },

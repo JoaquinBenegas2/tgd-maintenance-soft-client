@@ -20,7 +20,7 @@ const updateHeaders = async (request: AxiosRequestConfig) => {
 };
 
 axiosInstance.interceptors.request.use((request: any) => {
-  if (request.url?.includes("/auth")) return request;
+  if (request.url?.includes("/auth/")) return request;
 
   return updateHeaders(request);
 });
