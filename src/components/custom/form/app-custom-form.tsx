@@ -37,7 +37,7 @@ export default function CustomForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit} className={`grid ${gridColumnClass} -grid-cols-12 gap-4`}>
+      <form onSubmit={handleSubmit} className={`grid w-full ${gridColumnClass} -grid-cols-12 gap-4`}>
         {fields.map((field) => {
           const fieldSpan = (field.fieldSpan as keyof typeof COLUMN_SPANS) || formColumns || 1;
           const spanClass = COLUMN_SPANS[fieldSpan];

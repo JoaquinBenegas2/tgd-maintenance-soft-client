@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { InputTypeProps } from "../../models/custom-form-models";
 
-export default function SelectInput({ field, form }: InputTypeProps) {
+export default function SelectInput({ field, form, className }: InputTypeProps) {
   return (
     <Controller
       name={field.name}
@@ -21,7 +21,7 @@ export default function SelectInput({ field, form }: InputTypeProps) {
           value={controllerField.value}
           onValueChange={controllerField.onChange}
         >
-          <SelectTrigger>
+          <SelectTrigger className={className}>
             <SelectValue placeholder={field.placeholder} />
           </SelectTrigger>
           <SelectContent>

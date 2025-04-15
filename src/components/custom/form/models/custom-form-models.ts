@@ -91,4 +91,5 @@ export type UiFields<T> = {
 export interface InputTypeProps {
   field: FormFieldConfig;
   form: UseFormReturn;
+  className?: string;
 }

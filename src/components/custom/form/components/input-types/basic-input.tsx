@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 
 interface FieldTypeInterface {
   fieldType: "text" | "email" | "number";
-  className?: string;
 }
 
 export default function BasicInput({

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { InputTypeProps } from "../../models/custom-form-models";
 
-export default function DateInput({ field, form }: InputTypeProps) {
+export default function DateInput({ field, form, className }: InputTypeProps) {
   return (
     <Controller
       name={field.name}
@@ -19,7 +19,8 @@ export default function DateInput({ field, form }: InputTypeProps) {
               variant={"outline"}
               className={cn(
                 "w-full justify-start text-left font-normal",
-                !controllerField.value && "text-muted-foreground"
+                !controllerField.value && "text-muted-foreground",
+                className
               )}
             >
               <CalendarIcon />

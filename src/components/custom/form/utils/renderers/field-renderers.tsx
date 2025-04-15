@@ -24,22 +24,22 @@ export const renderField = (
       return <BasicInput field={field} form={form} fieldType={fieldType} className={className} />;
 
     case "date":
-      return <DateInput field={field} form={form} />;
+      return <DateInput field={field} form={form} className={className} />;
 
     case "textarea":
-      return <TextareaInput field={field} form={form} />;
+      return <TextareaInput field={field} form={form} className={className} />;
 
     case "select":
-      return <SelectInput field={field} form={form} />;
+      return <SelectInput field={field} form={form} className={className} />;
 
     case "combobox":
-      return <ComboboxInput field={field} form={form} />;
+      return <ComboboxInput field={field} form={form} className={className} />;
 
     case "checkbox":
-      return <CheckboxInput field={field} form={form} />;
+      return <CheckboxInput field={field} form={form} className={className} />;
 
     case "colorpicker":
-      return <ColorPickerInput field={field} form={form} />;
+      return <ColorPickerInput field={field} form={form} className={className} />;
 
     default:
       return null;

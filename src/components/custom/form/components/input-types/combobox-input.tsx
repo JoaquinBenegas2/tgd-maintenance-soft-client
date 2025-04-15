@@ -14,7 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { SelectLabel } from "@/components/ui/select";
 import { InputTypeProps } from "../../models/custom-form-models";
 
-export default function ComboboxInput({ field, form }: InputTypeProps) {
+export default function ComboboxInput({ field, form, className }: InputTypeProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -28,7 +28,7 @@ export default function ComboboxInput({ field, form }: InputTypeProps) {
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className="w-full justify-between"
+              className={"w-full justify-between" + className}
             >
               {controllerField.value
                 ? field.options?.find((option: any) => option.value === controllerField.value)
