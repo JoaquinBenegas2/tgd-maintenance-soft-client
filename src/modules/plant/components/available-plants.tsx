@@ -11,7 +11,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
 import { cn } from "@/lib/utils";
 import { useGetAssignedPlants } from "@/modules/user/handlers/user-handler";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { FaUserCog } from "react-icons/fa";
 import { TbBuildingFactory } from "react-icons/tb";
@@ -21,13 +20,9 @@ const PlantImages = [PlantImage1, PlantImage2, PlantImage3];
 const getPlantImage = (index: number) => PlantImages[index % PlantImages.length];
 
 export default function AvailablePlants() {
-  const { data: session } = useSession();
-
   const isMobile = useIsMobile();
 
-  const userId = session?.user?.auth0Id || "";
-
-  const { data: plants, isLoading } = useGetAssignedPlants(userId);
+  const { data: plants, isLoading } = useGetAssignedPlants();
 
   return (
     <FlexContainer className="mt-8">
