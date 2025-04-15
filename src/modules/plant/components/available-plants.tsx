@@ -8,6 +8,8 @@ import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
+import { cn } from "@/lib/utils";
 import { useGetAssignedPlants } from "@/modules/user/handlers/user-handler";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -21,13 +23,15 @@ const getPlantImage = (index: number) => PlantImages[index % PlantImages.length]
 export default function AvailablePlants() {
   const { data: session } = useSession();
 
+  const isMobile = useIsMobile();
+
   const userId = session?.user?.auth0Id || "";
 
   const { data: plants, isLoading } = useGetAssignedPlants(userId);
 
   return (
     <FlexContainer className="mt-8">
-      <BentoGrid className="grid-cols-3 auto-rows-auto">
+      <BentoGrid className="grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 auto-rows-auto">
         {/* Loading */}
         {isLoading && (
           <>
@@ -47,12 +51,16 @@ export default function AvailablePlants() {
             href="/plant"
             cta="View Plant"
             className="h-64 col-span-1"
+            alwaysActive={isMobile}
             background={
               <Image
                 src={getPlantImage(index)}
                 alt="Plant"
                 fill
-                className="absolute object-cover object-center opacity-25 transition-all duration-300 ease-out group-hover:scale-105 group-hover:opacity-50 [mask-image:linear-gradient(to_top,transparent_25%,#000_80%)]"
+                className={cn(
+                  "absolute object-cover object-center opacity-25 transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_25%,#000_80%)]",
+                  isMobile ? "scale-105 opacity-35" : "group-hover:scale-105 group-hover:opacity-50"
+                )}
               />
             }
             nextToTheButton={
