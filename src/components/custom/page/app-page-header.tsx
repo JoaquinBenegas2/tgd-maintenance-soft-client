@@ -1,14 +1,19 @@
 import React from "react";
+import FlexContainer from "../flex-container/flex-container";
 
 interface PageHeaderProps {
+  icon?: React.ReactNode;
   title?: string;
   description?: string;
 }
 
-export default function PageHeader({ title, description }: PageHeaderProps) {
+export default function PageHeader({ title, description, icon }: PageHeaderProps) {
   return (
     <header className="mb-8">
-      <h1 className="text-3xl font-bold text-foreground mb-2">{title}</h1>
+      <FlexContainer align="center" className=" mb-2">
+        {icon}
+        <h1 className="text-3xl font-bold text-foreground">{title}</h1>
+      </FlexContainer>
       <p className="text-base text-foreground/75">{description}</p>
     </header>
   );
