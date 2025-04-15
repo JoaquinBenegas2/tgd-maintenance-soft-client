@@ -12,12 +12,15 @@ interface BentoGridProps extends ComponentPropsWithoutRef<"div"> {
 interface BentoCardProps extends ComponentPropsWithoutRef<"div"> {
   name: string;
   className: string;
-  background: ReactNode;
-  Icon: React.ElementType;
-  description: string;
+  background?: ReactNode;
+  Icon?: React.ElementType;
+  topComponent?: ReactNode;
+  description: ReactNode;
+  subDescription?: ReactNode;
   nextToTheButton?: ReactNode;
-  href: string;
+  href?: string;
   cta: string;
+  ctaVariant?: "secondary" | "destructive" | "ghost" | "outline" | "link" | "default";
   alwaysActive?: boolean;
 }
 
@@ -34,11 +37,14 @@ const BentoCard = ({
   className,
   background,
   Icon,
+  topComponent,
   description,
+  subDescription,
   nextToTheButton,
   alwaysActive,
   href,
   cta,
+  ctaVariant,
   ...props
 }: BentoCardProps) => (
   <div
@@ -59,13 +65,18 @@ const BentoCard = ({
         alwaysActive ? "-translate-y-10" : "group-hover:-translate-y-10"
       }`}
     >
-      <Icon
-        className={`h-12 w-12 origin-left transform-gpu text-neutral-700 transition-all duration-300 ease-in-out ${
-          alwaysActive ? "scale-75" : "group-hover:scale-75"
-        }`}
-      />
+      {topComponent
+        ? topComponent
+        : Icon && (
+            <Icon
+              className={`h-12 w-12 origin-left transform-gpu text-neutral-700 transition-all duration-300 ease-in-out ${
+                alwaysActive ? "scale-75" : "group-hover:scale-75"
+              }`}
+            />
+          )}
       <h3 className="text-xl font-semibold text-neutral-700 dark:text-neutral-300">{name}</h3>
       <p className="max-w-lg text-neutral-400">{description}</p>
+      {subDescription}
     </div>
 
     <div
@@ -76,7 +87,7 @@ const BentoCard = ({
           : "group-hover:translate-y-0 group-hover:opacity-100"
       )}
     >
-      <Button variant="ghost" asChild size="sm" className="pointer-events-auto">
+      <Button variant={ctaVariant || "ghost"} asChild size="sm" className="pointer-events-auto">
         <a href={href}>
           {cta}
           <ArrowRightIcon className="ms-2 h-4 w-4 rtl:rotate-180" />
