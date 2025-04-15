@@ -1,3 +1,5 @@
+"use client";
+
 import FlexContainer from "@/components/custom/flex-container/flex-container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -6,6 +8,7 @@ import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useRef, useState } from "react";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { UserResponseDto } from "../models/user-model";
 import UserDetailSheet from "./user-detail-sheet";
@@ -32,9 +35,22 @@ const roleClasses = {
 export default function UserCard({ user }: UserCardProps) {
   const roleStyle = roleClasses[user.role as keyof typeof roleClasses];
 
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  const formRef = useRef<{ resetForm: () => void }>(null);
+
   return (
     <>
-      <Sheet>
+      <Sheet
+        open={sheetOpen}
+        onOpenChange={(open) => {
+          setSheetOpen(open);
+
+          if (!open) {
+            formRef.current?.resetForm();
+          }
+        }}
+      >
         <Card className="relative">
           <CardContent className="flex flex-row gap-4">
             <FlexContainer align="center" wrap="nowrap">
@@ -79,7 +95,7 @@ export default function UserCard({ user }: UserCardProps) {
             </Tooltip>
           </TooltipProvider>
         </Card>
-        <UserDetailSheet />
+        <UserDetailSheet user={user} ref={formRef} />
       </Sheet>
     </>
   );
