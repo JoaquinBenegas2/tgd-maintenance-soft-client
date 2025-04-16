@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/sheet";
 import { Pen } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCreateUser, useUpdateUser } from "../handlers/user-handler";
 import { UserRequestDto, UserResponseDto } from "../models/user-model";
 
@@ -42,6 +42,12 @@ const sheetText = {
   },
 };
 
+const roleValues = {
+  PLANT_MANAGER: "rol_j7iXqrWyAgIoJSTm",
+  PLANT_SUPERVISOR: "rol_7iVeknbdU4PCDZor",
+  PLANT_OPERATOR: "rol_dqX48DKzG2ve0KLY",
+};
+
 const UserRequestSheet = ({
   user,
   open,
@@ -53,7 +59,7 @@ const UserRequestSheet = ({
   const { mutate: createUser, isPending: isCreating } = useCreateUser();
   const { mutate: updateUser, isPending: isUpdating } = useUpdateUser();
 
-  const { form, renderField, resetForm, fields } = useCustomForm<UserRequestDto>({
+  const { form, renderField, resetForm, fields } = useCustomForm<UserRequestDto & { confirmPassword: string }>({
     fields: [
       {
         name: "name",
@@ -63,7 +69,7 @@ const UserRequestSheet = ({
         defaultValue: user?.name,
         disabled: !editMode && requestType !== "create",
         validations: {
-          required: { value: true, message: "Name is required" },
+          required: { value: requestType === "create", message: "Name is required" },
           minLength: { value: 2, message: "Name must be at least 2 characters" },
           maxLength: { value: 50, message: "Name must be at most 50 characters" },
         },
@@ -76,7 +82,7 @@ const UserRequestSheet = ({
         defaultValue: user?.email,
         disabled: !editMode && requestType !== "create",
         validations: {
-          required: { value: true, message: "Email is required" },
+          required: { value: requestType === "create", message: "Email is required" },
           pattern: {
             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
             message: "Email must be a valid address",
@@ -93,10 +99,10 @@ const UserRequestSheet = ({
           { value: "rol_7iVeknbdU4PCDZor", label: "Supervisor" },
           { value: "rol_dqX48DKzG2ve0KLY", label: "Operator" },
         ],
-        defaultValue: user?.role,
+        defaultValue: roleValues[(user?.role as keyof typeof roleValues) || ""],
         disabled: !editMode && requestType !== "create",
         validations: {
-          required: { value: true, message: "Role is required" },
+          required: { value: requestType === "create", message: "Role is required" },
         },
       },
       {
@@ -104,22 +110,27 @@ const UserRequestSheet = ({
         label: "Password",
         type: "password",
         placeholder: "User password",
-        hideField: !editMode && requestType !== "create",
+        hideField: requestType !== "create",
         validations: {
-          required: { value: true, message: "Password is required" },
-          minlength: {
-            value: 8,
-            message: "Password must be at least 8 characters",
-          },
-          maxlength: {
+          required: { value: requestType === "create", message: "Password is required" },
+          minLength:
+            requestType === "create"
+              ? {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                }
+              : undefined,
+          maxLength: {
             value: 72,
             message: "Password must be at most 72 characters",
           },
-          pattern: {
-            // At least 1 lowercase, 1 uppercase, 1 number
-            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-            message: "Password must contain uppercase, lowercase letters and a number",
-          },
+          pattern:
+            requestType === "create"
+              ? {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+                  message: "Password must contain uppercase, lowercase, and a number",
+                }
+              : undefined,
         },
       },
       {
@@ -127,9 +138,9 @@ const UserRequestSheet = ({
         label: "Confirm password",
         type: "password",
         placeholder: "Confirm password",
-        hideField: !editMode && requestType !== "create",
+        hideField: requestType !== "create",
         validations: {
-          required: { value: true, message: "Please confirm your password" },
+          required: { value: requestType === "create", message: "Please confirm your password" },
           custom: [
             {
               value: ({ password, confirmPassword }) => password === confirmPassword,
@@ -174,6 +185,19 @@ const UserRequestSheet = ({
   };
 
   const handleSubmit = form.handleSubmit((values) => onSubmit(values));
+
+  useEffect(() => {
+    if (user && requestType === "update") {
+      resetForm({
+        name: user.name,
+        email: user.email,
+        role_id: roleValues[user.role as keyof typeof roleValues],
+        password: "",
+        confirmPassword: "",
+      });
+    }
+  }, [user]);
+  
 
   return (
     <Sheet
@@ -248,7 +272,10 @@ const UserRequestSheet = ({
               <Button
                 variant={"secondary"}
                 type="button"
-                onClick={() => setEditMode(false)}
+                onClick={() => {
+                  setEditMode(false);
+                  resetForm();
+                }}
                 disabled={isUpdating}
               >
                 Cancel

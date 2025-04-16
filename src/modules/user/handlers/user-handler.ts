@@ -6,10 +6,11 @@ import { userService } from "@/modules/user/services/user-service";
 
 const QUERY_KEY = "users";
 
-export const { useCreate: useCreateUser, useUpdate: useUpdateUser } = createReactQueryHandlers(
-  userService,
-  QUERY_KEY
-);
+export const {
+  useCreate: useCreateUser,
+  useUpdate: useUpdateUser,
+  useDelete: useDeleteUser,
+} = createReactQueryHandlers(userService, QUERY_KEY);
 
 export const useGetAssignedPlants = () => {
   return useCustomQuery<PlantResponseDto[]>([QUERY_KEY, "assigned-plants"], () =>
