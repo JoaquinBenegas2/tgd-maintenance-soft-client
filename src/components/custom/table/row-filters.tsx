@@ -92,7 +92,7 @@ export default function RowFilters({ filters, onFiltersChange, resetPageIndex }:
     <div className="relative">
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="outline" className="border-r rounded-none" aria-label="Toggle filters">
+          <Button variant="outline" className="border-r rounded-none shadow-none" aria-label="Toggle filters">
             <FilterIcon className="w-5 h-5" />
           </Button>
         </PopoverTrigger>
@@ -120,7 +120,7 @@ export default function RowFilters({ filters, onFiltersChange, resetPageIndex }:
                         value={filter.selectedValue}
                         onValueChange={(newValue) => handleValueChange(filter.id, newValue)}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="w-full">
                           <SelectValue placeholder={`Select ${filter.label}`} />
                         </SelectTrigger>
                         <SelectContent>

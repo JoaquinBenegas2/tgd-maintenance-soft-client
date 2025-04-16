@@ -317,7 +317,7 @@ export default function CustomTable<T>({
       <div className="flex flex-col gap-3 items-start md:items-center md:justify-between md:flex-row">
         <div
           className={clsx(
-            "flex items-center  rounded-lg shadow-sm  max-w-xs ",
+            "flex items-center rounded-lg max-w-xs ",
             showSearchBar && "w-full min-w-72"
           )}
         >
@@ -334,7 +334,7 @@ export default function CustomTable<T>({
           {showSearchBar && (
             <Input
               placeholder="Search..."
-              className="border-l-0 shadow-none"
+              className="border-l-0 rounded-l-none shadow-none"
               value={inputValue}
               onChange={(e) => handleValueChange(e.target.value)}
             />
@@ -349,7 +349,7 @@ export default function CustomTable<T>({
       </div>
 
       {/* Table */}
-      <div className="overflow-auto border" style={{ height: height }}>
+      <div className="overflow-auto" style={{ height: height }}>
         <Table className="min-w-full" {...{ style: { width: table.getCenterTotalSize() } }}>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
