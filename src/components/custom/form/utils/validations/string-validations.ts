@@ -49,7 +49,7 @@ export const applyMaxLengthValidation = (
 
 export const applyPatternValidation = (
   validation: ZodString,
-  rule: ValidationRule<string> | undefined,
+  rule: ValidationRule<RegExp> | undefined,
   defaultMessage: string
 ) => {
   if (rule) {

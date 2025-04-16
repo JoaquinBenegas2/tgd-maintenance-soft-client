@@ -36,7 +36,7 @@ export interface FieldValidations {
   max?: ValidationRule<number>;
   minLength?: ValidationRule<number>;
   maxLength?: ValidationRule<number>;
-  pattern?: ValidationRule<string>;
+  pattern?: ValidationRule<RegExp>;
   from?: ValidationRule<Date>;
   to?: ValidationRule<Date>;
   custom?: ValidationRule<CustomValidator>[];

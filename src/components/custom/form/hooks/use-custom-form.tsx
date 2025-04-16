@@ -26,7 +26,10 @@ export default function useCustomForm<T>(formConfig: CustomFormConfig) {
 
   const gridColumnClass = GRID_COLUMNS[(formColumns as keyof typeof GRID_COLUMNS) || 1];
 
-  const resetForm = useCallback(() => form.reset(), [form]);
+  const resetForm = useCallback((values?: Partial<T>) => {
+    form.reset(values ?? undefined);
+  }, [form]);
+  
 
   const uiFields = useMemo(() => {
     return fields.reduce((acc, field) => {
