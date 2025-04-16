@@ -53,6 +53,8 @@ export interface BaseFormFieldConfig {
   validations?: FieldValidations;
   fieldSpan?: number;
   hideField?: boolean;
+  disabled?: boolean;
+  readOnly?: boolean;
 }
 
 type DateFieldConfig = Omit<BaseFormFieldConfig, "type" | "defaultValue"> & {

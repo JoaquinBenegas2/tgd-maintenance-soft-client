@@ -20,6 +20,7 @@ export const renderField = (
   switch (fieldType) {
     case "text":
     case "email":
+    case "password":
     case "number":
       return <BasicInput field={field} form={form} fieldType={fieldType} className={className} />;
 

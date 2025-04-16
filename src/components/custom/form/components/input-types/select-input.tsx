@@ -20,6 +20,7 @@ export default function SelectInput({ field, form, className }: InputTypeProps) 
           {...controllerField}
           value={controllerField.value}
           onValueChange={controllerField.onChange}
+          disabled={field.disabled}
         >
           <SelectTrigger className={className}>
             <SelectValue placeholder={field.placeholder} />

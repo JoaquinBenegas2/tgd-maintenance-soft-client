@@ -4,7 +4,7 @@ import { Controller } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 
 interface FieldTypeInterface {
-  fieldType: "text" | "email" | "number";
+  fieldType: "text" | "email" | "number" | "password";
 }
 
 export default function BasicInput({
@@ -24,6 +24,8 @@ export default function BasicInput({
           placeholder={field.placeholder}
           {...controllerField}
           className={"focus-visible:ring-0" + " " + className}
+          disabled={field.disabled}
+          readOnly={field.readOnly}
         />
       )}
     />

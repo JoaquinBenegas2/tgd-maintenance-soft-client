@@ -55,6 +55,7 @@ const ColorPicker = forwardRef<
     </Popover>
   );
 });
+
 ColorPicker.displayName = "ColorPicker";
 
 export { ColorPicker };

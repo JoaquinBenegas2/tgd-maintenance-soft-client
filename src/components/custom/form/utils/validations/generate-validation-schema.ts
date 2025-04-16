@@ -19,6 +19,7 @@ export const generateValidationSchema = (fields: FormFieldConfig[]) => {
     switch (fieldType) {
       case "text":
       case "textarea":
+      case "password":
       case "email":
         validation = applyStringValidations(z.string(), field.validations);
         break;
