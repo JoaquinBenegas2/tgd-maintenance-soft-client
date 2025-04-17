@@ -19,7 +19,8 @@ export type FormFieldType =
   | "checkbox"
   | "colorpicker"
   | "icon"
-  | "file";
+  | "file"
+  | "boolean";
 
 export interface SelectOption {
   label: string;
@@ -67,7 +68,12 @@ type NumberFieldConfig = Omit<BaseFormFieldConfig, "type" | "defaultValue"> & {
   defaultValue: number | string;
 };
 
-export type FormFieldConfig = BaseFormFieldConfig | DateFieldConfig | NumberFieldConfig;
+type BooleanFieldConfig = Omit<BaseFormFieldConfig, "type" | "defaultValue"> & {
+  type: "boolean";
+  defaultValue: boolean;
+};
+
+export type FormFieldConfig = BaseFormFieldConfig | DateFieldConfig | NumberFieldConfig | BooleanFieldConfig;
 
 export interface CustomFormConfig {
   formColumns?: number;
