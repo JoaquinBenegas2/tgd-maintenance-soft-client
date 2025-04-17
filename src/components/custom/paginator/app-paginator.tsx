@@ -60,7 +60,7 @@ export default function Paginator({
   };
 
   return (
-    <div className="flex flex-col gap-2 md:flex-row md:justify-between">
+    <div className="flex gap-2 justify-between">
       {/* Page Size Selector */}
       <div className="flex items-center gap-2">
         <Select
@@ -92,6 +92,7 @@ export default function Paginator({
               variant="ghost"
               onClick={() => onPageChange(pageIndex - 1)}
               disabled={pageIndex <= 1}
+              className="border-1 border-input md:border-none"
             >
               <ChevronLeft />
             </Button>
@@ -116,6 +117,7 @@ export default function Paginator({
           <PaginationItem>
             <Button
               variant="ghost"
+              className="border-1 border-input md:border-none"
               onClick={() => onPageChange(pageIndex + 1)}
               disabled={pageIndex >= pageCount}
             >

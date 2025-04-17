@@ -314,11 +314,11 @@ export default function CustomTable<T>({
 
   return (
     <div className="flex flex-col space-y-2">
-      <div className="flex flex-col gap-3 items-start md:items-center md:justify-between md:flex-row">
+      <div className="flex gap-3 justify-between items-center">
         <div
           className={clsx(
             "flex items-center rounded-lg max-w-xs ",
-            showSearchBar && "w-full min-w-72"
+            showSearchBar && "w-full min-w-60 md:min-w-72"
           )}
         >
           {/* Row Filters */}
@@ -349,7 +349,7 @@ export default function CustomTable<T>({
       </div>
 
       {/* Table */}
-      <div className="overflow-auto" style={{ height: height }}>
+      <div className="overflow-auto border mt-2 md:mt-0 md:border-0" style={{ height: height }}>
         <Table className="min-w-full" {...{ style: { width: table.getCenterTotalSize() } }}>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
