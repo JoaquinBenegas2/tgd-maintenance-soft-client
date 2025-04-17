@@ -4,16 +4,11 @@ import PlantImage1 from "@/assets/images/plant-image-1.jpg";
 import PlantImage2 from "@/assets/images/plant-image-2.jpg";
 import PlantImage3 from "@/assets/images/plant-image-3.jpg";
 import FlexContainer from "@/components/custom/flex-container/flex-container";
-import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
-import { Button } from "@/components/ui/button";
+import { BentoGrid } from "@/components/magicui/bento-grid";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
-import { cn } from "@/lib/utils";
 import { useGetAssignedPlants } from "@/modules/user/handlers/user-handler";
-import Image from "next/image";
-import { FaUserCog } from "react-icons/fa";
-import { TbBuildingFactory } from "react-icons/tb";
+import PlantBentoCard from "./plant-bento-card";
 
 const PlantImages = [PlantImage1, PlantImage2, PlantImage3];
 
@@ -38,42 +33,11 @@ export default function AvailablePlants() {
 
         {/* Plants */}
         {plants?.map((plant, index) => (
-          <BentoCard
+          <PlantBentoCard
+            plant={plant}
             key={plant.id}
-            Icon={TbBuildingFactory}
-            name={plant.name}
-            description={plant.location}
-            href="/plant"
-            cta="View Plant"
-            className="h-64 col-span-1"
+            image={getPlantImage(index)}
             alwaysActive={isMobile}
-            background={
-              <Image
-                src={getPlantImage(index)}
-                alt="Plant"
-                fill
-                className={cn(
-                  "absolute object-cover object-center opacity-25 transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_25%,#000_80%)]",
-                  isMobile ? "scale-105 opacity-35" : "group-hover:scale-105 group-hover:opacity-50"
-                )}
-              />
-            }
-            nextToTheButton={
-              <FlexContainer justify="end" className="w-full">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button variant={"ghost"} className="pointer-events-auto rounded-full">
-                        <FaUserCog className="scale-150" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Manage users</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </FlexContainer>
-            }
           />
         ))}
       </BentoGrid>

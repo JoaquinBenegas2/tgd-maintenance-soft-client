@@ -22,7 +22,7 @@ import { Pen } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useCreateUser, useUpdateUser } from "../handlers/user-handler";
-import { UserRequestDto, UserResponseDto } from "../models/user-model";
+import { roleValues, UserRequestDto, UserResponseDto } from "../models/user-model";
 
 interface UserRequestSheetProps {
   user?: UserResponseDto;
@@ -40,12 +40,6 @@ const sheetText = {
     title: "User details",
     description: "Make changes to the user here. Click save when youre done.",
   },
-};
-
-const roleValues = {
-  PLANT_MANAGER: "rol_j7iXqrWyAgIoJSTm",
-  PLANT_SUPERVISOR: "rol_7iVeknbdU4PCDZor",
-  PLANT_OPERATOR: "rol_dqX48DKzG2ve0KLY",
 };
 
 const UserRequestSheet = ({
