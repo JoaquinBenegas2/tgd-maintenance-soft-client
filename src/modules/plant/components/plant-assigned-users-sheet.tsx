@@ -53,7 +53,7 @@ export default function PlantAssignedUsersSheet({
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent className="translate-y-8">
-                  <p>Add user</p>
+                  <p>Assign user</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
