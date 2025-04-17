@@ -1,3 +1,5 @@
+"use client";
+
 import { useDebounce } from "@/hooks/debounce/use-debounce";
 import { useReducer } from "react";
 

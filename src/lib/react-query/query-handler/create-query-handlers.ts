@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 import { useCancelableCustomQuery, useCustomMutation } from "../custom/custom-query";
 import useFiltersState from "../hooks/use-filters-state";
