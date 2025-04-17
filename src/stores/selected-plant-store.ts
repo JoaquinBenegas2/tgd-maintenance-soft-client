@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { setCookie, deleteCookie } from "cookies-next";
+import { queryClient } from "@/providers/providers";
 
 interface Plant {
   id: number;
@@ -22,6 +23,8 @@ export const usePlantStore = create<PlantStore>()(
 
         set({ selectedPlant: plant });
         setCookie("plant-slug", plantSlug);
+
+        queryClient.invalidateQueries();
 
         onSuccessRedirect?.(plantSlug);
       },

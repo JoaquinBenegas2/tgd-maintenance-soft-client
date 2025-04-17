@@ -4,6 +4,7 @@ import LogoIcon from "@/assets/svg/color-isotype.svg";
 import { Sidebar } from "@/components/ui/sidebar/sidebar";
 import { SidebarContent } from "@/components/ui/sidebar/sidebar-content";
 import { SidebarFooter } from "@/components/ui/sidebar/sidebar-footer";
+import { SidebarGroup } from "@/components/ui/sidebar/sidebar-group";
 import { SidebarHeader } from "@/components/ui/sidebar/sidebar-header";
 import { SidebarItem } from "@/components/ui/sidebar/sidebar-item";
 import { usePlantPath } from "@/hooks/plant-path/use-plant-path";
@@ -37,20 +38,22 @@ export default function PlantSidebar() {
           href={`${basePath}/home`}
           isActive={pathname.startsWith(`${basePath}/home`)}
         />
-        <SidebarItem
-          icon={<MdOutlineMyLocation className="h-5 w-5" />}
-          text="Sectors"
-          tooltip="Sectors"
-          href={`${basePath}/sectors`}
-          isActive={pathname.startsWith(`${basePath}/sectors`)}
-        />
-        <SidebarItem
-          icon={<MdPrecisionManufacturing className="h-5 w-5" />}
-          text="Manufacturers"
-          tooltip="Manufacturers"
-          href={`${basePath}/manufacturers`}
-          isActive={pathname.startsWith(`${basePath}/manufacturers`)}
-        />
+        <SidebarGroup title="Configuration">
+          <SidebarItem
+            icon={<MdOutlineMyLocation className="h-5 w-5" />}
+            text="Sectors"
+            tooltip="Sectors"
+            href={`${basePath}/sectors`}
+            isActive={pathname.startsWith(`${basePath}/sectors`)}
+          />
+          <SidebarItem
+            icon={<MdPrecisionManufacturing className="h-5 w-5" />}
+            text="Manufacturers"
+            tooltip="Manufacturers"
+            href={`${basePath}/manufacturers`}
+            isActive={pathname.startsWith(`${basePath}/manufacturers`)}
+          />
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
         <SidebarItem

@@ -6,19 +6,16 @@ import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import { useEffect, useState } from "react";
 
-const Providers = ({ children }: { children: React.ReactNode }) => {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 30 * 1000, // 30 seconds
-            refetchInterval: 30 * 1000, // 30 seconds
-          },
-        },
-      })
-  );
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 30 * 1000, // 30 seconds
+      refetchInterval: 30 * 1000, // 30 seconds
+    },
+  },
+});
 
+const Providers = ({ children }: { children: React.ReactNode }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
