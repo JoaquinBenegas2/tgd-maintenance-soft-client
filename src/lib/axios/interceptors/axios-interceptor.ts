@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { getSession } from "next-auth/react";
 import { getValidationError } from "../utils/get-validation-error";
+import { usePlantStore } from "@/stores/selected-plant-store";
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -14,6 +15,12 @@ const updateHeaders = async (request: AxiosRequestConfig) => {
   if (accessToken && request.headers) {
     request.headers.Authorization = `Bearer ${accessToken}`;
     request.headers["Content-Type"] = "application/json";
+  }
+
+  const selectedPlant = usePlantStore.getState().selectedPlant;
+
+  if (selectedPlant?.id && request.headers) {
+    request.headers["x-plant-id"] = selectedPlant.id;
   }
 
   return request;

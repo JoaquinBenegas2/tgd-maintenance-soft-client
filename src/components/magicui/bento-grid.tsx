@@ -18,7 +18,7 @@ interface BentoCardProps extends ComponentPropsWithoutRef<"div"> {
   description: ReactNode;
   subDescription?: ReactNode;
   nextToTheButton?: ReactNode;
-  href?: string;
+  onButtonClick?: () => void;
   cta: string;
   ctaVariant?: "secondary" | "destructive" | "ghost" | "outline" | "link" | "default";
   alwaysActive?: boolean;
@@ -42,7 +42,7 @@ const BentoCard = ({
   subDescription,
   nextToTheButton,
   alwaysActive,
-  href,
+  onButtonClick,
   cta,
   ctaVariant,
   ...props
@@ -87,11 +87,14 @@ const BentoCard = ({
           : "group-hover:translate-y-0 group-hover:opacity-100"
       )}
     >
-      <Button variant={ctaVariant || "ghost"} asChild size="sm" className="pointer-events-auto">
-        <a href={href}>
-          {cta}
-          <ArrowRightIcon className="ms-2 h-4 w-4 rtl:rotate-180" />
-        </a>
+      <Button
+        variant={ctaVariant || "ghost"}
+        size="sm"
+        className="pointer-events-auto"
+        onClick={onButtonClick}
+      >
+        {cta}
+        <ArrowRightIcon className="ms-2 h-4 w-4 rtl:rotate-180" />
       </Button>
       {nextToTheButton}
     </div>

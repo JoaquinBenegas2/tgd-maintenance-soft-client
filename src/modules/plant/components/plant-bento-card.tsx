@@ -1,3 +1,4 @@
+import FlexContainer from "@/components/custom/flex-container/flex-container";
 import { BentoCard } from "@/components/magicui/bento-grid";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -6,9 +7,10 @@ import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import { FaUserCog } from "react-icons/fa";
 import { TbBuildingFactory } from "react-icons/tb";
-import PlantAssignedUsersSheet from "./plant-assigned-users-sheet";
 import { PlantResponseDto } from "../models/plant-model";
-import FlexContainer from "@/components/custom/flex-container/flex-container";
+import PlantAssignedUsersSheet from "./plant-assigned-users-sheet";
+import { usePlantStore } from "@/stores/selected-plant-store";
+import { useRouter } from "next/navigation";
 
 interface PlantBentoCardProps {
   plant: PlantResponseDto;
@@ -18,6 +20,13 @@ interface PlantBentoCardProps {
 
 export default function PlantBentoCard({ plant, image, alwaysActive }: PlantBentoCardProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
+  const setSelectedPlant = usePlantStore((state) => state.setSelectedPlant);
+
+  const router = useRouter();
+
+  const handleButtonClick = () => {
+    setSelectedPlant(plant, (plantSlug) => router.push(`/${plantSlug}/home`));
+  };
 
   return (
     <>
@@ -26,10 +35,10 @@ export default function PlantBentoCard({ plant, image, alwaysActive }: PlantBent
         Icon={TbBuildingFactory}
         name={plant.name}
         description={plant.location}
-        href="/plant"
         cta="View Plant"
         className="h-64 col-span-1"
         alwaysActive={alwaysActive}
+        onButtonClick={handleButtonClick}
         background={
           <Image
             src={image}
