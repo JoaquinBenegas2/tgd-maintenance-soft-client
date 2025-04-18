@@ -5,7 +5,7 @@ import React from "react";
 
 export default function SectorsPage() {
   return (
-    <PageContainer>
+    <PageContainer variant="contained">
       <PageHeader title="Sectors" description="In this page you can manage your sectors" />
       <SectorList />
     </PageContainer>

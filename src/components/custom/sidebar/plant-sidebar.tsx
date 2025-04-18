@@ -10,6 +10,7 @@ import { SidebarItem } from "@/components/ui/sidebar/sidebar-item";
 import { usePlantPath } from "@/hooks/plant-path/use-plant-path";
 import { SignOutButton } from "@/modules/auth/components/sign-out-button";
 import { usePlantStore } from "@/stores/selected-plant-store";
+import { Package } from "lucide-react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
@@ -52,6 +53,13 @@ export default function PlantSidebar() {
             tooltip="Manufacturers"
             href={`${basePath}/manufacturers`}
             isActive={pathname.startsWith(`${basePath}/manufacturers`)}
+          />
+          <SidebarItem
+            icon={<Package className="h-5 w-5" />}
+            text="Assets"
+            tooltip="Assets"
+            href={`${basePath}/assets`}
+            isActive={pathname.startsWith(`${basePath}/assets`)}
           />
         </SidebarGroup>
       </SidebarContent>
