@@ -1,5 +1,5 @@
 import { createReactQueryHandlers } from "@/lib/react-query/query-handler/create-query-handlers";
-import { manufacturerService } from "../services/sector-service";
+import { manufacturerService } from "../services/manufacturer-service";
 
 const QUERY_KEY = "manufacturers";
 

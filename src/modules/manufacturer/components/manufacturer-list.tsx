@@ -42,7 +42,7 @@ export default function ManufacturerList() {
         <div className="w-full flex justify-end">
           <ManufacturerRequestDialog>
             <Button>
-              <Plus /> New manufacturer
+              <Plus />
             </Button>
           </ManufacturerRequestDialog>
         </div>

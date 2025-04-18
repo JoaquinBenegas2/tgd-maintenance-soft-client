@@ -27,7 +27,7 @@ export default function ManufacturerRequestDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {children && <DialogTrigger asChild>{children}</DialogTrigger>}
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[480px]">
         <DialogHeader>
           <DialogTitle>{isUpdating ? "Edit Manufacturer" : "Create Manufacturer"}</DialogTitle>
           <DialogDescription>

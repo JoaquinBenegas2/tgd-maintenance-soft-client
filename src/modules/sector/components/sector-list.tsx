@@ -42,7 +42,7 @@ export default function SectorList() {
         <div className="w-full flex justify-end">
           <SectorRequestDialog>
             <Button>
-              <Plus /> New sector
+              <Plus />
             </Button>
           </SectorRequestDialog>
         </div>
