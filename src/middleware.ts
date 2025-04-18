@@ -8,6 +8,10 @@ export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
+  if (pathname === "/auth/login") {
+    return NextResponse.next();
+  }
+  
   if (!session?.user) {
     console.log("🔁 Redirect: not authenticated → /auth/login");
     return NextResponse.redirect(new URL("/auth/login", request.url));
