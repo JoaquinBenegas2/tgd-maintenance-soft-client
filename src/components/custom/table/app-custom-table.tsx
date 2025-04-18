@@ -65,6 +65,8 @@ export interface CustomTableProps<T> {
   items: T[];
   columns: TableColumn<T>[];
   height?: string;
+  className?: string;
+  tableClassName?: string;
   searchValue?: string;
   onSearchValueChange?: (searchValue: string) => void;
   columnResizing?:
@@ -93,6 +95,8 @@ export default function CustomTable<T>({
   items,
   columns,
   height = "560px",
+  className,
+  tableClassName,
   columnResizing = { mode: "onChange", direction: "ltr" },
   pagination: serverSidePagination,
   searchValue,
@@ -313,7 +317,7 @@ export default function CustomTable<T>({
   });
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className={`${className} flex flex-col space-y-2`}>
       <div className="flex gap-3 justify-between items-center">
         <div
           className={clsx(
@@ -349,7 +353,7 @@ export default function CustomTable<T>({
       </div>
 
       {/* Table */}
-      <div className="overflow-auto border mt-2 md:mt-0 md:border-0" style={{ height: height }}>
+      <div className={`${tableClassName} overflow-auto border mt-2 md:mt-0 md:border-0`} style={{ height: height }}>
         <Table className="min-w-full" {...{ style: { width: table.getCenterTotalSize() } }}>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

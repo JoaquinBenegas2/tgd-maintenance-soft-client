@@ -16,28 +16,36 @@ import { FormFieldConfig } from "./models/custom-form-models";
 
 interface CustomFormProps {
   form: UseFormReturn;
+  formId?: string;
   fields: FormFieldConfig[];
   formColumns?: number;
   renderField: (field: FormFieldConfig, className?: string) => React.JSX.Element | null;
   gridColumnClass?: string;
   onSubmit: (values: Record<string, any>) => void;
   submitButton?: ReactElement<ButtonHTMLAttributes<HTMLButtonElement>>;
+  showSubmitButton?: boolean;
 }
 
 export default function CustomForm({
   form,
+  formId,
   fields,
   formColumns,
   renderField,
   gridColumnClass,
   onSubmit,
   submitButton,
+  showSubmitButton = true,
 }: CustomFormProps) {
   const handleSubmit = form.handleSubmit((values) => onSubmit(values));
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit} className={`grid w-full ${gridColumnClass} -grid-cols-12 gap-4`}>
+      <form
+        id={formId}
+        onSubmit={handleSubmit}
+        className={`grid w-full ${gridColumnClass} -grid-cols-12 gap-4`}
+      >
         {fields.map((field) => {
           const fieldSpan = (field.fieldSpan as keyof typeof COLUMN_SPANS) || formColumns || 1;
           const spanClass = COLUMN_SPANS[fieldSpan];
@@ -72,14 +80,15 @@ export default function CustomForm({
             />
           );
         })}
-        {submitButton ? (
-          React.isValidElement(submitButton) &&
-          React.cloneElement(submitButton, {
-            type: submitButton.props.type || "submit",
-          })
-        ) : (
-          <Button type="submit">Submit</Button>
-        )}
+        {showSubmitButton &&
+          (submitButton ? (
+            React.isValidElement(submitButton) &&
+            React.cloneElement(submitButton, {
+              type: submitButton.props.type || "submit",
+            })
+          ) : (
+            <Button type="submit">Submit</Button>
+          ))}
       </form>
     </Form>
   );

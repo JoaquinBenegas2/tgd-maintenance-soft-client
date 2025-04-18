@@ -8,7 +8,7 @@ export default function TextareaInput({ field, form, className }: InputTypeProps
       name={field.name}
       control={form.control}
       render={({ field: controllerField }) => (
-        <Textarea id={field.name} placeholder={field.placeholder} {...controllerField} className={className} />
+        <Textarea id={field.name} placeholder={field.placeholder} {...controllerField} className={className} disabled={field.disabled} />
       )}
     />
   );

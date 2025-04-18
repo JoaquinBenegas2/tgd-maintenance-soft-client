@@ -78,6 +78,7 @@ export type FormFieldConfig = BaseFormFieldConfig | DateFieldConfig | NumberFiel
 export interface CustomFormConfig {
   formColumns?: number;
   fields: FormFieldConfig[];
+  fieldClassName?: string;
 }
 
 type ReactHookFormRenderArgs = {

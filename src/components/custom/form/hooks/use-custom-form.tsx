@@ -10,7 +10,7 @@ import { generateValidationSchema } from "../utils/validations/generate-validati
 import { renderField } from "../utils/renderers/field-renderers";
 
 export default function useCustomForm<T>(formConfig: CustomFormConfig) {
-  const { fields, formColumns } = formConfig;
+  const { fields, formColumns, fieldClassName } = formConfig;
 
   const formSchema = useMemo(() => generateValidationSchema(fields), [fields]);
 
@@ -50,7 +50,7 @@ export default function useCustomForm<T>(formConfig: CustomFormConfig) {
     fields,
     uiFields,
     formColumns,
-    renderField: (field: any, className?: string) => renderField(field, form, className),
+    renderField: (field: any, className?: string) => renderField(field, form, fieldClassName || className),
     gridColumnClass,
     resetForm,
   };

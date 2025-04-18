@@ -22,6 +22,7 @@ export default function DateInput({ field, form, className }: InputTypeProps) {
                 !controllerField.value && "text-muted-foreground",
                 className
               )}
+              disabled={field.disabled}
             >
               <CalendarIcon />
               {controllerField.value ? (

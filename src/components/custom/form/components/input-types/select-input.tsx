@@ -22,7 +22,7 @@ export default function SelectInput({ field, form, className }: InputTypeProps) 
           onValueChange={controllerField.onChange}
           disabled={field.disabled}
         >
-          <SelectTrigger className={className}>
+          <SelectTrigger className={`w-full ${className}`}>
             <SelectValue placeholder={field.placeholder} />
           </SelectTrigger>
           <SelectContent>
