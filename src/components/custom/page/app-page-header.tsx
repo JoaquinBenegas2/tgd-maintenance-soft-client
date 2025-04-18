@@ -5,12 +5,13 @@ interface PageHeaderProps {
   icon?: React.ReactNode;
   title?: string;
   description?: string;
+  className?: string;
 }
 
-export default function PageHeader({ title, description, icon }: PageHeaderProps) {
+export default function PageHeader({ title, description, icon, className }: PageHeaderProps) {
   return (
-    <header className="mb-8">
-      <FlexContainer align="center" className=" mb-2">
+    <header className={`${className} mb-8`}>
+      <FlexContainer align="center" className="mb-2">
         {icon}
         <h1 className="text-3xl font-bold text-foreground">{title}</h1>
       </FlexContainer>

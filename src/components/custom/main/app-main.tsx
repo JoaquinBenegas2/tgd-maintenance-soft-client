@@ -19,7 +19,7 @@ export default function AppMain({
     >
       <div className="flex flex-col min-h-screen">
         {navbar}
-        <div className="mt-16 flex flex-col">{children}</div>
+        <div className="mt-16 flex flex-col flex-1">{children}</div>
       </div>
     </main>
   );
