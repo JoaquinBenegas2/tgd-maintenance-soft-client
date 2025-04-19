@@ -16,7 +16,13 @@ export default function useCustomForm<T>(formConfig: CustomFormConfig) {
 
   const defaultValues = useMemo(() => {
     return fields.reduce((acc, field) => {
-      acc[field.name] = field.defaultValue ?? "";
+      const defaultValue = field.defaultValue;
+
+      if (defaultValue === null || defaultValue === undefined) {
+        return acc;
+      }
+
+      acc[field.name] = defaultValue;
       return acc;
     }, {} as Record<string, any>);
   }, [fields]);
@@ -28,10 +34,12 @@ export default function useCustomForm<T>(formConfig: CustomFormConfig) {
 
   const gridColumnClass = GRID_COLUMNS[(formColumns as keyof typeof GRID_COLUMNS) || 1];
 
-  const resetForm = useCallback((values?: Partial<T>) => {
-    form.reset(values ?? undefined);
-  }, [form]);
-  
+  const resetForm = useCallback(
+    (values?: Partial<T>) => {
+      form.reset(values ?? undefined);
+    },
+    [form]
+  );
 
   const uiFields = useMemo(() => {
     return fields.reduce((acc, field) => {
@@ -50,7 +58,8 @@ export default function useCustomForm<T>(formConfig: CustomFormConfig) {
     fields,
     uiFields,
     formColumns,
-    renderField: (field: any, className?: string) => renderField(field, form, fieldClassName || className),
+    renderField: (field: any, className?: string) =>
+      renderField(field, form, fieldClassName || className),
     gridColumnClass,
     resetForm,
   };

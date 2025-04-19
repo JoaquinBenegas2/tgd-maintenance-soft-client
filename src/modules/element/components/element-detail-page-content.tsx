@@ -1,18 +1,15 @@
 import { DynamicBreadcrumbTrail } from "@/components/custom/dynamic-breadcrumb/dynamic-breadcrumb-trail";
 import PageHeader from "@/components/custom/page/app-page-header";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
 import { useParams, usePathname } from "next/navigation";
-import {useGetComponentByIdAndAssetId } from "../handlers/component-handler";
-import ComponentRequestForm from "./component-request-form";
-/* import ElementList from "@/modules/element/components/element-list"; */
+import ElementRequestForm from "./element-request-form";
 import { Button } from "@/components/ui/button";
 import { Pen, Save, X } from "lucide-react";
 import { useState } from "react";
-import ElementList from "@/modules/element/components/element-list";
+import { useGetElementByIdComponentIdAndAssetId } from "../handlers/element-handler";
 
-export default function ComponentDetailPageContent() {
-  const { assetId, componentId } = useParams();
+export default function ElementDetailPageContent() {
+  const { assetId, componentId, elementId } = useParams();
 
   const [editMode, setEditMode] = useState(false);
   const [formUtils, setFormUtils] = useState<{
@@ -20,25 +17,36 @@ export default function ComponentDetailPageContent() {
     isUpdating: boolean;
   } | null>(null);
 
-  const { data: component } = useGetComponentByIdAndAssetId(Number(assetId), Number(componentId));
+  const { data: element } = useGetElementByIdComponentIdAndAssetId(
+    Number(assetId),
+    Number(componentId),
+    Number(elementId)
+  );
 
   const pathname = usePathname();
 
   const customPathname = [
     { href: pathname.split("/")[1], name: pathname.slice(1) },
     { href: "assets", name: "Assets" },
-    { href: component?.asset?.id || "", name: component?.asset?.name || "" },
+    { href: element?.component?.asset?.id || "", name: element?.component?.asset?.name || "" },
     { href: "components", name: "Components" },
-    { href: component?.id || "", name: component?.name || "" },
+    { href: element?.component?.id || "", name: element?.component?.name || "" },
+    { href: "elements", name: "Elements" },
+    { href: element?.id || "", name: element?.name || "" },
   ];
 
   console.log({customPathname});
+  
 
   return (
     <>
-      <PageHeader title={"Component: " + component?.name} className="mb-3!" />
+      <PageHeader title={"Element: " + element?.name} className="mb-3!" />
       <Breadcrumb className="mb-4 flex justify-between">
-        <DynamicBreadcrumbTrail startFrom={2} customPathname={customPathname} ignore={["components"]} />
+        <DynamicBreadcrumbTrail
+          startFrom={2}
+          customPathname={customPathname}
+          ignore={["components", "elements"]}
+        />
         {editMode ? (
           <div className="grid grid-cols-2 gap-2">
             <Button
@@ -53,12 +61,7 @@ export default function ComponentDetailPageContent() {
             >
               <X />
             </Button>
-            <Button
-              size={"sm"}
-              type="submit"
-              form="component-form"
-              disabled={formUtils?.isUpdating}
-            >
+            <Button size={"sm"} type="submit" form="element-form" disabled={formUtils?.isUpdating}>
               <Save />
             </Button>
           </div>
@@ -68,18 +71,16 @@ export default function ComponentDetailPageContent() {
           </Button>
         )}
       </Breadcrumb>
-      <ComponentRequestForm
-        formId="component-form"
+      <ElementRequestForm
+        formId="element-form"
         editMode={editMode}
         onEditModeChange={setEditMode}
         requestType="update"
-        initialData={component}
-        assetId={Number(assetId)}
+        initialData={element}
+        assetId={Number(element?.component?.asset?.id)}
+        componentId={Number(componentId)}
         onExpose={setFormUtils}
       />
-      <Separator className="my-6" />
-      <h2 className="text-lg font-bold text-foreground mb-3">Elements</h2>
-      <ElementList assetId={component?.asset?.id} componentId={component?.id} />
     </>
   );
 }
