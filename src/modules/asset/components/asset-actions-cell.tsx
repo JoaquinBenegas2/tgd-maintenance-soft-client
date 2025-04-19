@@ -9,17 +9,13 @@ import { MoreHorizontal, Pen, Trash } from "lucide-react";
 import React, { useState } from "react";
 import { AssetResponseDto } from "../models/asset-model";
 import AssetDeleteAlertDialog from "./asset-delete-alert-dialog";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function AssetActionsCell({ item }: { item: AssetResponseDto }) {
   const [deleteAlertDialogOpen, setDeleteAlertDialogOpen] = useState(false);
 
   const pathname = usePathname();
-  const router = useRouter();
-
-  const handleViewDetailsButtonClick = () => {
-    router.push(`${pathname}/${item.id}`);
-  };
 
   return (
     <>
@@ -30,11 +26,13 @@ export default function AssetActionsCell({ item }: { item: AssetResponseDto }) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem onClick={handleViewDetailsButtonClick} className="p-0">
-            <div className="flex items-center gap-2 cursor-pointer w-full px-2 py-1.5">
-              <Pen className="w-4 h-4" />
-              View Details
-            </div>
+          <DropdownMenuItem className="p-0">
+            <Link href={`${pathname}/${item.id}`}>
+              <div className="flex items-center gap-2 cursor-pointer w-full px-2 py-1.5">
+                <Pen className="w-4 h-4" />
+                View Details
+              </div>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setDeleteAlertDialogOpen(true)} className="p-0">
             <div className="flex items-center gap-2 text-red-600 cursor-pointer w-full px-2 py-1.5">

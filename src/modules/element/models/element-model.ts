@@ -23,3 +23,13 @@ export interface ElementResponseDto {
   last_replacement_date: string;
   status: ElementStatusEnum;
 }
+
+export interface ElementWithoutComponentResponseDto {
+  id: number;
+  name: string;
+  description: string;
+  manufacturer: ManufacturerResponseDto;
+  last_maintenance_date: string;
+  last_replacement_date: string;
+  status: ElementStatusEnum;
+}

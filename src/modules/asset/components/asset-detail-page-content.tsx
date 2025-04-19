@@ -1,14 +1,14 @@
 import { DynamicBreadcrumbTrail } from "@/components/custom/dynamic-breadcrumb/dynamic-breadcrumb-trail";
 import PageHeader from "@/components/custom/page/app-page-header";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import ComponentList from "@/modules/component/components/component-list";
+import { Package, Pen, Save, X } from "lucide-react";
 import { useParams, usePathname } from "next/navigation";
+import { useState } from "react";
 import { useGetAssetById } from "../handlers/asset-handler";
 import AssetRequestForm from "./asset-request-form";
-import ComponentList from "@/modules/component/components/component-list";
-import { Button } from "@/components/ui/button";
-import { Pen, Save, X } from "lucide-react";
-import { useState } from "react";
 
 export default function AssetDetailPageContent() {
   const { assetId } = useParams();
@@ -19,7 +19,7 @@ export default function AssetDetailPageContent() {
     isUpdating: boolean;
   } | null>(null);
 
-  const { data: asset } = useGetAssetById(Number(assetId));
+  const { data: asset, isLoading } = useGetAssetById(Number(assetId));
 
   const pathname = usePathname();
 
@@ -33,7 +33,7 @@ export default function AssetDetailPageContent() {
 
   return (
     <>
-      <PageHeader title={title} className="mb-3!" />
+      <PageHeader icon={<Package className="w-8 h-8" />} title={title} className="mb-0!" />
       <Breadcrumb className="mb-4 flex justify-between">
         <DynamicBreadcrumbTrail startFrom={2} customPathname={customPathname} />
         {editMode ? (
@@ -55,7 +55,7 @@ export default function AssetDetailPageContent() {
             </Button>
           </div>
         ) : (
-          <Button size={"sm"} type="button" onClick={() => setEditMode(true)}>
+          <Button size={"sm"} type="button" onClick={() => setEditMode(true)} disabled={isLoading}>
             <Pen />
           </Button>
         )}
@@ -70,7 +70,7 @@ export default function AssetDetailPageContent() {
       />
       <Separator className="my-6" />
       <h2 className="text-lg font-bold text-foreground mb-3">Components</h2>
-      <ComponentList assetId={asset?.id} />
+      <ComponentList asset={asset} isLoading={isLoading} />
     </>
   );
 }

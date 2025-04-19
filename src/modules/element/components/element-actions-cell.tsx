@@ -1,25 +1,21 @@
-import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { ElementResponseDto } from "../models/element-model";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Pen, Trash } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { ElementWithoutComponentResponseDto } from "../models/element-model";
 import ElementDeleteAlertDialog from "./element-delete-alert-dialog";
 
-export default function ElementActionsCell({ item }: { item: ElementResponseDto }) {
+export default function ElementActionsCell({ item }: { item: ElementWithoutComponentResponseDto }) {
   const [deleteAlertDialogOpen, setDeleteAlertDialogOpen] = useState(false);
 
   const pathname = usePathname();
-  const router = useRouter();
-
-  const handleViewDetailsButtonClick = () => {
-    router.push(`${pathname}/elements/${item.id}`);
-  };
 
   return (
     <>
@@ -30,11 +26,13 @@ export default function ElementActionsCell({ item }: { item: ElementResponseDto 
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem onClick={handleViewDetailsButtonClick} className="p-0">
-            <div className="flex items-center gap-2 cursor-pointer w-full px-2 py-1.5">
-              <Pen className="w-4 h-4" />
-              View Details
-            </div>
+          <DropdownMenuItem className="p-0">
+            <Link href={`${pathname}/elements/${item.id}`}>
+              <div className="flex items-center gap-2 cursor-pointer w-full px-2 py-1.5">
+                <Pen className="w-4 h-4" />
+                View Details
+              </div>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setDeleteAlertDialogOpen(true)} className="p-0">
             <div className="flex items-center gap-2 text-red-600 cursor-pointer w-full px-2 py-1.5">

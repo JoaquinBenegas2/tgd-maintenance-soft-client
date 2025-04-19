@@ -4,7 +4,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { useParams, usePathname } from "next/navigation";
 import ElementRequestForm from "./element-request-form";
 import { Button } from "@/components/ui/button";
-import { Pen, Save, X } from "lucide-react";
+import { Grip, Pen, Save, X } from "lucide-react";
 import { useState } from "react";
 import { useGetElementByIdComponentIdAndAssetId } from "../handlers/element-handler";
 
@@ -17,7 +17,7 @@ export default function ElementDetailPageContent() {
     isUpdating: boolean;
   } | null>(null);
 
-  const { data: element } = useGetElementByIdComponentIdAndAssetId(
+  const { data: element, isLoading } = useGetElementByIdComponentIdAndAssetId(
     Number(assetId),
     Number(componentId),
     Number(elementId)
@@ -39,7 +39,7 @@ export default function ElementDetailPageContent() {
 
   return (
     <>
-      <PageHeader title={title} className="mb-3!" />
+      <PageHeader icon={<Grip className="w-8 h-8" />} title={title} className="mb-0!" />
       <Breadcrumb className="mb-4 flex justify-between">
         <DynamicBreadcrumbTrail
           startFrom={2}
@@ -65,7 +65,7 @@ export default function ElementDetailPageContent() {
             </Button>
           </div>
         ) : (
-          <Button size={"sm"} type="button" onClick={() => setEditMode(true)}>
+          <Button size={"sm"} type="button" onClick={() => setEditMode(true)} disabled={isLoading}>
             <Pen />
           </Button>
         )}

@@ -1,3 +1,4 @@
+import { ComponentWithoutAssetResponseDto } from "@/modules/component/models/component-model";
 import { ManufacturerResponseDto } from "@/modules/manufacturer/models/manufacturer-model";
 import { SectorResponseDto } from "@/modules/sector/models/sector-model";
 
@@ -26,4 +27,5 @@ export interface AssetResponseDto {
   serial_number: string;
   status: AssetStatusEnum;
   installation_date: string;
+  components: ComponentWithoutAssetResponseDto[];
 }

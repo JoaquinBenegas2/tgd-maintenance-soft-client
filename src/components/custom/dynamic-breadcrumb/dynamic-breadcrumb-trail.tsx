@@ -1,15 +1,16 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import {
-  BreadcrumbList,
   BreadcrumbItem,
-  BreadcrumbPage,
   BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Fragment } from "react";
 import capitalize from "@/utils/capitalize";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Fragment } from "react";
 
 interface BreadcrumbItemObject {
   href: string | number; // slug or id
@@ -52,18 +53,18 @@ export const DynamicBreadcrumbTrail = ({
             <Fragment key={fullPath}>
               {isLast ? (
                 <BreadcrumbPage>
-                  <BreadcrumbLink
-                    href={ignore.includes(item.href.toString()) ? undefined : fullPath}
-                  >
-                    {item.name}
+                  <BreadcrumbLink asChild>
+                    <Link href={ignore.includes(item.href.toString()) ? "#" : fullPath}>
+                      {item.name}
+                    </Link>
                   </BreadcrumbLink>
                 </BreadcrumbPage>
               ) : (
                 <BreadcrumbItem>
-                  <BreadcrumbLink
-                    href={ignore.includes(item.href.toString()) ? undefined : fullPath}
-                  >
-                    {item.name}
+                  <BreadcrumbLink asChild>
+                    <Link href={ignore.includes(item.href.toString()) ? "#" : fullPath}>
+                      {item.name}
+                    </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
               )}

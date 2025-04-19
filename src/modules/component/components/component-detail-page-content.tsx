@@ -3,11 +3,10 @@ import PageHeader from "@/components/custom/page/app-page-header";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { useParams, usePathname } from "next/navigation";
-import {useGetComponentByIdAndAssetId } from "../handlers/component-handler";
+import { useGetComponentByIdAndAssetId } from "../handlers/component-handler";
 import ComponentRequestForm from "./component-request-form";
-/* import ElementList from "@/modules/element/components/element-list"; */
 import { Button } from "@/components/ui/button";
-import { Pen, Save, X } from "lucide-react";
+import { Pen, Puzzle, Save, X } from "lucide-react";
 import { useState } from "react";
 import ElementList from "@/modules/element/components/element-list";
 
@@ -20,7 +19,10 @@ export default function ComponentDetailPageContent() {
     isUpdating: boolean;
   } | null>(null);
 
-  const { data: component } = useGetComponentByIdAndAssetId(Number(assetId), Number(componentId));
+  const { data: component, isLoading } = useGetComponentByIdAndAssetId(
+    Number(assetId),
+    Number(componentId)
+  );
 
   const pathname = usePathname();
 
@@ -36,9 +38,13 @@ export default function ComponentDetailPageContent() {
 
   return (
     <>
-      <PageHeader title={title} className="mb-3!" />
+      <PageHeader icon={<Puzzle className="w-8 h-8" />} title={title} className="mb-0!" />
       <Breadcrumb className="mb-4 flex justify-between">
-        <DynamicBreadcrumbTrail startFrom={2} customPathname={customPathname} ignore={["components"]} />
+        <DynamicBreadcrumbTrail
+          startFrom={2}
+          customPathname={customPathname}
+          ignore={["components"]}
+        />
         {editMode ? (
           <div className="grid grid-cols-2 gap-2">
             <Button
@@ -63,7 +69,7 @@ export default function ComponentDetailPageContent() {
             </Button>
           </div>
         ) : (
-          <Button size={"sm"} type="button" onClick={() => setEditMode(true)}>
+          <Button size={"sm"} type="button" onClick={() => setEditMode(true)} disabled={isLoading}>
             <Pen />
           </Button>
         )}
@@ -79,7 +85,7 @@ export default function ComponentDetailPageContent() {
       />
       <Separator className="my-6" />
       <h2 className="text-lg font-bold text-foreground mb-3">Elements</h2>
-      <ElementList assetId={component?.asset?.id} componentId={component?.id} />
+      <ElementList assetId={component?.asset?.id} component={component} isLoading={isLoading} />
     </>
   );
 }

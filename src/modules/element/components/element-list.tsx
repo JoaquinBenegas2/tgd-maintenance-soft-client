@@ -1,21 +1,20 @@
 import CustomTable, { TableColumn } from "@/components/custom/table/app-custom-table";
 import { Badge } from "@/components/ui/badge";
-import { ElementResponseDto, ElementStatusEnum } from "../models/element-model";
 import { Button } from "@/components/ui/button";
+import { ComponentResponseDto } from "@/modules/component/models/component-model";
 import { Plus } from "lucide-react";
+import { ElementStatusEnum, ElementWithoutComponentResponseDto } from "../models/element-model";
 import ElementActionsCell from "./element-actions-cell";
 import ElementRequestDialog from "./element-request-dialog";
-import { useGetAllElementsByComponentIdAndAssetId } from "../handlers/element-handler";
 
 interface ElementListProps {
   assetId?: number;
-  componentId?: number;
+  component?: ComponentResponseDto;
+  isLoading?: boolean;
 }
 
-export default function ElementList({ assetId, componentId }: ElementListProps) {
-  const { data, isLoading } = useGetAllElementsByComponentIdAndAssetId(assetId, componentId);
-
-  const columns: TableColumn<ElementResponseDto>[] = [
+export default function ElementList({ assetId, component, isLoading }: ElementListProps) {
+  const columns: TableColumn<ElementWithoutComponentResponseDto>[] = [
     { header: "Name", accessorKey: "name" },
     { header: "Description", accessorKey: "description" },
     {
@@ -53,15 +52,15 @@ export default function ElementList({ assetId, componentId }: ElementListProps) 
 
   return (
     <CustomTable
-      items={data || []}
+      items={component?.elements || []}
       height="100%"
       className="flex-1"
       tableClassName="flex-1"
       columns={columns}
-      isDataLoading={isLoading || !assetId || !componentId}
+      isDataLoading={isLoading}
       headerChildren={
         <div className="w-full flex justify-end">
-          <ElementRequestDialog assetId={assetId} componentId={componentId}>
+          <ElementRequestDialog assetId={assetId} componentId={component?.id}>
             <Button>
               <Plus />
             </Button>

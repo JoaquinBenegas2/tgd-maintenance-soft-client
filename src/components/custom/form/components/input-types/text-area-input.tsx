@@ -7,6 +7,7 @@ export default function TextareaInput({ field, form, className }: InputTypeProps
     <Controller
       name={field.name}
       control={form.control}
+      defaultValue={field.defaultValue ?? ""}
       render={({ field: controllerField }) => (
         <Textarea id={field.name} placeholder={field.placeholder} {...controllerField} className={className} disabled={field.disabled} />
       )}
