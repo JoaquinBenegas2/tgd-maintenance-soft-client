@@ -58,7 +58,7 @@ export default function ElementList({ assetId, componentId }: ElementListProps) 
       className="flex-1"
       tableClassName="flex-1"
       columns={columns}
-      isDataLoading={isLoading}
+      isDataLoading={isLoading || !assetId || !componentId}
       headerChildren={
         <div className="w-full flex justify-end">
           <ElementRequestDialog assetId={assetId} componentId={componentId}>

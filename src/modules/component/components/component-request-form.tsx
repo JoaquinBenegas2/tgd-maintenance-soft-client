@@ -10,6 +10,7 @@ interface ComponentRequestFormProps {
   initialData?: ComponentResponseDto;
   requestType?: "create" | "update";
   editMode?: boolean;
+  isLoading?: boolean;
   onEditModeChange?: (editMode: boolean) => void;
   onExpose?: (utils: { resetForm: () => void; isUpdating: boolean }) => void;
   formId?: string;
@@ -31,6 +32,7 @@ export default function ComponentRequestForm({
     initialData: initialData,
     requestType,
     editMode,
+    isLoading: requestType === "update" && !initialData,
   });
 
   const onSubmit = (values: any) => {

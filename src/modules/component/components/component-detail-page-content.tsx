@@ -27,16 +27,16 @@ export default function ComponentDetailPageContent() {
   const customPathname = [
     { href: pathname.split("/")[1], name: pathname.slice(1) },
     { href: "assets", name: "Assets" },
-    { href: component?.asset?.id || "", name: component?.asset?.name || "" },
+    { href: component?.asset?.id || "", name: component?.asset?.name || "..." },
     { href: "components", name: "Components" },
-    { href: component?.id || "", name: component?.name || "" },
+    { href: component?.id || "", name: component?.name || "..." },
   ];
 
-  console.log({customPathname});
+  const title = "Component: " + (component?.name || "...");
 
   return (
     <>
-      <PageHeader title={"Component: " + component?.name} className="mb-3!" />
+      <PageHeader title={title} className="mb-3!" />
       <Breadcrumb className="mb-4 flex justify-between">
         <DynamicBreadcrumbTrail startFrom={2} customPathname={customPathname} ignore={["components"]} />
         {editMode ? (

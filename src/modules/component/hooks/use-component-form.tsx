@@ -8,12 +8,14 @@ interface ComponentFormHookProps {
   initialData?: ComponentResponseDto;
   editMode?: boolean;
   requestType?: "create" | "update";
+  isLoading?: boolean;
 }
 
 export default function useComponentForm({
   initialData,
   editMode,
   requestType,
+  isLoading,
 }: ComponentFormHookProps) {
   const { data: manufacturers } = useGetAllManufacturers();
 
@@ -31,6 +33,7 @@ export default function useComponentForm({
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         name: "model",
@@ -42,6 +45,7 @@ export default function useComponentForm({
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         name: "description",
@@ -53,6 +57,7 @@ export default function useComponentForm({
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         type: "select",
@@ -70,6 +75,7 @@ export default function useComponentForm({
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         name: "serial_number",
@@ -81,6 +87,7 @@ export default function useComponentForm({
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
     ],
   };
