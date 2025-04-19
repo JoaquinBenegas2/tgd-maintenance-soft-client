@@ -17,6 +17,7 @@ export default function BasicInput({
     <Controller
       name={field.name}
       control={form.control}
+      defaultValue={field.defaultValue ?? ""}
       render={({ field: controllerField }) => (
         <Input
           id={field.name}

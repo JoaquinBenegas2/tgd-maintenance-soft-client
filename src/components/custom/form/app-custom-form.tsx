@@ -13,6 +13,7 @@ import { UseFormReturn } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { COLUMN_SPANS } from "./constants/constants";
 import { FormFieldConfig } from "./models/custom-form-models";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CustomFormProps {
   form: UseFormReturn;
@@ -51,6 +52,7 @@ export default function CustomForm({
 
           const fieldSpan = (field.fieldSpan as keyof typeof COLUMN_SPANS) || formColumns || 1;
           const spanClass = COLUMN_SPANS[fieldSpan];
+          const heightClass = field.type === "textarea" ? "h-16" : "h-9";
 
           const className = form.formState.errors[field.name] ? "border-red-600" : "";
           return (
@@ -68,7 +70,11 @@ export default function CustomForm({
                   ) : (
                     <>
                       {field.label && <FormLabel htmlFor={field.name}>{field.label}</FormLabel>}
-                      <FormControl>{renderField(field, className)}</FormControl>
+                      {field.loading ? (
+                        <Skeleton key={field.name} className={`${spanClass} ${heightClass}`} />
+                      ) : (
+                        <FormControl>{renderField(field, className)}</FormControl>
+                      )}
                     </>
                   )}
 

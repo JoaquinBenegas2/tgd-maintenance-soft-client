@@ -15,9 +15,10 @@ export default function SelectInput({ field, form, className }: InputTypeProps) 
     <Controller
       name={field.name}
       control={form.control}
-      render={({ field: controllerField }) => (
+      defaultValue={field.defaultValue ?? ""}
+      render={({ field: controllerField }) => {console.log({controllerField}); return(
         <Select
-          {...controllerField}
+          name={controllerField.name}
           value={controllerField.value}
           onValueChange={controllerField.onChange}
           disabled={field.disabled}
@@ -36,7 +37,7 @@ export default function SelectInput({ field, form, className }: InputTypeProps) 
             </SelectGroup>
           </SelectContent>
         </Select>
-      )}
+      )}}
     />
   );
 }

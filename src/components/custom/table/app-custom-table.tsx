@@ -28,6 +28,8 @@ import Paginator from "@/components/custom/paginator/app-paginator";
 import { Input } from "@/components/ui/input";
 import "./app-custom-table.css";
 import RowFilters, { ActiveFilter, RowFilter } from "./row-filters";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { MdInfoOutline } from "react-icons/md";
 
 function IndeterminateCheckbox({
   indeterminate,
@@ -353,7 +355,10 @@ export default function CustomTable<T>({
       </div>
 
       {/* Table */}
-      <div className={`${tableClassName} overflow-auto border mt-2 md:mt-0 md:border-0`} style={{ height: height }}>
+      <div
+        className={`${tableClassName} overflow-auto border mt-2 md:mt-0 md:border-0`}
+        style={{ height: height }}
+      >
         <Table className="min-w-full" {...{ style: { width: table.getCenterTotalSize() } }}>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -410,7 +415,7 @@ export default function CustomTable<T>({
                   </TableRow>
                 ))}
               </>
-            ) : (
+            ) : items.length > 0 ? (
               <>
                 {table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id}>
@@ -422,6 +427,15 @@ export default function CustomTable<T>({
                   </TableRow>
                 ))}
               </>
+            ) : (
+              <tr>
+                <td colSpan={columns.length + 1} className="py-4">
+                  <Alert variant="default" className="bg-sky-50 text-sky-700 border-sky-700">
+                    <MdInfoOutline className="h-4 w-4 inline-block mr-2" />
+                    <AlertDescription className="text-sky-700">No results.</AlertDescription>
+                  </Alert>
+                </td>
+              </tr>
             )}
           </TableBody>
           {hasFooter && (
