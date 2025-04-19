@@ -47,6 +47,8 @@ export default function CustomForm({
         className={`grid w-full ${gridColumnClass} -grid-cols-12 gap-4`}
       >
         {fields.map((field) => {
+          if (field.hideField) return null;
+
           const fieldSpan = (field.fieldSpan as keyof typeof COLUMN_SPANS) || formColumns || 1;
           const spanClass = COLUMN_SPANS[fieldSpan];
 
