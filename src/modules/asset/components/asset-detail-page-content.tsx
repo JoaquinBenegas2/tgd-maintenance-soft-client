@@ -26,12 +26,14 @@ export default function AssetDetailPageContent() {
   const customPathname = [
     { href: pathname.split("/")[1], name: pathname.slice(1) },
     { href: "assets", name: "Assets" },
-    { href: asset?.id || "", name: asset?.name || "" },
+    { href: asset?.id || "", name: asset?.name || "..." },
   ];
+
+  const title = "Asset: " + (asset?.name || "...");
 
   return (
     <>
-      <PageHeader title={"Asset: " + asset?.name} className="mb-3!" />
+      <PageHeader title={title} className="mb-3!" />
       <Breadcrumb className="mb-4 flex justify-between">
         <DynamicBreadcrumbTrail startFrom={2} customPathname={customPathname} />
         {editMode ? (

@@ -29,6 +29,7 @@ export default function AssetRequestForm({
     initialData: initialData,
     requestType,
     editMode,
+    isLoading: requestType === "update" && !initialData,
   });
 
   const onSubmit = (values: any) => {

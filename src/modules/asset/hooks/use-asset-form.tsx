@@ -9,9 +9,10 @@ interface AssetFormHookProps {
   initialData?: AssetResponseDto;
   editMode?: boolean;
   requestType?: "create" | "update";
+  isLoading?: boolean;
 }
 
-export default function useAssetForm({ initialData, editMode, requestType }: AssetFormHookProps) {
+export default function useAssetForm({ initialData, editMode, requestType, isLoading }: AssetFormHookProps) {
   const { data: sectors } = useGetAllSectors();
   const { data: manufacturers } = useGetAllManufacturers();
 
@@ -29,6 +30,7 @@ export default function useAssetForm({ initialData, editMode, requestType }: Ass
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         name: "model",
@@ -40,6 +42,7 @@ export default function useAssetForm({ initialData, editMode, requestType }: Ass
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         name: "serial_number",
@@ -51,6 +54,7 @@ export default function useAssetForm({ initialData, editMode, requestType }: Ass
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         name: "description",
@@ -62,6 +66,7 @@ export default function useAssetForm({ initialData, editMode, requestType }: Ass
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         type: "select",
@@ -79,6 +84,7 @@ export default function useAssetForm({ initialData, editMode, requestType }: Ass
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         type: "select",
@@ -96,6 +102,7 @@ export default function useAssetForm({ initialData, editMode, requestType }: Ass
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         type: "date",
@@ -108,6 +115,7 @@ export default function useAssetForm({ initialData, editMode, requestType }: Ass
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
     ],
   };
@@ -116,15 +124,15 @@ export default function useAssetForm({ initialData, editMode, requestType }: Ass
 
   useEffect(() => {
     if (initialData) {
-      form.resetForm({
-        name: initialData.name,
-        model: initialData.model,
-        serial_number: initialData.serial_number,
-        description: initialData.description,
-        sector_id: initialData.sector?.id.toString(),
-        manufacturer_id: initialData.manufacturer?.id.toString(),
-        installation_date: initialData.installation_date,
-      });
+        form.resetForm({
+          name: initialData.name,
+          model: initialData.model,
+          serial_number: initialData.serial_number,
+          description: initialData.description,
+          sector_id: initialData.sector?.id.toString(),
+          manufacturer_id: initialData.manufacturer?.id.toString(),
+          installation_date: initialData.installation_date,
+        });
     }
   }, [initialData]);
 
