@@ -1,7 +1,10 @@
-import React from 'react'
+import PageContainer from "@/components/custom/page/app-page-container";
+import MaintenanceFormPageContent from "@/modules/maintenance-form/components/maintenance-form-page-content";
 
 export default function FormsPage() {
   return (
-    <div>FormsPage</div>
-  )
+    <PageContainer variant="contained">
+      <MaintenanceFormPageContent />
+    </PageContainer>
+  );
 }
