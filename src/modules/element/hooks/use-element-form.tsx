@@ -9,12 +9,14 @@ interface ElementFormHookProps {
   initialData?: ElementResponseDto;
   editMode?: boolean;
   requestType?: "create" | "update";
+  isLoading?: boolean;
 }
 
 export default function useElementForm({
   initialData,
   editMode,
   requestType,
+  isLoading,
 }: ElementFormHookProps) {
   const { data: manufacturers } = useGetAllManufacturers();
 
@@ -42,6 +44,7 @@ export default function useElementForm({
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         type: "select",
@@ -59,6 +62,7 @@ export default function useElementForm({
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         name: "description",
@@ -70,6 +74,7 @@ export default function useElementForm({
         validations: {
           required: true,
         },
+        loading: isLoading,
       },
       {
         name: "last_maintenance_date",
@@ -79,6 +84,7 @@ export default function useElementForm({
         defaultValue: lastMaintenanceDate,
         disabled: true,
         hideField: requestType === "create",
+        loading: isLoading,
       },
       {
         name: "last_replacement_date",
@@ -88,6 +94,7 @@ export default function useElementForm({
         defaultValue: lastReplacementDate,
         disabled: true,
         hideField: requestType === "create",
+        loading: isLoading,
       },
     ],
   };

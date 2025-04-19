@@ -28,19 +28,18 @@ export default function ElementDetailPageContent() {
   const customPathname = [
     { href: pathname.split("/")[1], name: pathname.slice(1) },
     { href: "assets", name: "Assets" },
-    { href: element?.component?.asset?.id || "", name: element?.component?.asset?.name || "" },
+    { href: element?.component?.asset?.id || "", name: element?.component?.asset?.name || "..." },
     { href: "components", name: "Components" },
-    { href: element?.component?.id || "", name: element?.component?.name || "" },
+    { href: element?.component?.id || "", name: element?.component?.name || "..." },
     { href: "elements", name: "Elements" },
-    { href: element?.id || "", name: element?.name || "" },
+    { href: element?.id || "", name: element?.name || "..." },
   ];
 
-  console.log({customPathname});
-  
+  const title = "Element: " + (element?.name || "...");
 
   return (
     <>
-      <PageHeader title={"Element: " + element?.name} className="mb-3!" />
+      <PageHeader title={title} className="mb-3!" />
       <Breadcrumb className="mb-4 flex justify-between">
         <DynamicBreadcrumbTrail
           startFrom={2}
