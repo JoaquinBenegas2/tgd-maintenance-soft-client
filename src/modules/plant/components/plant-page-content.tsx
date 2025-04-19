@@ -7,9 +7,9 @@ import AvailablePlants from "./available-plants";
 export default function PlantPageContent() {
   return (
     <>
-      <Card className="min-h-64 relative flex flex-col">
+      <Card className="min-h-64 relative">
         {/* Text */}
-        <CardContent className="h-full flex-1 flex items-center">
+        <CardContent className="justify-center">
           <FlexContainer direction="col" gap={2} wrap="nowrap">
             <CardTitle
               className="text-3xl font-normal text-primary"
