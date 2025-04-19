@@ -10,11 +10,12 @@ import { SidebarItem } from "@/components/ui/sidebar/sidebar-item";
 import { usePlantPath } from "@/hooks/plant-path/use-plant-path";
 import { SignOutButton } from "@/modules/auth/components/sign-out-button";
 import { usePlantStore } from "@/stores/selected-plant-store";
-import { Package } from "lucide-react";
+import { Package, Tags, Wrench } from "lucide-react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
 import { MdHome, MdOutlineMyLocation, MdPrecisionManufacturing } from "react-icons/md";
+import { RiSurveyLine } from "react-icons/ri";
 
 export default function PlantSidebar() {
   const pathname = usePathname();
@@ -39,6 +40,32 @@ export default function PlantSidebar() {
           href={`${basePath}/home`}
           isActive={pathname.startsWith(`${basePath}/home`)}
         />
+        <SidebarGroup title="Maintenance">
+          <SidebarItem
+            icon={<Wrench className="h-5 w-5" />}
+            text="Maintenance"
+            tooltip="Maintenance"
+            href={`${basePath}/maintenance`}
+            isActive={
+              pathname.startsWith(`${basePath}/maintenance`) &&
+              !pathname.startsWith(`${basePath}/maintenance-types`)
+            }
+          />
+          <SidebarItem
+            icon={<Tags className="h-5 w-5" />}
+            text="Maintenance Types"
+            tooltip="Maintenance Types"
+            href={`${basePath}/maintenance-types`}
+            isActive={pathname.startsWith(`${basePath}/maintenance-types`)}
+          />
+          <SidebarItem
+            icon={<RiSurveyLine className="h-5 w-5" />}
+            text="Forms"
+            tooltip="Forms"
+            href={`${basePath}/forms`}
+            isActive={pathname.startsWith(`${basePath}/forms`)}
+          />
+        </SidebarGroup>
         <SidebarGroup title="Configuration">
           <SidebarItem
             icon={<MdOutlineMyLocation className="h-5 w-5" />}
