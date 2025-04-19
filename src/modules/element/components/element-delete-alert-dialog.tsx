@@ -9,6 +9,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { DialogTrigger } from "@/components/ui/dialog";
+import { queryClient } from "@/providers/providers";
 import { TriangleAlert } from "lucide-react";
 import React from "react";
 import { useDeleteElement } from "../handlers/element-handler";
@@ -28,6 +29,14 @@ export default function ElementDeleteAlertDialog({
 }: ElementDeleteAlertDialogProps) {
   const { mutate: deleteElement } = useDeleteElement();
 
+  const handleDeleteButtonClick = () => {
+    deleteElement(item.id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["components"] });
+      },
+    });
+  };
+
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       {children && <DialogTrigger asChild>{children}</DialogTrigger>}
@@ -42,7 +51,7 @@ export default function ElementDeleteAlertDialog({
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             className="bg-red-600 hover:bg-red-500"
-            onClick={() => deleteElement(item.id)}
+            onClick={handleDeleteButtonClick}
           >
             Delete
           </AlertDialogAction>

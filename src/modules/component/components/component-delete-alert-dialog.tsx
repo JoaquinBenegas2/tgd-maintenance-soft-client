@@ -12,6 +12,7 @@ import { DialogTrigger } from "@/components/ui/dialog";
 import { TriangleAlert } from "lucide-react";
 import React from "react";
 import { useDeleteComponent } from "../handlers/component-handler";
+import { queryClient } from "@/providers/providers";
 
 interface ComponentDeleteAlertDialogProps {
   children?: React.ReactNode;
@@ -28,6 +29,14 @@ export default function ComponentDeleteAlertDialog({
 }: ComponentDeleteAlertDialogProps) {
   const { mutate: deleteComponent } = useDeleteComponent();
 
+  const handleDeleteButtonClick = () => {
+    deleteComponent(item.id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["assets"] });
+      },
+    });
+  };
+
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       {children && <DialogTrigger asChild>{children}</DialogTrigger>}
@@ -42,7 +51,7 @@ export default function ComponentDeleteAlertDialog({
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             className="bg-red-600 hover:bg-red-500"
-            onClick={() => deleteComponent(item.id)}
+            onClick={handleDeleteButtonClick}
           >
             Delete
           </AlertDialogAction>

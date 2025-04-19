@@ -18,10 +18,6 @@ export default function ElementList({ assetId, component, isLoading }: ElementLi
     { header: "Name", accessorKey: "name" },
     { header: "Description", accessorKey: "description" },
     {
-      header: "Component",
-      accessorKey: "component.name",
-    },
-    {
       header: "Manufacturer",
       accessorKey: "manufacturer.name",
     },
