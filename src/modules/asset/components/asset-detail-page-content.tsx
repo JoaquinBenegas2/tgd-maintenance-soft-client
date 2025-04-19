@@ -53,7 +53,7 @@ export default function AssetDetailPageContent() {
             </Button>
           </div>
         ) : (
-          <Button size={"sm"} type="button" onClick={() => setEditMode(true)} form="user-form">
+          <Button size={"sm"} type="button" onClick={() => setEditMode(true)}>
             <Pen />
           </Button>
         )}

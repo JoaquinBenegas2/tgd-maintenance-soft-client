@@ -33,7 +33,7 @@ export default function AssetDeleteAlertDialog({
       {children && <DialogTrigger asChild>{children}</DialogTrigger>}
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to delete this Manufacturer?</AlertDialogTitle>
+          <AlertDialogTitle>Are you sure you want to delete this Asset?</AlertDialogTitle>
           <AlertDialogDescription className="flex items-center gap-2 text-red-600">
             <TriangleAlert /> This action cannot be undone.
           </AlertDialogDescription>
