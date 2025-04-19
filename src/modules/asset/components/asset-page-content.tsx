@@ -7,7 +7,7 @@ export default function AssetPageContent() {
   return (
     <>
       <PageHeader title="Assets" className="mb-3!" />
-      <Breadcrumb className="mb-4">
+      <Breadcrumb className="mb-4 flex justify-between h-8">
         <DynamicBreadcrumbTrail startFrom={2} />
       </Breadcrumb>
       <AssetList />
