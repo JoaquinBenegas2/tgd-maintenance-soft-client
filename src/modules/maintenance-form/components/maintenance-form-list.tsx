@@ -1,7 +1,7 @@
 "use client";
 
 import CustomTable, { TableColumn } from "@/components/custom/table/app-custom-table";
-import { useGetAllForms } from "../handlers/maintenance-handler";
+import { useGetAllForms } from "../handlers/maintenance-form-handler";
 import { FormResponseDto } from "../models/maintenance-form-model";
 import MaintenanceFormActionsCell from "./maintenance-form-actions-cell";
 import { Badge } from "@/components/ui/badge";
