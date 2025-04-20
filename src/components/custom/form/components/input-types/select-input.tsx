@@ -1,4 +1,3 @@
-import { Controller } from "react-hook-form";
 import {
   Select,
   SelectContent,
@@ -8,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Controller } from "react-hook-form";
 import { InputTypeProps } from "../../models/custom-form-models";
 
 export default function SelectInput({ field, form, className }: InputTypeProps) {
@@ -16,7 +16,7 @@ export default function SelectInput({ field, form, className }: InputTypeProps) 
       name={field.name}
       control={form.control}
       defaultValue={field.defaultValue ?? ""}
-      render={({ field: controllerField }) => {console.log({controllerField}); return(
+      render={({ field: controllerField }) => (
         <Select
           name={controllerField.name}
           value={controllerField.value}
@@ -37,7 +37,7 @@ export default function SelectInput({ field, form, className }: InputTypeProps) 
             </SelectGroup>
           </SelectContent>
         </Select>
-      )}}
+      )}
     />
   );
 }
