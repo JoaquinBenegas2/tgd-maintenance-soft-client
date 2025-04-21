@@ -9,6 +9,13 @@ import { Button } from "@/components/ui/button";
 import { Pen, Puzzle, Save, X } from "lucide-react";
 import { useState } from "react";
 import ElementList from "@/modules/element/components/element-list";
+import {
+  Tabs,
+  TabsContent,
+  TabsContents,
+  TabsList,
+  TabsTrigger,
+} from "@/components/animate-ui/radix-tabs";
 
 export default function ComponentDetailPageContent() {
   const { assetId, componentId } = useParams();
@@ -84,8 +91,20 @@ export default function ComponentDetailPageContent() {
         onExpose={setFormUtils}
       />
       <Separator className="my-6" />
-      <h2 className="text-lg font-bold text-foreground mb-3">Elements</h2>
-      <ElementList assetId={component?.asset?.id} component={component} isLoading={isLoading} />
+      <Tabs defaultValue="elements" className="w-full flex flex-1">
+        <TabsList className="grid w-full grid-cols-1">
+          <TabsTrigger value="elements">Elements</TabsTrigger>
+        </TabsList>
+        <TabsContents className="mx-1 mt-2 flex flex-1">
+          <TabsContent value="elements" className="flex">
+            <ElementList
+              assetId={component?.asset?.id}
+              component={component}
+              isLoading={isLoading}
+            />
+          </TabsContent>
+        </TabsContents>
+      </Tabs>
     </>
   );
 }

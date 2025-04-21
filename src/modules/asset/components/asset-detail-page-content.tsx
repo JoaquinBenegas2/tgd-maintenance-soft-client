@@ -9,6 +9,13 @@ import { useParams, usePathname } from "next/navigation";
 import { useState } from "react";
 import { useGetAssetById } from "../handlers/asset-handler";
 import AssetRequestForm from "./asset-request-form";
+import {
+  Tabs,
+  TabsContent,
+  TabsContents,
+  TabsList,
+  TabsTrigger,
+} from "@/components/animate-ui/radix-tabs";
 
 export default function AssetDetailPageContent() {
   const { assetId } = useParams();
@@ -69,8 +76,16 @@ export default function AssetDetailPageContent() {
         onExpose={setFormUtils}
       />
       <Separator className="my-6" />
-      <h2 className="text-lg font-bold text-foreground mb-3">Components</h2>
-      <ComponentList asset={asset} isLoading={isLoading} />
+      <Tabs defaultValue="components" className="w-full flex flex-1">
+        <TabsList className="grid w-full grid-cols-1">
+          <TabsTrigger value="components">Components</TabsTrigger>
+        </TabsList>
+        <TabsContents className="mx-1 mt-2 flex flex-1">
+          <TabsContent value="components" className="flex">
+            <ComponentList asset={asset} isLoading={isLoading} />
+          </TabsContent>
+        </TabsContents>
+      </Tabs>
     </>
   );
 }
