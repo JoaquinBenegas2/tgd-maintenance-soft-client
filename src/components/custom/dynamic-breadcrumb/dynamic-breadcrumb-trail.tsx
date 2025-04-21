@@ -62,9 +62,13 @@ export const DynamicBreadcrumbTrail = ({
               ) : (
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href={ignore.includes(item.href.toString()) ? "#" : fullPath}>
-                      {item.name}
-                    </Link>
+                    {ignore.includes(item.href.toString()) ? (
+                      <div>{item.name}</div>
+                    ) : (
+                      <Link href={ignore.includes(item.href.toString()) ? "#" : fullPath}>
+                        {item.name}
+                      </Link>
+                    )}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
               )}
