@@ -16,6 +16,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
 import { MdHome, MdOutlineMyLocation, MdPrecisionManufacturing } from "react-icons/md";
 import { RiSurveyLine } from "react-icons/ri";
+import { TbRoute2 } from "react-icons/tb";
 
 export default function PlantSidebar() {
   const pathname = usePathname();
@@ -41,6 +42,13 @@ export default function PlantSidebar() {
           isActive={pathname.startsWith(`${basePath}/home`)}
         />
         <SidebarGroup title="Maintenance">
+          <SidebarItem
+            icon={<TbRoute2 className="h-5 w-5" />}
+            text="Routes"
+            tooltip="Routes"
+            href={`${basePath}/routes`}
+            isActive={pathname.startsWith(`${basePath}/routes`)}
+          />
           <SidebarItem
             icon={<Wrench className="h-5 w-5" />}
             text="Maintenance"

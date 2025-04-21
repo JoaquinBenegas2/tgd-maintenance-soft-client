@@ -12,6 +12,7 @@ export default function DateInput({ field, form, className }: InputTypeProps) {
     <Controller
       name={field.name}
       control={form.control}
+      defaultValue={field.defaultValue ?? ""}
       render={({ field: controllerField }) => (
         <Popover>
           <PopoverTrigger asChild>
@@ -35,7 +36,6 @@ export default function DateInput({ field, form, className }: InputTypeProps) {
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar
               mode="single"
-              {...controllerField}
               selected={controllerField.value}
               onSelect={controllerField.onChange}
               initialFocus

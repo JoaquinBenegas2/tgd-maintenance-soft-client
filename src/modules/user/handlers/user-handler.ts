@@ -7,6 +7,7 @@ import { userService } from "@/modules/user/services/user-service";
 const QUERY_KEY = "users";
 
 export const {
+  useGetAll: useGetAllUsers,
   useCreate: useCreateUser,
   useUpdate: useUpdateUser,
   useDelete: useDeleteUser,
