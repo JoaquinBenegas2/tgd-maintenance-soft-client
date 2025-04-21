@@ -3,16 +3,6 @@
 import React, { HTMLProps, useCallback, useState } from "react";
 
 import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  OnChangeFn,
-  PaginationState,
-  useReactTable,
-} from "@tanstack/react-table";
-import {
   Table,
   TableBody,
   TableCell,
@@ -21,15 +11,26 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  OnChangeFn,
+  PaginationState,
+  RowSelectionState,
+  useReactTable,
+} from "@tanstack/react-table";
 import ColumnToggle from "./column-toggle";
 
-import clsx from "clsx";
 import Paginator from "@/components/custom/paginator/app-paginator";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
+import clsx from "clsx";
+import { MdInfoOutline } from "react-icons/md";
 import "./app-custom-table.css";
 import RowFilters, { ActiveFilter, RowFilter } from "./row-filters";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { MdInfoOutline } from "react-icons/md";
 
 function IndeterminateCheckbox({
   indeterminate,
@@ -85,7 +86,9 @@ export interface CustomTableProps<T> {
     onPageSizeChange: (size: number) => void;
   };
   availableRowFilters?: RowFilter[];
+  rowSelection?: RowSelectionState;
   onRowFiltersChange?: (filters: Record<string, string>) => void;
+  onRowSelectionChange?: (values: RowSelectionState) => void;
   headerChildren?: React.ReactNode;
   showSearchBar?: boolean;
   showRowFilters?: boolean;
@@ -104,7 +107,9 @@ export default function CustomTable<T>({
   searchValue,
   onSearchValueChange: onServerSideSearchValueChange,
   availableRowFilters,
+  rowSelection: rowSelectionProp,
   onRowFiltersChange,
+  onRowSelectionChange,
   headerChildren,
   showColumnToggle = true,
   showRowFilters = true,
@@ -118,7 +123,23 @@ export default function CustomTable<T>({
     pageSize: 10,
   });
 
-  const [rowSelection, setRowSelection] = useState({});
+  const [rowSelectionState, setRowSelectionState] = useState<RowSelectionState>({});
+
+  const rowSelection = rowSelectionProp ?? rowSelectionState;
+
+  const handleRowSelectionChange: OnChangeFn<RowSelectionState> = useCallback(
+    (updaterOrValue) => {
+      const newSelection =
+        typeof updaterOrValue === "function" ? updaterOrValue(rowSelection) : updaterOrValue;
+
+      if (rowSelectionProp == null) {
+        setRowSelectionState(newSelection);
+      }
+
+      onRowSelectionChange?.(newSelection);
+    },
+    [onRowSelectionChange, rowSelection, rowSelectionProp]
+  );
 
   const [globalFilter, setGlobalFilter] = useState("");
 
@@ -304,7 +325,7 @@ export default function CustomTable<T>({
     },
     enableRowSelection: true, //enable row selection for all rows
     /* Events */
-    onRowSelectionChange: setRowSelection,
+    onRowSelectionChange: handleRowSelectionChange,
     onColumnVisibilityChange: setColumnVisibility,
     onPaginationChange: handlePaginationChange,
     onGlobalFilterChange: setGlobalFilter,
