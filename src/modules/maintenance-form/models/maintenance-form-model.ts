@@ -1,6 +1,6 @@
 import { MaintenanceTypeResponseDto } from "@/modules/maintenance-type/models/maintenance-type-model";
 
-enum FormFieldType {
+export enum FormFieldType {
   TEXT = "TEXT",
   TEXTAREA = "TEXTAREA",
   NUMBER = "NUMBER",

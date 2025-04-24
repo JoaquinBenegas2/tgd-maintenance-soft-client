@@ -159,6 +159,7 @@ export default function CustomTable<T>({
       }
 
       return columnHelper.accessor(column.accessorKey as any, {
+        id: column.accessorKey,
         header: column.header,
         cell: (info) =>
           column.cellRenderer ? column.cellRenderer(info.row.original) : info.renderValue(),
@@ -439,7 +440,7 @@ export default function CustomTable<T>({
             ) : items.length > 0 ? (
               <>
                 {table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id}>
+                  <TableRow key={row.id} className="border-b-2 border-neutral-100">
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
                         key={cell.id}

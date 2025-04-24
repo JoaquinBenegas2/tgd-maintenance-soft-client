@@ -4,6 +4,7 @@ import CustomTable, { TableColumn } from "@/components/custom/table/app-custom-t
 import { useGetAllMaintenances } from "../handlers/maintenance-handler";
 import { MaintenanceResponseDto } from "../models/maintenance-model";
 import { DateCell } from "@/components/custom/cells/date-cell";
+import MaintenanceActionsCell from "./maintenance-actions-cell";
 
 export default function MaintenanceList() {
   const { data, isLoading } = useGetAllMaintenances();
@@ -11,7 +12,7 @@ export default function MaintenanceList() {
   const columns: TableColumn<MaintenanceResponseDto>[] = [
     { header: "Route", accessorKey: "route.name" },
     { header: "Asset", accessorKey: "element.component.asset.name" },
-    { header: "Componen", accessorKey: "element.component.name" },
+    { header: "Component", accessorKey: "element.component.name" },
     { header: "Element", accessorKey: "element.name" },
     { header: "Form", accessorKey: "form.name" },
     {
@@ -22,8 +23,8 @@ export default function MaintenanceList() {
     {
       header: "Actions",
       accessorKey: "actions",
-      /* cellRenderer: (item) => <MaintenanceActionsCell item={item} />, */
-    }
+      cellRenderer: (item) => <MaintenanceActionsCell item={item} />,
+    },
   ];
 
   return (

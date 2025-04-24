@@ -16,6 +16,7 @@ import GeneratedRouteMaintenanceForm from "./generated-route-maintenance-form";
 import RouteMaintenanceFormSelector from "./route-maintenance-form-selector";
 import RouteMaintenanceTypeSelector from "./route-maintenance-type-selector";
 import { queryClient } from "@/providers/providers";
+import { useGetMaintenanceTypesWithForms } from "@/modules/maintenance-type/handlers/maintenance-type-handler";
 
 const steps = [
   {
@@ -41,6 +42,7 @@ export default function RouteMaintenanceRequestForm({
   selectedElement: ProgressElementResponseDto;
   onSubmit: () => void;
 }) {
+  const { data: maintenanceTypes } = useGetMaintenanceTypesWithForms();
   const { mutate: createMaintenance } = useCreateMaintenance();
 
   const { activeStep, nextStep, prevStep, resetSteps, isDisabledStep } = useStepper({
@@ -104,6 +106,7 @@ export default function RouteMaintenanceRequestForm({
           {activeStep === 0 && (
             <Card className="bg-accent h-[448px]">
               <RouteMaintenanceTypeSelector
+                maintenanceTypes={maintenanceTypes || []}
                 onMaintenanceTypeSelection={handleMaintenanceTypeSelection}
               />
             </Card>
