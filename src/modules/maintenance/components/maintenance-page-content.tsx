@@ -1,6 +1,7 @@
 import PageHeader from "@/components/custom/page/app-page-header";
 import { Wrench } from "lucide-react";
 import React from "react";
+import MaintenanceList from "./maintenance-list";
 
 export default function MaintenancePageContent() {
   return (
@@ -10,6 +11,7 @@ export default function MaintenancePageContent() {
         title="Maintenance"
         description="Here you can manage your maintenance"
       />
+      <MaintenanceList />
     </>
   );
 }
