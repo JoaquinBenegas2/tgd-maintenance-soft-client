@@ -37,3 +37,10 @@ export interface FormResponseDto {
   maintenance_type: MaintenanceTypeResponseDto;
   fields: FormFieldResponseDto[];
 }
+
+export interface FormWithoutMaintenanceTypeResponseDto {
+  id: number;
+  name: string;
+  description: string;
+  fields: FormFieldResponseDto[];
+}

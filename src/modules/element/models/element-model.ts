@@ -24,6 +24,18 @@ export interface ElementResponseDto {
   status: ElementStatusEnum;
 }
 
+export interface ProgressElementResponseDto {
+  id: number;
+  name: string;
+  description: string;
+  component: ComponentResponseDto;
+  manufacturer: ManufacturerResponseDto;
+  last_maintenance_date: string;
+  last_replacement_date: string;
+  status: ElementStatusEnum;
+  received_maintenance: boolean;
+}
+
 export interface ElementWithoutComponentResponseDto {
   id: number;
   name: string;

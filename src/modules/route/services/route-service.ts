@@ -1,5 +1,5 @@
 import { GenericService } from "@/lib/react-query/services/generic-service";
-import { RouteRequestDto, RouteResponseDto } from "../models/route-model";
+import { ProgressRouteResponseDto, RouteRequestDto, RouteResponseDto } from "../models/route-model";
 import { axiosRequest } from "@/lib/axios/config/axios-config";
 
 const BASE_URL = "/routes";
@@ -8,6 +8,18 @@ class RouteService extends GenericService<RouteRequestDto, RouteResponseDto> {
   constructor() {
     super(BASE_URL);
   }
+
+  getTodayRoutes = async (): Promise<ProgressRouteResponseDto[]> => {
+    return await axiosRequest.get(`${BASE_URL}/today`);
+  };
+
+  getWeekRoutes = async (): Promise<Record<string, ProgressRouteResponseDto[]>> => {
+    return await axiosRequest.get(`${BASE_URL}/week`);
+  };
+
+  getDelayedRoutes = async (): Promise<ProgressRouteResponseDto[]> => {
+    return await axiosRequest.get(`${BASE_URL}/delayed`);
+  };
 
   assignUserToRoute = async (routeId: number, userId: number): Promise<RouteResponseDto> => {
     return await axiosRequest.post(`${BASE_URL}/${routeId}/users/${userId}`);
@@ -21,7 +33,10 @@ class RouteService extends GenericService<RouteRequestDto, RouteResponseDto> {
     return await axiosRequest.post(`${BASE_URL}/${routeId}/elements/${elementId}`);
   };
 
-  unassignElementFromRoute = async (routeId: number, elementId: number): Promise<RouteResponseDto> => {
+  unassignElementFromRoute = async (
+    routeId: number,
+    elementId: number
+  ): Promise<RouteResponseDto> => {
     return await axiosRequest.delete(`${BASE_URL}/${routeId}/elements/${elementId}`);
   };
 }

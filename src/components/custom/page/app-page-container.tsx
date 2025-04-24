@@ -3,9 +3,11 @@ import React from "react";
 
 export default function PageContainer({
   variant = "default",
+  padding = "py-8 px-4 sm:px-10",
   children,
 }: {
   variant?: "default" | "contained";
+  padding?: string;
   children: React.ReactNode;
 }) {
 
@@ -16,5 +18,5 @@ export default function PageContainer({
       </Card>
     );
 
-  return <div className="py-8 px-4 sm:px-10 flex flex-col flex-1">{children}</div>;
+  return <div className={`flex flex-col flex-1 ${padding}`}>{children}</div>;
 }

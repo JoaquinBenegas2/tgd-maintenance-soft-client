@@ -1,4 +1,4 @@
-import { ElementResponseDto } from "@/modules/element/models/element-model";
+import { ElementResponseDto, ProgressElementResponseDto } from "@/modules/element/models/element-model";
 import { UserResponseDto } from "@/modules/user/models/user-model";
 
 export enum RouteStatusEnum {
@@ -23,5 +23,16 @@ export interface RouteResponseDto {
   start_date: string;
   status: RouteStatusEnum;
   assigned_elements: ElementResponseDto[];
+  assigned_operators: UserResponseDto[];
+}
+
+export interface ProgressRouteResponseDto {
+  id: number;
+  name: string;
+  description: string;
+  periodicity_in_days: number;
+  start_date: string;
+  status: RouteStatusEnum;
+  assigned_elements: ProgressElementResponseDto[];
   assigned_operators: UserResponseDto[];
 }
