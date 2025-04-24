@@ -29,6 +29,6 @@ export interface MaintenanceResponseDto {
 
 export interface MaintenanceAnswerResponseDto {
   id: number;
-  field: FormFieldResponseDto;
+  form_field: FormFieldResponseDto;
   value: string;
 }

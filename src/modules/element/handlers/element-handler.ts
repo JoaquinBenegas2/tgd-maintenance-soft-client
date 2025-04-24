@@ -3,6 +3,7 @@ import { createReactQueryHandlers } from "@/lib/react-query/query-handler/create
 import { queryClient } from "@/providers/providers";
 import { ElementRequestDto, ElementResponseDto } from "../models/element-model";
 import { elementService } from "../services/element-service";
+import { toast } from "sonner";
 
 const QUERY_KEY = "elements";
 
@@ -45,7 +46,12 @@ export const useCreateAssetComponentElement = () => {
     [QUERY_KEY],
     ({ assetId, componentId, data }) =>
       elementService.createAssetComponentElement(assetId, componentId, data),
-    { onSuccess: () => queryClient.invalidateQueries({ queryKey: ["components"] }) }
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["components"] });
+        toast.success("Created successfully");
+      },
+    }
   );
 };
 
@@ -57,6 +63,11 @@ export const useUpdateAssetComponentElement = () => {
     [QUERY_KEY],
     ({ assetId, componentId, elementId, data }) =>
       elementService.updateAssetComponentElement(assetId, componentId, elementId, data),
-    { onSuccess: () => queryClient.invalidateQueries({ queryKey: ["components"] }) }
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["components"] });
+        toast.success("Updated successfully");
+      },
+    }
   );
 };

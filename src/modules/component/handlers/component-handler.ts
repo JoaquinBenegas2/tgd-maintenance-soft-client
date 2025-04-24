@@ -3,6 +3,7 @@ import { createReactQueryHandlers } from "@/lib/react-query/query-handler/create
 import { queryClient } from "@/providers/providers";
 import { ComponentRequestDto, ComponentResponseDto } from "../models/component-model";
 import { componentService } from "../services/component-service";
+import { toast } from "sonner";
 
 const QUERY_KEY = "components";
 
@@ -34,7 +35,12 @@ export const useCreateAssetComponent = () => {
   return useCustomMutation<ComponentResponseDto, { assetId: number; data: ComponentRequestDto }>(
     [QUERY_KEY],
     ({ assetId, data }) => componentService.createAssetComponent(assetId, data),
-    { onSuccess: () => queryClient.invalidateQueries({ queryKey: ["assets"] }) }
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["assets"] });
+        toast.success("Created successfully");
+      },
+    }
   );
 };
 
@@ -46,6 +52,11 @@ export const useUpdateAssetComponent = () => {
     [QUERY_KEY],
     ({ assetId, componentId, data }) =>
       componentService.updateAssetComponent(assetId, componentId, data),
-    { onSuccess: () => queryClient.invalidateQueries({ queryKey: ["assets"] }) }
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["assets"] });
+        toast.success("Updated successfully");
+      },
+    }
   );
 };

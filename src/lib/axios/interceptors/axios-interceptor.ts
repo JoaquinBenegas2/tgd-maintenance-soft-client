@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { getSession } from "next-auth/react";
 import { getValidationError } from "../utils/get-validation-error";
 import { usePlantStore } from "@/stores/selected-plant-store";
+import { toast } from "sonner";
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -50,6 +51,12 @@ axiosInstance.interceptors.response.use(
 
     const errorMessage = getValidationError(error.code);
     console.error("ERROR: ", errorMessage);
+
+    if (error.response?.status === 409) {
+      toast.error("Error al eliminar", {
+        description: error.response?.data?.message || "No se pudo eliminar el recurso.",
+      });
+    }
 
     return Promise.reject(error);
   }

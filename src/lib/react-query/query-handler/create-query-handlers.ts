@@ -7,6 +7,7 @@ import { usePaginationState } from "../hooks/use-pagination-state";
 import { GetAllOptions } from "../models/get-all-model";
 import { GetByIdOptions } from "../models/get-by-id-model";
 import { GenericService } from "../services/generic-service";
+import { toast } from "sonner";
 
 interface MutationOptions<TData = unknown> {
   optimisticUpdate?: (Data: TData) => (prevData: any) => any;
@@ -112,6 +113,9 @@ export const createReactQueryHandlers = <Service extends GenericService<any, any
   const useCreate = (options?: MutationOptions<RequestDto>) => {
     return useCustomMutation<ResponseDto>([key], (data: RequestDto) => service.create(data), {
       optimisticUpdate: options?.optimisticUpdate ? options.optimisticUpdate : undefined,
+      onSuccess: () => {
+        toast.success("Created successfully");
+      }
     });
   };
 
@@ -124,6 +128,9 @@ export const createReactQueryHandlers = <Service extends GenericService<any, any
       ({ id, data }: { id: string | number; data: RequestDto }) => service.update(id, data),
       {
         optimisticUpdate: options?.optimisticUpdate ? options.optimisticUpdate : undefined,
+        onSuccess: () => {
+          toast.success("Updated successfully");
+        }
       }
     );
   };
@@ -137,6 +144,9 @@ export const createReactQueryHandlers = <Service extends GenericService<any, any
       (id: string | number) => service.delete(id),
       {
         optimisticUpdate: options?.optimisticUpdate ? options.optimisticUpdate : undefined,
+        onSuccess: () => {
+          toast.success("Deleted successfully");
+        }
       }
     );
   };

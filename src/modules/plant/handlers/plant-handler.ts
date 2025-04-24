@@ -2,6 +2,7 @@ import { useCustomMutation } from "@/lib/react-query/custom/custom-query";
 import { PlantResponseDto } from "../models/plant-model";
 import { plantService } from "../services/plant-service";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const QUERY_KEY = "plants";
 
@@ -14,6 +15,7 @@ export const useAssignUserToPlant = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["users"] });
+        toast.success("User assigned successfully");
       },
     }
   );
@@ -28,6 +30,7 @@ export const useUnassignUserFromPlant = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["users"] });
+        toast.success("User unassigned successfully");
       },
     }
   );
