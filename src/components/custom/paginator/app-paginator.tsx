@@ -60,14 +60,14 @@ export default function Paginator({
   };
 
   return (
-    <div className="flex gap-2 justify-between">
+    <div className="flex flex-col sm:flex-row gap-2 justify-between">
       {/* Page Size Selector */}
       <div className="flex items-center gap-2">
         <Select
           value={pageSize.toString()}
           onValueChange={(value) => onPageSizeChange(Number(value))}
         >
-          <SelectTrigger className="h-8">
+          <SelectTrigger className="h-8 w-full sm:w-auto">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -85,7 +85,7 @@ export default function Paginator({
 
       {/* Pagination Controls */}
       <Pagination className="w-auto mx-0">
-        <PaginationContent className="flex items-center gap-2">
+        <PaginationContent className="flex items-center gap-2 w-full">
           {/* Previous Button */}
           <PaginationItem>
             <Button
@@ -99,7 +99,7 @@ export default function Paginator({
           </PaginationItem>
 
           {/* Page Input */}
-          <PaginationItem className="flex items-center">
+          <PaginationItem className="flex items-center w-full">
             <Input
               type="number"
               min={1}
@@ -108,9 +108,12 @@ export default function Paginator({
               onChange={handleInputChange}
               onBlur={handleInputValidation} // Validar al perder el foco
               onKeyDown={handleKeyDown} // Validar al presionar Enter
-              className="w-16 h-8 text-center border rounded px-2"
+              className="w-full md:w-16 h-8 text-center border rounded px-2"
             />
-            <span className="ml-2">/ {pageCount}</span>
+            <div className="flex mx-4">
+              <span>/</span>
+              <span className="ml-2">{pageCount}</span>
+            </div>
           </PaginationItem>
 
           {/* Next Button */}

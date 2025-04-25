@@ -92,6 +92,9 @@ export default function AssetList() {
 
   return (
     <CustomTable
+      height="100%"
+      tableClassName="flex-1"
+      className="flex-1"
       items={assets?.content || []}
       columns={columns}
       searchValue={searchTerm}
@@ -102,7 +105,7 @@ export default function AssetList() {
       headerChildren={
         <div className="w-full flex justify-end">
           <AssetRequestDialog>
-            <Button>
+            <Button className="w-full md:w-auto">
               <Plus />
             </Button>
           </AssetRequestDialog>

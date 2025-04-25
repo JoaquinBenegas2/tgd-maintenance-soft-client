@@ -41,7 +41,7 @@ export default function AssetDetailPageContent() {
   return (
     <>
       <PageHeader icon={<Package className="w-8 h-8" />} title={title} className="mb-0!" />
-      <Breadcrumb className="mb-4 flex justify-between">
+      <Breadcrumb className="mb-4 flex flex-col md:flex-row gap-4 justify-between">
         <DynamicBreadcrumbTrail startFrom={2} customPathname={customPathname} />
         {editMode ? (
           <div className="grid grid-cols-2 gap-2">

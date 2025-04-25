@@ -27,7 +27,7 @@ export default function RouteRequestDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {children && <DialogTrigger asChild>{children}</DialogTrigger>}
-      <DialogContent className="sm:max-w-[1048px] h-[680px] flex flex-col">
+      <DialogContent className="h-[98vh] sm:max-w-[1048px] md:h-[680px] flex flex-col">
         <DialogHeader>
           <DialogTitle>{isUpdating ? "Edit Route" : "Create Route"}</DialogTitle>
           <DialogDescription>

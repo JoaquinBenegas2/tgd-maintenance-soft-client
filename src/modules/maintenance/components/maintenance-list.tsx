@@ -29,6 +29,9 @@ export default function MaintenanceList() {
 
   return (
     <CustomTable
+      height="100%"
+      tableClassName="flex-1"
+      className="flex-1"
       items={data || []}
       columns={columns}
       isDataLoading={isLoading}

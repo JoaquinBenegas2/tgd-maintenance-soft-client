@@ -8,8 +8,11 @@ import { GRID_COLUMNS } from "../constants/constants";
 import { CustomFormConfig, UiFields } from "../models/custom-form-models";
 import { generateValidationSchema } from "../utils/validations/generate-validation-schema";
 import { renderField } from "../utils/renderers/field-renderers";
+import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
 
 export default function useCustomForm<T>(formConfig: CustomFormConfig) {
+  const isMobile = useIsMobile(768);
+
   const { fields, formColumns, fieldClassName } = formConfig;
 
   const formSchema = useMemo(() => generateValidationSchema(fields), [fields]);
@@ -32,7 +35,8 @@ export default function useCustomForm<T>(formConfig: CustomFormConfig) {
     defaultValues,
   });
 
-  const gridColumnClass = GRID_COLUMNS[(formColumns as keyof typeof GRID_COLUMNS) || 1];
+  const gridColumnClass =
+    GRID_COLUMNS[(!isMobile && (formColumns as keyof typeof GRID_COLUMNS)) || 1];
 
   const resetForm = useCallback(
     (values?: Partial<T>) => {

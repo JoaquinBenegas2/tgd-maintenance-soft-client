@@ -67,7 +67,7 @@ export default function AssetRequestForm({
       onSubmit={onSubmit}
       showSubmitButton={requestType === "create"}
       submitButton={
-        <Button className="mt-2 col-span-3" disabled={isCreating || isUpdating}>
+        <Button className="mt-2 col-span-1 md:col-span-3" disabled={isCreating || isUpdating}>
           Save
         </Button>
       }

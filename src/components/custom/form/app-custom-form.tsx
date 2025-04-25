@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { COLUMN_SPANS } from "./constants/constants";
 import { FormFieldConfig } from "./models/custom-form-models";
 import { Skeleton } from "@/components/ui/skeleton";
+import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
 
 interface CustomFormProps {
   form: UseFormReturn;
@@ -38,19 +39,19 @@ export default function CustomForm({
   submitButton,
   showSubmitButton = true,
 }: CustomFormProps) {
+  const isMobile = useIsMobile(768);
+
   const handleSubmit = form.handleSubmit((values) => onSubmit(values));
 
   return (
     <Form {...form}>
-      <form
-        id={formId}
-        onSubmit={handleSubmit}
-        className={`grid w-full ${gridColumnClass} -grid-cols-12 gap-4`}
-      >
+      <form id={formId} onSubmit={handleSubmit} className={`grid w-full ${gridColumnClass} gap-4`}>
         {fields.map((field) => {
           if (field.hideField) return null;
 
-          const fieldSpan = (field.fieldSpan as keyof typeof COLUMN_SPANS) || formColumns || 1;
+          const fieldSpan = !isMobile
+            ? (field.fieldSpan as keyof typeof COLUMN_SPANS) || formColumns || 1
+            : 1;
           const spanClass = COLUMN_SPANS[fieldSpan];
           const heightClass = field.type === "textarea" ? "h-16" : "h-9";
 

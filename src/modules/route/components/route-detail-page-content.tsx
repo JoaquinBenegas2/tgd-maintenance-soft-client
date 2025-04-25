@@ -23,8 +23,11 @@ import { TbRoute2 } from "react-icons/tb";
 import { useGetRouteById } from "../handlers/route-handler";
 import AssignElementToRouteDialog from "./assign-user-or-element-to-route-dialog";
 import RouteDetailRequestForm from "./route-detail-request-form";
+import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
 
 export default function RouteDetailPageContent() {
+  const isMobile = useIsMobile();
+
   const { routeId } = useParams();
 
   const [editMode, setEditMode] = useState(false);
@@ -46,8 +49,9 @@ export default function RouteDetailPageContent() {
       >
         <div className="flex flex-1 justify-end">
           {editMode ? (
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2 w-full sm:w-auto">
               <Button
+                className="w-full sm:w-auto"
                 variant={"secondary"}
                 size={"sm"}
                 type="button"
@@ -59,12 +63,19 @@ export default function RouteDetailPageContent() {
               >
                 <X />
               </Button>
-              <Button size={"sm"} type="submit" form="route-form" disabled={formUtils?.isUpdating}>
+              <Button
+                className="w-full sm:w-auto"
+                size={"sm"}
+                type="submit"
+                form="route-form"
+                disabled={formUtils?.isUpdating}
+              >
                 <Save />
               </Button>
             </div>
           ) : (
             <Button
+              className="w-full sm:w-auto"
               size={"sm"}
               type="button"
               onClick={() => setEditMode(true)}
@@ -92,15 +103,15 @@ export default function RouteDetailPageContent() {
         <TabsContents className="mx-1 mt-2 flex flex-1">
           <TabsContent value="elements" className="flex">
             <CustomTable
-              height="100%"
-              className="flex-1"
-              tableClassName="flex-1"
+              height={!isMobile ? "100%" : "400px"}
+              className={!isMobile ? "flex-1" : "w-full"}
+              tableClassName={!isMobile ? "flex-1" : ""}
               items={route?.assigned_elements || []}
               isDataLoading={isLoading}
               headerChildren={
                 <div className="w-full flex justify-end">
                   <AssignElementToRouteDialog assignType="element" route={route}>
-                    <Button>
+                    <Button className="w-full md:w-auto">
                       <MdAssignment />
                     </Button>
                   </AssignElementToRouteDialog>
@@ -136,15 +147,15 @@ export default function RouteDetailPageContent() {
           </TabsContent>
           <TabsContent value="operators" className="flex">
             <CustomTable
-              height="100%"
-              className="flex-1"
-              tableClassName="flex-1"
+              height={!isMobile ? "100%" : "400px"}
+              className={!isMobile ? "flex-1" : "w-full"}
+              tableClassName={!isMobile ? "flex-1" : ""}
               items={route?.assigned_operators || []}
               isDataLoading={isLoading}
               headerChildren={
                 <div className="w-full flex justify-end">
                   <AssignElementToRouteDialog assignType="operator" route={route}>
-                    <Button>
+                    <Button className="w-full md:w-auto">
                       <MdAssignment />
                     </Button>
                   </AssignElementToRouteDialog>

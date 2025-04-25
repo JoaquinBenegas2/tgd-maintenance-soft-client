@@ -20,10 +20,10 @@ function ColumnToggle<T>({ table }: ColumnToggleProps<T>) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full md:w-auto">
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="outline" aria-label="Toggle columns">
+          <Button className="w-full md:w-auto" variant="outline" aria-label="Toggle columns">
             <ColumnsIcon className="w-5 h-5" />
           </Button>
         </PopoverTrigger>

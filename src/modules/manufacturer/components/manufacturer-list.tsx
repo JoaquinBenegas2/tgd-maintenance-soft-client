@@ -35,13 +35,16 @@ export default function ManufacturerList() {
 
   return (
     <CustomTable
+      height="100%"
+      tableClassName="flex-1"
+      className="flex-1"
       items={data || []}
       columns={columns}
       isDataLoading={isLoading}
       headerChildren={
         <div className="w-full flex justify-end">
           <ManufacturerRequestDialog>
-            <Button>
+            <Button className="w-full md:w-auto">
               <Plus />
             </Button>
           </ManufacturerRequestDialog>

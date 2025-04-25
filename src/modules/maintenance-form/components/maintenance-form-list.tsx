@@ -11,7 +11,11 @@ export default function MaintenanceFormList() {
 
   const columns: TableColumn<FormResponseDto>[] = [
     { header: "Name", accessorKey: "name" },
-    { header: "Type", accessorKey: "maintenance_type.name", cellRenderer: (item) => <Badge variant={"secondary"}>{item.maintenance_type.name}</Badge> },
+    {
+      header: "Type",
+      accessorKey: "maintenance_type.name",
+      cellRenderer: (item) => <Badge variant={"secondary"}>{item.maintenance_type.name}</Badge>,
+    },
     { header: "Description", accessorKey: "description" },
     {
       header: "Actions",
@@ -22,6 +26,9 @@ export default function MaintenanceFormList() {
 
   return (
     <CustomTable
+      height="100%"
+      tableClassName="flex-1"
+      className="flex-1"
       items={data || []}
       columns={columns}
       isDataLoading={isLoading}

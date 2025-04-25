@@ -6,6 +6,7 @@ import { Plus } from "lucide-react";
 import { ElementStatusEnum, ElementWithoutComponentResponseDto } from "../models/element-model";
 import ElementActionsCell from "./element-actions-cell";
 import ElementRequestDialog from "./element-request-dialog";
+import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
 
 interface ElementListProps {
   assetId?: number;
@@ -14,6 +15,8 @@ interface ElementListProps {
 }
 
 export default function ElementList({ assetId, component, isLoading }: ElementListProps) {
+  const isMobile = useIsMobile();
+
   const columns: TableColumn<ElementWithoutComponentResponseDto>[] = [
     { header: "Name", accessorKey: "name" },
     { header: "Description", accessorKey: "description" },
@@ -49,15 +52,15 @@ export default function ElementList({ assetId, component, isLoading }: ElementLi
   return (
     <CustomTable
       items={component?.elements || []}
-      height="100%"
-      className="flex-1"
-      tableClassName="flex-1"
+      height={!isMobile ? "100%" : "400px"}
+      className={!isMobile ? "flex-1" : "w-full"}
+      tableClassName={!isMobile ? "flex-1" : ""}
       columns={columns}
       isDataLoading={isLoading}
       headerChildren={
         <div className="w-full flex justify-end">
           <ElementRequestDialog assetId={assetId} componentId={component?.id}>
-            <Button>
+            <Button className="w-full md:w-auto">
               <Plus />
             </Button>
           </ElementRequestDialog>

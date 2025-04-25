@@ -40,7 +40,7 @@ export default function ElementDetailPageContent() {
   return (
     <>
       <PageHeader icon={<Grip className="w-8 h-8" />} title={title} className="mb-0!" />
-      <Breadcrumb className="mb-4 flex justify-between">
+      <Breadcrumb className="mb-4 flex flex-col md:flex-row gap-4 justify-between">
         <DynamicBreadcrumbTrail
           startFrom={2}
           customPathname={customPathname}

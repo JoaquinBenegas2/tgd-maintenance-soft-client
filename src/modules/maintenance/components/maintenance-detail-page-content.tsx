@@ -20,8 +20,11 @@ import { useGetMaintenanceById } from "../handlers/maintenance-handler";
 import MaintenanceDetailRequestForm from "./maintenance-detail-request-form";
 import { Button } from "@/components/ui/button";
 import MaintenanceUpdateRequestForm from "./maintenance-update-request-form";
+import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
 
 export default function MaintenanceDetailPageContent() {
+  const isMobile = useIsMobile(768);
+
   const { maintenanceId } = useParams();
 
   const { data: maintenance, isLoading } = useGetMaintenanceById(Number(maintenanceId));
@@ -53,16 +56,16 @@ export default function MaintenanceDetailPageContent() {
         <TabsContents className="mx-1 mt-2 flex flex-1">
           <TabsContent value="maintenance-answers" className="flex">
             <CustomTable
-              height="100%"
-              className="flex-1"
-              tableClassName="flex-1"
+              height={!isMobile ? "100%" : "400px"}
+              className={!isMobile ? "flex-1" : "w-full"}
+              tableClassName={!isMobile ? "flex-1" : ""}
               isDataLoading={isLoading}
               columns={columns as any}
               items={[answer]}
               headerChildren={
                 <div className="w-full flex justify-end">
                   <MaintenanceUpdateRequestForm maintenance={maintenance}>
-                    <Button>
+                    <Button className="w-full md:w-auto">
                       <Pen />
                     </Button>
                   </MaintenanceUpdateRequestForm>

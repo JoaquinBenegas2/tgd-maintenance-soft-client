@@ -6,6 +6,7 @@ import { Plus } from "lucide-react";
 import { ComponentStatusEnum, ComponentWithoutAssetResponseDto } from "../models/component-model";
 import ComponentActionsCell from "./component-actions-cell";
 import ComponentRequestDialog from "./component-request-dialog";
+import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
 
 interface ComponentListProps {
   asset?: AssetResponseDto;
@@ -13,6 +14,8 @@ interface ComponentListProps {
 }
 
 export default function ComponentList({ asset, isLoading }: ComponentListProps) {
+  const isMobile = useIsMobile();
+
   const columns: TableColumn<ComponentWithoutAssetResponseDto>[] = [
     { header: "Name", accessorKey: "name" },
     { header: "Description", accessorKey: "description" },
@@ -48,15 +51,15 @@ export default function ComponentList({ asset, isLoading }: ComponentListProps) 
   return (
     <CustomTable
       items={asset?.components || []}
-      height="100%"
-      className="flex-1"
-      tableClassName="flex-1"
+      height={!isMobile ? "100%" : "400px"}
+      className={!isMobile ? "flex-1" : "w-full"}
+      tableClassName={!isMobile ? "flex-1" : ""}
       columns={columns}
       isDataLoading={isLoading}
       headerChildren={
         <div className="w-full flex justify-end">
           <ComponentRequestDialog assetId={asset?.id}>
-            <Button>
+            <Button className="w-full md:w-auto">
               <Plus />
             </Button>
           </ComponentRequestDialog>

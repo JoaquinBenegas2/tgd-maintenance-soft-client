@@ -31,6 +31,7 @@ import clsx from "clsx";
 import { MdInfoOutline } from "react-icons/md";
 import "./app-custom-table.css";
 import RowFilters, { ActiveFilter, RowFilter } from "./row-filters";
+import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
 
 function IndeterminateCheckbox({
   indeterminate,
@@ -99,7 +100,7 @@ export interface CustomTableProps<T> {
 export default function CustomTable<T>({
   items,
   columns,
-  height = "560px",
+  height,
   className,
   tableClassName,
   columnResizing = { mode: "onChange", direction: "ltr" },
@@ -116,6 +117,9 @@ export default function CustomTable<T>({
   showSearchBar = true,
   isDataLoading,
 }: CustomTableProps<T>) {
+  const isMobile = useIsMobile(768)
+  const tableHeight = height ? height : isMobile ? "420px" : "560px";
+
   const [columnVisibility, setColumnVisibility] = useState({});
 
   const [clientSidePagination, setClientSidePagination] = useState<PaginationState>({
@@ -342,11 +346,11 @@ export default function CustomTable<T>({
 
   return (
     <div className={`${className} flex flex-col space-y-2`}>
-      <div className="flex gap-3 justify-between items-center">
+      <div className="flex gap-3 justify-between items-center flex-col md:flex-row">
         <div
           className={clsx(
-            "flex items-center rounded-lg max-w-xs ",
-            showSearchBar && "w-full min-w-60 md:min-w-72"
+            "flex items-center rounded-lg md:max-w-xs ",
+            showSearchBar && "w-full md:min-w-72"
           )}
         >
           {/* Row Filters */}
@@ -379,7 +383,7 @@ export default function CustomTable<T>({
       {/* Table */}
       <div
         className={`${tableClassName} overflow-auto border mt-2 md:mt-0 md:border-0`}
-        style={{ height: height }}
+        style={{ height: tableHeight }}
       >
         <Table className="min-w-full" {...{ style: { width: table.getCenterTotalSize() } }}>
           <TableHeader>
@@ -446,7 +450,7 @@ export default function CustomTable<T>({
                         key={cell.id}
                         style={{ width: cell.column.getSize() }}
                         className="truncate whitespace-nowrap max-w-[200px]"
-                        title={cell.getValue() as string}
+                        title={(cell.getValue() as string)?.toString()}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
