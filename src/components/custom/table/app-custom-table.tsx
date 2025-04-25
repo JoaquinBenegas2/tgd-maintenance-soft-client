@@ -431,7 +431,7 @@ export default function CustomTable<T>({
                   <TableRow key={rowIndex} className="animate-pulse">
                     {table.getAllColumns().map((column, colIndex) => (
                       <TableCell key={colIndex}>
-                        <div className="h-5 bg-gray-300 dark:bg-gray-700 rounded-md w-full"></div>
+                        <div className="h-5 bg-gray-300 dark:bg-neutral-800 rounded-md w-full"></div>
                       </TableCell>
                     ))}
                   </TableRow>
@@ -440,7 +440,7 @@ export default function CustomTable<T>({
             ) : items.length > 0 ? (
               <>
                 {table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id} className="border-b-2 border-neutral-100">
+                  <TableRow key={row.id} className="border-b-2 border-neutral-100 dark:border-neutral-800">
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
                         key={cell.id}

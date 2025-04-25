@@ -1,15 +1,17 @@
 "use client";
 
+import { AnimatedThemeIcon } from "@/components/ui/animated-theme-icon";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { ChevronDown, Settings, UserRound } from "lucide-react";
-import Link from "next/link";
 import { useSidebar } from "@/components/ui/sidebar/sidebar-context";
+import { ChevronDown, Settings, UserRound } from "lucide-react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
 
 interface NavbarProps {
   session: any;
@@ -17,6 +19,12 @@ interface NavbarProps {
 
 export default function Navbar({ session }: NavbarProps) {
   const { isOpen: isSidebarOpen } = useSidebar();
+
+  const { setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme((theme) => (theme === "dark" ? "light" : "dark"));
+  };
 
   return (
     <div
@@ -33,9 +41,7 @@ export default function Navbar({ session }: NavbarProps) {
             <AvatarFallback>{session.user.name?.charAt(0)}</AvatarFallback>
           </Avatar>
           {/* Name and Icon */}
-          <span className="text-sm font-medium text-sidebar-foreground">
-            {session.user.name}
-          </span>
+          <span className="text-sm font-medium text-sidebar-foreground">{session.user.name}</span>
           <ChevronDown className="w-4 h-4 text-sidebar-foreground" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-48">
@@ -48,6 +54,11 @@ export default function Navbar({ session }: NavbarProps) {
             <Link href="/profile" className="flex gap-3 cursor-pointer">
               <Settings /> <p>Configuración</p>
             </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <div onClick={toggleTheme} className="flex gap-3 cursor-pointer">
+              <AnimatedThemeIcon /> <p>Toggle Theme</p>
+            </div>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

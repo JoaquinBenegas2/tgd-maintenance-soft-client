@@ -76,7 +76,7 @@ export const Stepper: React.FC<StepperProps> = ({
                     "w-8 h-8",
                     isCompleted && "bg-blue-500 border-blue-500 text-white",
                     isActive && "bg-blue-600 border-blue-600 text-white",
-                    !isCompleted && !isActive && "bg-white border-gray-300 text-gray-500",
+                    !isCompleted && !isActive && "bg-white border-gray-300 text-gray-500 dark:bg-card dark:border-gray-700 dark:text-gray-400",
                     clickableSteps && isCompleted && "hover:bg-blue-400 hover:border-blue-400",
                     clickableSteps && isActive && "hover:bg-blue-500 hover:border-blue-500",
                     clickableSteps && !isCompleted && !isActive && "hover:bg-gray-100",
@@ -102,7 +102,7 @@ export const Stepper: React.FC<StepperProps> = ({
                       "text-sm font-medium transition-colors duration-200",
                       isActive && "text-blue-600",
                       isCompleted && "text-blue-500",
-                      !isCompleted && !isActive && "text-gray-600",
+                      !isCompleted && !isActive && "text-gray-600 dark:text-gray-400",
                       labelOrient === "bottom" ? "text-center" : ""
                     )}
                   >
@@ -135,7 +135,7 @@ export const Stepper: React.FC<StepperProps> = ({
                   className={cn(
                     "transition-colors duration-200",
                     orientation === "horizontal" ? "flex-1 h-1 mx-2" : "w-1 h-full my-2",
-                    isNextCompleted ? "bg-blue-500" : isNextActive ? "bg-blue-600" : "bg-gray-200"
+                    isNextCompleted ? "bg-blue-500" : isNextActive ? "bg-blue-600" : "bg-gray-200 dark:bg-gray-700"
                   )}
                 />
               )}

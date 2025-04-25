@@ -104,7 +104,7 @@ export default function RouteMaintenanceRequestForm({
         {/* Step 1 */}
         <Step index={0} label={steps[0].label} description={steps[0].description}>
           {activeStep === 0 && (
-            <Card className="bg-accent h-[448px]">
+            <Card className="bg-accent dark:bg-card h-[448px]">
               <RouteMaintenanceTypeSelector
                 maintenanceTypes={maintenanceTypes || []}
                 onMaintenanceTypeSelection={handleMaintenanceTypeSelection}
@@ -115,7 +115,7 @@ export default function RouteMaintenanceRequestForm({
         {/* Step 2 */}
         <Step index={1} label={steps[1].label} description={steps[1].description}>
           {activeStep === 1 && (
-            <Card className="bg-accent h-[448px]">
+            <Card className="bg-accent dark:bg-card h-[448px]">
               <RouteMaintenanceFormSelector
                 onMaintenanceFormSelection={handleMaintenanceFormSelection}
               />
@@ -125,7 +125,7 @@ export default function RouteMaintenanceRequestForm({
         {/* Step 3 */}
         <Step index={2} label={steps[2].label} description={steps[2].description}>
           {activeStep === 2 && (
-            <Card className="bg-accent h-[448px]">
+            <Card className="bg-accent dark:bg-card h-[448px]">
               <GeneratedRouteMaintenanceForm
                 formId="maintenance-request-form"
                 onMaintenanceSubmit={handleMaintenanceSubmit}

@@ -147,7 +147,7 @@ export default function RouteRequestForm() {
         {/* Step 1 */}
         <Step index={0} label={steps[0].label} description={steps[0].description}>
           {activeStep === 0 && (
-            <Card className="bg-accent">
+            <Card className="bg-accent dark:bg-card">
               <CardContent>
                 <CustomForm onSubmit={() => {}} showSubmitButton={false} {...form} />
               </CardContent>
@@ -158,7 +158,7 @@ export default function RouteRequestForm() {
         {/* Step 2 */}
         <Step index={1} label={steps[1].label} description={steps[1].description}>
           {activeStep === 1 && (
-            <Card className="bg-accent">
+            <Card className="bg-accent dark:bg-card">
               <CardContent>
                 <CustomTable
                   height="220px"
@@ -200,7 +200,7 @@ export default function RouteRequestForm() {
         {/* Step 2 */}
         <Step index={2} label={steps[2].label} description={steps[2].description}>
           {activeStep === 2 && (
-            <Card className="bg-accent">
+            <Card className="bg-accent dark:bg-card">
               <CardContent>
                 <CustomTable
                   height="220px"
