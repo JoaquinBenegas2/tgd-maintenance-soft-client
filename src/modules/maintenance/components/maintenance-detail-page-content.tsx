@@ -14,10 +14,12 @@ import { generateColumnsFromAnswers } from "@/modules/maintenance-form/utils/gen
 import { mapAnswersToRecord } from "@/modules/maintenance-form/utils/map-answers-to-record";
 import { format, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
-import { Wrench } from "lucide-react";
+import { Pen, Wrench } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useGetMaintenanceById } from "../handlers/maintenance-handler";
 import MaintenanceDetailRequestForm from "./maintenance-detail-request-form";
+import { Button } from "@/components/ui/button";
+import MaintenanceUpdateRequestForm from "./maintenance-update-request-form";
 
 export default function MaintenanceDetailPageContent() {
   const { maintenanceId } = useParams();
@@ -57,6 +59,15 @@ export default function MaintenanceDetailPageContent() {
               isDataLoading={isLoading}
               columns={columns as any}
               items={[answer]}
+              headerChildren={
+                <div className="w-full flex justify-end">
+                  <MaintenanceUpdateRequestForm maintenance={maintenance}>
+                    <Button>
+                      <Pen />
+                    </Button>
+                  </MaintenanceUpdateRequestForm>
+                </div>
+              }
             />
           </TabsContent>
         </TabsContents>
