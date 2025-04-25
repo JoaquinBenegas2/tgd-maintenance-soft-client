@@ -28,7 +28,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     //-- Authorization Callback
     authorized: async ({ auth }) => {
-      return !!auth;
+      const expiresAt = auth?.expiresAt;
+
+      if (!expiresAt || Date.now() > expiresAt) {
+        console.log("🔒 Token expired, access denied by authorized()");
+        return false;
+      }
+
+      return true;
     },
 
     //-- JWT Callback

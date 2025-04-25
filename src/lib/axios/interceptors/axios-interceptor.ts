@@ -45,6 +45,8 @@ axiosInstance.interceptors.response.use(
     }
 
     if (error.response?.status === 401 && !originalRequest._retry) {
+      console.log("⚠️ 401 Unauthorized: Redirect to login page");
+      
       window.location.href = "/auth/login";
       return;
     }
