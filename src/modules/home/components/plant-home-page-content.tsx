@@ -11,13 +11,13 @@ export default function PlantHomePageContent() {
   return (
     <div className="w-full flex flex-1 gap-4">
       <div className="flex flex-col flex-1 gap-4">
-        <div className="flex gap-4 w-full h-full overflow-y-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-full h-full">
           <DelayedRouteList />
           <TodayRouteList />
           <TodayRouteProgressCard />
         </div>
-        <div className="grid grid-cols-12 gap-4 w-full h-full overflow-y-auto">
-          <div className="flex flex-col gap-4 col-span-3">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 w-full h-full">
+          <div className="flex flex-col gap-4 col-span-1 lg:col-span-3">
             <RiskIndicatorCard />
             <MonthMaintenanceCard />
           </div>

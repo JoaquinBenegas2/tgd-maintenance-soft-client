@@ -12,11 +12,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { TrendingUp } from "lucide-react";
+import { format } from "date-fns";
+import { PencilRuler, TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { useGetMonthMaintenances } from "../handlers/maintenance-handler";
 import { MaintenanceResponseDto } from "../models/maintenance-model";
-import { format } from "date-fns";
 
 export default function MaintenanceTypeBarChart() {
   const { data: maintenance } = useGetMonthMaintenances();
@@ -42,8 +42,14 @@ export default function MaintenanceTypeBarChart() {
     },
   } satisfies ChartConfig;
 
+  const totalTasks = chartData.reduce((sum, bar) => sum + bar.count, 0);
+  const topType = chartData.reduce(
+    (prev, curr) => (curr.count > prev.count ? curr : prev),
+    chartData[0] || { type: "", count: 0 }
+  );
+
   return (
-    <Card className="col-span-9">
+    <Card className="col-span-1 lg:col-span-9">
       <CardHeader>
         <CardTitle>Bar Chart</CardTitle>
         <CardDescription>{format(new Date(), "MMMM yyyy")}</CardDescription>
@@ -59,11 +65,11 @@ export default function MaintenanceTypeBarChart() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+        <div className="flex items-center gap-2 font-medium leading-none">
+          <PencilRuler size={16} /> Total de mantenimientos este mes: {totalTasks}
         </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+        <div className="flex items-center gap-2 leading-none text-muted-foreground">
+          <TrendingUp size={16} /> Tipo más común: {topType.type} ({topType.count} tareas)
         </div>
       </CardFooter>
     </Card>
