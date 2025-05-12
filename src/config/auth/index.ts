@@ -30,6 +30,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     authorized: async ({ auth }) => {
       const expiresAt = auth?.expiresAt;
 
+      console.log({ expiresAt });
+      
+
       if (!expiresAt || Date.now() > expiresAt) {
         console.log("🔒 Token expired, access denied by authorized()");
         return false;
@@ -54,7 +57,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     session: async ({ session, token }) => {
       session.accessToken = token.accessToken;
       session.expiresAt = token.expiresAt;
-      session.user.roles = token.user.roles;
+      session.user.roles = token.user?.roles;
+
+      if (!session.expiresAt || Date.now() > session.expiresAt) {
+        console.log("🔒 Token expired, access denied by authorized()");
+        session.user = null!;
+      }
 
       return session;
     },
