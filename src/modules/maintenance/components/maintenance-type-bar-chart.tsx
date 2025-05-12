@@ -42,8 +42,8 @@ export default function MaintenanceTypeBarChart() {
     },
   } satisfies ChartConfig;
 
-  const totalTasks = chartData.reduce((sum, bar) => sum + bar.count, 0);
-  const topType = chartData.reduce(
+  const totalTasks = chartData?.reduce((sum, bar) => sum + bar.count, 0);
+  const topType = chartData?.reduce(
     (prev, curr) => (curr.count > prev.count ? curr : prev),
     chartData[0] || { type: "", count: 0 }
   );
@@ -69,7 +69,7 @@ export default function MaintenanceTypeBarChart() {
           <PencilRuler size={16} /> Total de mantenimientos este mes: {totalTasks}
         </div>
         <div className="flex items-center gap-2 leading-none text-muted-foreground">
-          <TrendingUp size={16} /> Tipo más común: {topType.type} ({topType.count} tareas)
+          <TrendingUp size={16} /> Tipo más común: {topType?.type} ({topType?.count} tareas)
         </div>
       </CardFooter>
     </Card>

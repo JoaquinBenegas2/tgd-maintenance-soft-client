@@ -6,6 +6,7 @@ import DelayedRouteList from "@/modules/route/components/delayed-route-list";
 import RiskIndicatorCard from "@/modules/route/components/risk-indicator-card";
 import TodayRouteList from "@/modules/route/components/today-route-list";
 import TodayRouteProgressCard from "@/modules/route/components/today-route-progress-card";
+import AIAssistant from "@/modules/ai-assistant/components/ai-assistant";
 
 export default function PlantHomePageContent() {
   return (
@@ -24,6 +25,7 @@ export default function PlantHomePageContent() {
           <MaintenanceTypeBarChart />
         </div>
       </div>
+      <AIAssistant />
     </div>
   );
 }

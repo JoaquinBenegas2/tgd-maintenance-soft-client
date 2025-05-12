@@ -3,6 +3,7 @@ import { MaintenanceTypeWithFormsResponseDto } from "@/modules/maintenance-type/
 import { create } from "zustand";
 import { MaintenanceAnswerRequestDto } from "../models/maintenance-model";
 import { format } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 
 interface MaintenanceRequestFormStore {
   maintenance_date: string;
@@ -13,8 +14,13 @@ interface MaintenanceRequestFormStore {
   reset: () => void;
 }
 
+const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+const now = new Date();
+const zonedDate = toZonedTime(now, timeZone);
+const todayFormatted = format(zonedDate, "yyyy-MM-dd");
+
 const initialState: MaintenanceRequestFormStore = {
-  maintenance_date: format(new Date(), "yyyy-MM-dd"),
+  maintenance_date: todayFormatted,
   selectedMaintenanceType: null,
   selectedForm: null,
   answers: [],
@@ -34,6 +40,6 @@ export const useMaintenanceFormStore = create<MaintenanceRequestFormStore>((set)
   reset: () =>
     set({
       ...initialState,
-      maintenance_date: format(new Date(), "yyyy-MM-dd"),
+      maintenance_date: todayFormatted,
     }),
 }));

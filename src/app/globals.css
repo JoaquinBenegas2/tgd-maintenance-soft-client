@@ -158,3 +158,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.markdown-custom-list ul ul > li {
+  @apply list-[circle];
+}
+
+.markdown-custom-list ul ul ul > li {
+  @apply list-[square];
+}
