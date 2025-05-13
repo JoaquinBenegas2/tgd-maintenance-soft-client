@@ -17,6 +17,9 @@ import RouteMaintenanceFormSelector from "./route-maintenance-form-selector";
 import RouteMaintenanceTypeSelector from "./route-maintenance-type-selector";
 import { queryClient } from "@/providers/providers";
 import { useGetMaintenanceTypesWithForms } from "@/modules/maintenance-type/handlers/maintenance-type-handler";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
 
 const steps = [
   {
@@ -44,6 +47,7 @@ export default function RouteMaintenanceRequestForm({
 }) {
   const { data: maintenanceTypes } = useGetMaintenanceTypesWithForms();
   const { mutate: createMaintenance } = useCreateMaintenance();
+  const [notifySupervisor, setNotifySupervisor] = useState(false);
 
   const { activeStep, nextStep, prevStep, resetSteps, isDisabledStep } = useStepper({
     initialStep: 0,
@@ -81,12 +85,12 @@ export default function RouteMaintenanceRequestForm({
       form_id: useMaintenanceFormStore.getState().selectedForm?.id || 0,
       maintenance_date: useMaintenanceFormStore.getState().maintenance_date,
       answers,
+      notify_supervisor: notifySupervisor,
     };
 
     createMaintenance(data, {
       onSuccess: () => {
         onSubmit();
-        // useMaintenanceFormStore.getState().reset();
         resetSteps();
         queryClient.invalidateQueries({ queryKey: ["routes"] });
       },
@@ -136,6 +140,16 @@ export default function RouteMaintenanceRequestForm({
       </Stepper>
       {/* Navigation */}
       <div className="flex justify-end gap-4 mt-6">
+        <div className="flex items-center space-x-2 mr-4">
+          <Checkbox
+            id="notify-supervisor"
+            checked={notifySupervisor}
+            onCheckedChange={(checked) => setNotifySupervisor(checked as boolean)}
+          />
+          <Label htmlFor="notify-supervisor">
+            ¿Deseas notificar al supervisor que este mantenimiento es crítico?
+          </Label>
+        </div>
         <Button variant="outline" disabled={isDisabledStep} onClick={prevStep}>
           <FaAngleLeft />
         </Button>
