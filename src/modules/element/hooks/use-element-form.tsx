@@ -1,9 +1,11 @@
 import useCustomForm from "@/components/custom/form/hooks/use-custom-form";
 import { CustomFormConfig } from "@/components/custom/form/models/custom-form-models";
-import { useGetAllManufacturers } from "@/modules/manufacturer/handlers/manufacturer-handler";
+import {
+  useGetActiveManufacturers
+} from "@/modules/manufacturer/handlers/manufacturer-handler";
+import { parse } from "date-fns";
 import { useEffect } from "react";
 import { ElementResponseDto } from "../models/element-model";
-import { parse } from "date-fns";
 
 interface ElementFormHookProps {
   initialData?: ElementResponseDto;
@@ -18,7 +20,7 @@ export default function useElementForm({
   requestType,
   isLoading,
 }: ElementFormHookProps) {
-  const { data: manufacturers } = useGetAllManufacturers();
+  const { data: manufacturers } = useGetActiveManufacturers();
 
   const lastReplacementDate =
     initialData?.last_replacement_date && initialData?.last_replacement_date !== null

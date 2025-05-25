@@ -1,9 +1,9 @@
 import useCustomForm from "@/components/custom/form/hooks/use-custom-form";
 import { CustomFormConfig } from "@/components/custom/form/models/custom-form-models";
-import { useGetAllManufacturers } from "@/modules/manufacturer/handlers/manufacturer-handler";
-import { useGetAllSectors } from "@/modules/sector/handlers/sector-handler";
-import { AssetResponseDto } from "../models/asset-model";
+import { useGetActiveManufacturers } from "@/modules/manufacturer/handlers/manufacturer-handler";
+import { useGetActiveSectors } from "@/modules/sector/handlers/sector-handler";
 import { useEffect } from "react";
+import { AssetResponseDto } from "../models/asset-model";
 
 interface AssetFormHookProps {
   initialData?: AssetResponseDto;
@@ -12,9 +12,14 @@ interface AssetFormHookProps {
   isLoading?: boolean;
 }
 
-export default function useAssetForm({ initialData, editMode, requestType, isLoading }: AssetFormHookProps) {
-  const { data: sectors } = useGetAllSectors();
-  const { data: manufacturers } = useGetAllManufacturers();
+export default function useAssetForm({
+  initialData,
+  editMode,
+  requestType,
+  isLoading,
+}: AssetFormHookProps) {
+  const { data: sectors } = useGetActiveSectors();
+  const { data: manufacturers } = useGetActiveManufacturers();
 
   const formConfig: CustomFormConfig = {
     formColumns: 3,
@@ -124,15 +129,15 @@ export default function useAssetForm({ initialData, editMode, requestType, isLoa
 
   useEffect(() => {
     if (initialData) {
-        form.resetForm({
-          name: initialData.name,
-          model: initialData.model,
-          serial_number: initialData.serial_number,
-          description: initialData.description,
-          sector_id: initialData.sector?.id.toString(),
-          manufacturer_id: initialData.manufacturer?.id.toString(),
-          installation_date: initialData.installation_date,
-        });
+      form.resetForm({
+        name: initialData.name,
+        model: initialData.model,
+        serial_number: initialData.serial_number,
+        description: initialData.description,
+        sector_id: initialData.sector?.id.toString(),
+        manufacturer_id: initialData.manufacturer?.id.toString(),
+        installation_date: initialData.installation_date,
+      });
     }
   }, [initialData]);
 

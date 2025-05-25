@@ -1,19 +1,21 @@
-import React, { useState } from "react";
-import { ManufacturerResponseDto } from "../models/manufacturer-model";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Pen, Trash } from "lucide-react";
-import ManufacturerRequestDialog from "./manufacturer-request-dialog";
+import { LucidePower, LucidePowerOff, MoreHorizontal, Pen, Trash } from "lucide-react";
+import { useState } from "react";
+import { ManufacturerResponseDto } from "../models/manufacturer-model";
+import ManufacturerActiveAlertDialog from "./manufacturer-active-alert-dialog";
 import ManufacturerDeleteAlertDialog from "./manufacturer-delete-alert-dialog";
+import ManufacturerRequestDialog from "./manufacturer-request-dialog";
 
 export default function ManufacturerActionsCell({ item }: { item: ManufacturerResponseDto }) {
   const [deleteAlertDialogOpen, setDeleteAlertDialogOpen] = useState(false);
   const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
+  const [activeAlertDialogOpen, setActiveAlertDialogOpen] = useState(false);
 
   return (
     <>
@@ -28,6 +30,16 @@ export default function ManufacturerActionsCell({ item }: { item: ManufacturerRe
             <div className="flex items-center gap-2 cursor-pointer w-full px-2 py-1.5">
               <Pen className="w-4 h-4" />
               Edit
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setActiveAlertDialogOpen(true)} className="p-0">
+            <div className="flex items-center gap-2 cursor-pointer w-full px-2 py-1.5">
+              {item.active ? (
+                <LucidePowerOff className="w-4 h-4" />
+              ) : (
+                <LucidePower className="w-4 h-4" />
+              )}
+              {item.active ? "Deactivate" : "Activate"}
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setDeleteAlertDialogOpen(true)} className="p-0">
@@ -52,6 +64,13 @@ export default function ManufacturerActionsCell({ item }: { item: ManufacturerRe
         item={item}
         open={deleteAlertDialogOpen}
         setOpen={setDeleteAlertDialogOpen}
+      />
+
+      {/* Update Active Alert Dialog */}
+      <ManufacturerActiveAlertDialog
+        item={item}
+        open={activeAlertDialogOpen}
+        setOpen={setActiveAlertDialogOpen}
       />
     </>
   );

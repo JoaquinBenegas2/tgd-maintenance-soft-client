@@ -1,6 +1,6 @@
 import useCustomForm from "@/components/custom/form/hooks/use-custom-form";
 import { CustomFormConfig } from "@/components/custom/form/models/custom-form-models";
-import { useGetAllManufacturers } from "@/modules/manufacturer/handlers/manufacturer-handler";
+import { useGetActiveManufacturers } from "@/modules/manufacturer/handlers/manufacturer-handler";
 import { useEffect } from "react";
 import { ComponentResponseDto } from "../models/component-model";
 
@@ -17,7 +17,7 @@ export default function useComponentForm({
   requestType,
   isLoading,
 }: ComponentFormHookProps) {
-  const { data: manufacturers } = useGetAllManufacturers();
+  const { data: manufacturers } = useGetActiveManufacturers();
 
   const formConfig: CustomFormConfig = {
     formColumns: 4,
