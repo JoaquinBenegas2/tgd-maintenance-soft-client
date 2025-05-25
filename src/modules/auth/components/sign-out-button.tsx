@@ -6,8 +6,8 @@ export function SignOutButton() {
   return (
     <SidebarItem
       icon={<LogOut className="h-5 w-5" />}
-      text="Logout"
-      tooltip="Logout"
+      text="LogOut"
+      tooltip="LogOut"
       className="hover:!text-destructive hover:!bg-sidebar"
       onClick={handleSignOut}
     />

@@ -8,8 +8,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
 import { useSidebar } from "@/components/ui/sidebar/sidebar-context";
-import { ChevronDown, Settings, UserRound } from "lucide-react";
+import { usePlantPath } from "@/hooks/plant-path/use-plant-path";
+import { handleSignOut } from "@/modules/auth/actions/auth-actions";
+import { ChevronDown, CircleHelp, LogOut, Settings, UserRound } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 
@@ -25,6 +28,8 @@ export default function Navbar({ session }: NavbarProps) {
   const toggleTheme = () => {
     setTheme((theme) => (theme === "dark" ? "light" : "dark"));
   };
+
+  const plantPath = usePlantPath();
 
   return (
     <div
@@ -46,18 +51,58 @@ export default function Navbar({ session }: NavbarProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-48">
           <DropdownMenuItem asChild>
-            <Link href="/profile" className="flex gap-3 cursor-pointer">
-              <UserRound /> <p>Perfil</p>
+            <Link
+              href={plantPath ? `${plantPath}/profile` : "/profile"}
+              className="flex gap-3 cursor-pointer"
+            >
+              <span className="w-4">
+                <UserRound />
+              </span>
+              <p>Perfil</p>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href="/profile" className="flex gap-3 cursor-pointer">
-              <Settings /> <p>Configuración</p>
-            </Link>
-          </DropdownMenuItem>
+          <div className="w-full my-1 px-2">
+            <Separator className="bg-border/50" />
+          </div>
           <DropdownMenuItem asChild>
             <div onClick={toggleTheme} className="flex gap-3 cursor-pointer">
-              <AnimatedThemeIcon /> <p>Toggle Theme</p>
+              <span className="w-4">
+                <AnimatedThemeIcon />
+              </span>
+              <p>Toggle Theme</p>
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link
+              href={plantPath ? `${plantPath}/settings` : "/settings"}
+              className="flex gap-3 cursor-pointer"
+            >
+              <span className="w-4">
+                <Settings />
+              </span>
+              <p>Configuración</p>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link
+              href={plantPath ? `${plantPath}/help` : "/help"}
+              className="flex gap-3 cursor-pointer"
+            >
+              <span className="w-4">
+                <CircleHelp />
+              </span>
+              <p>Ayuda</p>
+            </Link>
+          </DropdownMenuItem>
+          <div className="w-full my-1 px-2">
+            <Separator className="bg-border/50" />
+          </div>
+          <DropdownMenuItem asChild>
+            <div onClick={handleSignOut} className="flex gap-3 cursor-pointer">
+              <span className="w-4">
+                <LogOut />
+              </span>
+              <p>LogOut</p>
             </div>
           </DropdownMenuItem>
         </DropdownMenuContent>

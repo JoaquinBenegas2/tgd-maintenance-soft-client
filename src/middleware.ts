@@ -32,7 +32,7 @@ export async function middleware(request: NextRequest) {
   const rawSlugInPath = pathname.split("/")[1] || "";
   const decodedSlugInPath = decodeURIComponent(rawSlugInPath);
 
-  const isGeneralRoute = isExactPath(pathname, ["/plants", "/users"]);
+  const isGeneralRoute = isExactPath(pathname, ["/plants", "/users", "/profile", "/settings", "/help"]);
 
   // 🔓 User without a plant but on route that requires a plant
   if (!plantSlug && !isGeneralRoute) {
