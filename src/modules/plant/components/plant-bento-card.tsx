@@ -11,6 +11,7 @@ import { PlantResponseDto } from "../models/plant-model";
 import PlantAssignedUsersSheet from "./plant-assigned-users-sheet";
 import { usePlantStore } from "@/stores/selected-plant-store";
 import { useRouter } from "next/navigation";
+import WithPermission from "@/components/with-permission/with-permission";
 
 interface PlantBentoCardProps {
   plant: PlantResponseDto;
@@ -51,24 +52,26 @@ export default function PlantBentoCard({ plant, image, alwaysActive }: PlantBent
           />
         }
         nextToTheButton={
-          <FlexContainer justify="end" className="w-full">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant={"ghost"}
-                    className="pointer-events-auto rounded-full"
-                    onClick={() => setSheetOpen(true)}
-                  >
-                    <FaUserCog className="scale-150" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Manage users</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </FlexContainer>
+          <WithPermission roles={["PLANT_MANAGER", "PLANT_SUPERVISOR"]}>
+            <FlexContainer justify="end" className="w-full">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={"ghost"}
+                      className="pointer-events-auto rounded-full"
+                      onClick={() => setSheetOpen(true)}
+                    >
+                      <FaUserCog className="scale-150" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Manage users</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </FlexContainer>
+          </WithPermission>
         }
       />
       <PlantAssignedUsersSheet plant={plant} open={sheetOpen} onOpenChange={setSheetOpen} />

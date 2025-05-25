@@ -9,6 +9,7 @@ import RouteRequestDialog from "./route-request-dialog";
 import { Badge } from "@/components/ui/badge";
 import RouteActionsCell from "./route-actions-cell";
 import { DateCell } from "@/components/custom/cells/date-cell";
+import WithPermission from "@/components/with-permission/with-permission";
 
 export default function RouteList() {
   const { data, isLoading } = useGetAllRoutes();
@@ -52,13 +53,15 @@ export default function RouteList() {
       columns={columns}
       isDataLoading={isLoading}
       headerChildren={
-        <div className="w-full flex justify-end">
-          <RouteRequestDialog>
-            <Button className="w-full md:w-auto">
-              <Plus />
-            </Button>
-          </RouteRequestDialog>
-        </div>
+        <WithPermission roles={["PLANT_MANAGER", "PLANT_SUPERVISOR"]}>
+          <div className="w-full flex justify-end">
+            <RouteRequestDialog>
+              <Button className="w-full md:w-auto">
+                <Plus />
+              </Button>
+            </RouteRequestDialog>
+          </div>
+        </WithPermission>
       }
       showColumnToggle={true}
       showRowFilters={true}

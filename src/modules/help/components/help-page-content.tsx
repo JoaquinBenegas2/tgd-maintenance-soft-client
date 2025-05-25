@@ -70,7 +70,7 @@ export default function HelpPageContent() {
                 botón "Asignar operadores" para seleccionar usuarios disponibles.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="ruta-2" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="ruta-3" className="bg-white px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
                 ¿Cómo asigno elementos a una ruta?
               </AccordionTrigger>
@@ -79,7 +79,7 @@ export default function HelpPageContent() {
                 botón "Asignar elementos" para seleccionar los elementos disponibles.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="ruta-3" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="ruta-4" className="bg-white px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
                 ¿Qué sucede si una ruta está atrasada?
               </AccordionTrigger>
@@ -167,22 +167,12 @@ export default function HelpPageContent() {
         <section>
           <h2 className="text-xl font-semibold mb-2">Otros</h2>
           <Accordion type="single" collapsible className="w-full space-y-2">
-            <AccordionItem value="otros-1" className="bg-white px-4 py-1 border-none rounded-lg">
-              <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Puedo generar reportes?
-              </AccordionTrigger>
-              <AccordionContent>
-                Sí, desde la sección "Reportes" podés generar informes de mantenimientos realizados,
-                rutas activas, equipos por planta y más. Podés exportarlos en PDF o Excel.
-              </AccordionContent>
-            </AccordionItem>
             <AccordionItem value="otros-2" className="bg-white px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
                 ¿El sistema envía notificaciones?
               </AccordionTrigger>
               <AccordionContent>
-                Sí, el sistema envía notificaciones por email o WhatsApp si están configurados los
-                canales. Se notifican vencimientos, asignaciones y cambios de estado.
+                Sí, el sistema envía notificaciones por email. Se notifica ante el atraso de rutas y el registro de mantenimientos críticos.
               </AccordionContent>
             </AccordionItem>
           </Accordion>

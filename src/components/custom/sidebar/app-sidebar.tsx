@@ -6,6 +6,7 @@ import { SidebarContent } from "@/components/ui/sidebar/sidebar-content";
 import { SidebarFooter } from "@/components/ui/sidebar/sidebar-footer";
 import { SidebarHeader } from "@/components/ui/sidebar/sidebar-header";
 import { SidebarItem } from "@/components/ui/sidebar/sidebar-item";
+import WithPermission from "@/components/with-permission/with-permission";
 import { SignOutButton } from "@/modules/auth/components/sign-out-button";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -26,13 +27,15 @@ export default function AppSidebar() {
           href="/plants"
           isActive={pathname === "/plants"}
         />
-        <SidebarItem
-          icon={<MdPeople className="h-5 w-5" />}
-          text="Users"
-          tooltip="Users"
-          href="/users"
-          isActive={pathname === "/users"}
-        />
+        <WithPermission roles={["PLANT_MANAGER"]}>
+          <SidebarItem
+            icon={<MdPeople className="h-5 w-5" />}
+            text="Users"
+            tooltip="Users"
+            href="/users"
+            isActive={pathname === "/users"}
+          />
+        </WithPermission>
       </SidebarContent>
       <SidebarFooter>
         <SignOutButton />

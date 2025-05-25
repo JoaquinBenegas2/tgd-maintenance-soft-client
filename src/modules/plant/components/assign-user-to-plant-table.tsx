@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { PlantResponseDto } from "../models/plant-model";
 import { useAssignUserToPlant, useUnassignUserFromPlant } from "../handlers/plant-handler";
 import { useQueryClient } from "@tanstack/react-query";
+import { useHasRole } from "@/hooks/use-has-role/use-has-role";
 
 interface AssignUserToPlantTableProps {
   plant?: PlantResponseDto;
@@ -25,6 +26,8 @@ export default function AssignUserToPlantTable({ plant }: AssignUserToPlantTable
   const { mutateAsync: unassignUserFromPlantAsync } = useUnassignUserFromPlant();
 
   const assignedUserIds = plant?.assigned_users?.map((u) => u.id) || [];
+
+  const isUserPlantManager = useHasRole("PLANT_MANAGER");
 
   const columns: TableColumn<UserResponseDto>[] = [
     {
@@ -55,6 +58,8 @@ export default function AssignUserToPlantTable({ plant }: AssignUserToPlantTable
         const isAssigned = assignedUserIds.includes(user.id);
         const isLoading = loadingUserId === user.id;
 
+        const disabled = isLoading || ((user.role === "PLANT_MANAGER" || user.role === "PLANT_SUPERVISOR") && !isUserPlantManager);
+
         const handleClick = async () => {
           setLoadingUserId(user.id);
           try {
@@ -73,12 +78,7 @@ export default function AssignUserToPlantTable({ plant }: AssignUserToPlantTable
         };
 
         return isAssigned ? (
-          <Button
-            variant="destructive"
-            size="sm"
-            onClick={handleClick}
-            disabled={isLoading}
-          >
+          <Button variant="destructive" size="sm" onClick={handleClick} disabled={disabled}>
             <X className="w-4 h-4" />
             Unassign
           </Button>
@@ -87,7 +87,7 @@ export default function AssignUserToPlantTable({ plant }: AssignUserToPlantTable
             size="sm"
             className="bg-emerald-600 hover:bg-emerald-500"
             onClick={handleClick}
-            disabled={isLoading}
+            disabled={disabled}
           >
             <Check className="w-4 h-4" />
             Assign

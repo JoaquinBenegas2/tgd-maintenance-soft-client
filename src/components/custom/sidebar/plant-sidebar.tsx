@@ -7,6 +7,7 @@ import { SidebarFooter } from "@/components/ui/sidebar/sidebar-footer";
 import { SidebarGroup } from "@/components/ui/sidebar/sidebar-group";
 import { SidebarHeader } from "@/components/ui/sidebar/sidebar-header";
 import { SidebarItem } from "@/components/ui/sidebar/sidebar-item";
+import WithPermission from "@/components/with-permission/with-permission";
 import { usePlantPath } from "@/hooks/plant-path/use-plant-path";
 import { SignOutButton } from "@/modules/auth/components/sign-out-button";
 import { usePlantStore } from "@/stores/selected-plant-store";
@@ -74,29 +75,31 @@ export default function PlantSidebar() {
             isActive={pathname.startsWith(`${basePath}/forms`)}
           />
         </SidebarGroup>
-        <SidebarGroup title="Configuration">
-          <SidebarItem
-            icon={<MdOutlineMyLocation className="h-5 w-5" />}
-            text="Sectors"
-            tooltip="Sectors"
-            href={`${basePath}/sectors`}
-            isActive={pathname.startsWith(`${basePath}/sectors`)}
-          />
-          <SidebarItem
-            icon={<MdPrecisionManufacturing className="h-5 w-5" />}
-            text="Manufacturers"
-            tooltip="Manufacturers"
-            href={`${basePath}/manufacturers`}
-            isActive={pathname.startsWith(`${basePath}/manufacturers`)}
-          />
-          <SidebarItem
-            icon={<Package className="h-5 w-5" />}
-            text="Assets"
-            tooltip="Assets"
-            href={`${basePath}/assets`}
-            isActive={pathname.startsWith(`${basePath}/assets`)}
-          />
-        </SidebarGroup>
+        <WithPermission roles={["PLANT_MANAGER", "PLANT_SUPERVISOR"]}>
+          <SidebarGroup title="Configuration">
+            <SidebarItem
+              icon={<MdOutlineMyLocation className="h-5 w-5" />}
+              text="Sectors"
+              tooltip="Sectors"
+              href={`${basePath}/sectors`}
+              isActive={pathname.startsWith(`${basePath}/sectors`)}
+            />
+            <SidebarItem
+              icon={<MdPrecisionManufacturing className="h-5 w-5" />}
+              text="Manufacturers"
+              tooltip="Manufacturers"
+              href={`${basePath}/manufacturers`}
+              isActive={pathname.startsWith(`${basePath}/manufacturers`)}
+            />
+            <SidebarItem
+              icon={<Package className="h-5 w-5" />}
+              text="Assets"
+              tooltip="Assets"
+              href={`${basePath}/assets`}
+              isActive={pathname.startsWith(`${basePath}/assets`)}
+            />
+          </SidebarGroup>
+        </WithPermission>
       </SidebarContent>
       <SidebarFooter>
         <SidebarItem

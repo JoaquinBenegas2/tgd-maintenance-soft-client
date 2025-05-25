@@ -7,6 +7,7 @@ import { useGetAllMaintenanceTypes } from "../handlers/maintenance-type-handler"
 import { MaintenanceTypeResponseDto } from "../models/maintenance-type-model";
 import MaintenanceTypeActionsCell from "./maintenance-type-actions-cell";
 import MaintenanceTypeRequestDialog from "./maintenance-type-request-dialog";
+import WithPermission from "@/components/with-permission/with-permission";
 
 export default function MaintenanceTypeList() {
   const { data, isLoading } = useGetAllMaintenanceTypes();
@@ -30,13 +31,15 @@ export default function MaintenanceTypeList() {
       columns={columns}
       isDataLoading={isLoading}
       headerChildren={
-        <div className="w-full flex justify-end">
-          <MaintenanceTypeRequestDialog>
-            <Button className="w-full md:w-auto">
-              <Plus />
-            </Button>
-          </MaintenanceTypeRequestDialog>
-        </div>
+        <WithPermission roles={["PLANT_MANAGER", "PLANT_SUPERVISOR"]}>
+          <div className="w-full flex justify-end">
+            <MaintenanceTypeRequestDialog>
+              <Button className="w-full md:w-auto">
+                <Plus />
+              </Button>
+            </MaintenanceTypeRequestDialog>
+          </div>
+        </WithPermission>
       }
       showColumnToggle={true}
       showRowFilters={true}
