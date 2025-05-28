@@ -166,3 +166,8 @@
 .markdown-custom-list ul ul ul > li {
   @apply list-[square];
 }
+
+html body[data-scroll-locked] {
+  overflow: visible !important;
+  margin-right: 0 !important;
+}

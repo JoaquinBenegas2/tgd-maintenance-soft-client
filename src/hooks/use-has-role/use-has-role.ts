@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react"; // o desde tu contexto auth
+import { useSession } from "next-auth/react";
 
 /**
  * Verifica si el usuario tiene al menos uno de los roles requeridos.
@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react"; // o desde tu contexto auth
  * @returns boolean
  */
 export function useHasRole(allowedRoles: string | string[]): boolean {
-  const { data: session } = useSession(); // o desde Zustand, context, etc.
+  const { data: session } = useSession();
   const userRoles: string[] | null | undefined = session?.user?.roles;
 
   if (!userRoles || userRoles.length === 0) return false;

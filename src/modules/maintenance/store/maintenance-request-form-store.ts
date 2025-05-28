@@ -13,11 +13,11 @@ interface MaintenanceRequestFormStore {
   reset: () => void;
 }
 
-const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-const todayFormatted = formatInTimeZone(new Date(), timeZone, "yyyy-MM-dd");
+/* const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+const todayFormatted = formatInTimeZone(new Date(), timeZone, "yyyy-MM-dd"); */
 
 const initialState: MaintenanceRequestFormStore = {
-  maintenance_date: todayFormatted,
+  maintenance_date: new Date().toISOString().split("T")[0],
   selectedMaintenanceType: null,
   selectedForm: null,
   answers: [],
@@ -37,6 +37,6 @@ export const useMaintenanceFormStore = create<MaintenanceRequestFormStore>((set)
   reset: () =>
     set({
       ...initialState,
-      maintenance_date: todayFormatted,
+      maintenance_date: new Date().toISOString().split("T")[0],
     }),
 }));

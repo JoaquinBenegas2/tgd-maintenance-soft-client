@@ -100,6 +100,17 @@ export default function PlantSidebar() {
             />
           </SidebarGroup>
         </WithPermission>
+        <WithPermission roles={["PLANT_MANAGER", "PLANT_SUPERVISOR"]}>
+          <SidebarGroup title="Reports">
+            <SidebarItem
+              icon={<Wrench className="h-5 w-5" />}
+              text="Maintenance"
+              tooltip="Maintenance"
+              href={`${basePath}/reports/maintenance`}
+              isActive={pathname.startsWith(`${basePath}/reports`)}
+            />
+          </SidebarGroup>
+        </WithPermission>
       </SidebarContent>
       <SidebarFooter>
         <SidebarItem

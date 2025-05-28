@@ -94,6 +94,7 @@ export interface CustomTableProps<T> {
   showSearchBar?: boolean;
   showRowFilters?: boolean;
   showColumnToggle?: boolean;
+  showCheckbox?: boolean;
   isDataLoading?: boolean;
 }
 
@@ -115,9 +116,10 @@ export default function CustomTable<T>({
   showColumnToggle = true,
   showRowFilters = true,
   showSearchBar = true,
+  showCheckbox = false,
   isDataLoading,
 }: CustomTableProps<T>) {
-  const isMobile = useIsMobile(768)
+  const isMobile = useIsMobile(768);
   const tableHeight = height ? height : isMobile ? "420px" : "560px";
 
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -173,6 +175,10 @@ export default function CustomTable<T>({
   };
 
   const getTableColumnsWithCheckboxes: any = (columns: TableColumn<T>[]) => {
+    if (!showCheckbox) {
+      return getTableColumns(columns);
+    }
+
     const checkboxColumn = columnHelper.accessor("select" as any, {
       id: "select",
       size: 36, // Set size to minimum
@@ -444,7 +450,10 @@ export default function CustomTable<T>({
             ) : items.length > 0 ? (
               <>
                 {table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id} className="border-b-2 border-neutral-100 dark:border-neutral-800">
+                  <TableRow
+                    key={row.id}
+                    className="border-b-2 border-neutral-100 dark:border-neutral-800"
+                  >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
                         key={cell.id}

@@ -25,7 +25,7 @@ export default function RouteListItem({ route, delayed }: RouteListItemProps) {
   const progress = (completedElements * 100) / totalElements;
 
   return (
-    <li className="bg-accent rounded-md p-2 py-3">
+    <li className="bg-accent dark:bg-neutral-800 rounded-md p-3">
       <div className="flex items-center gap-4">
         <RadiobuttonIcon
           className={`w-4 h-4 transition-all ${
