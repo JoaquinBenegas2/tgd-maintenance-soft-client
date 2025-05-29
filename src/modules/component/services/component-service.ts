@@ -31,6 +31,15 @@ class ComponentService extends GenericService<ComponentRequestDto, ComponentResp
   ) => {
     return await axiosRequest.put(`/assets/${assetId}/${BASE_URL}/${componentId}`, component);
   };
+
+  updateStatus = async (
+    id: number | string,
+    status: "ACTIVE" | "INACTIVE"
+  ): Promise<ComponentResponseDto> => {
+    return await axiosRequest.put(`${this.baseUrl}/${id}/status`, null, {
+      params: { status },
+    });
+  };
 }
 
 export const componentService = new ComponentService();

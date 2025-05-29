@@ -6,20 +6,20 @@ import { Stepper } from "@/components/custom/stepper/stepper";
 import { StepConfig } from "@/components/custom/stepper/stepper-types";
 import { useStepper } from "@/components/custom/stepper/use-stepper";
 import CustomTable from "@/components/custom/table/app-custom-table";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useGetAllElements } from "@/modules/element/handlers/element-handler";
+import { cn } from "@/lib/utils";
+import { useGetElementsByStatus } from "@/modules/element/handlers/element-handler";
+import { ElementResponseDto, ElementStatusEnum } from "@/modules/element/models/element-model";
 import { useGetAssignedCompany } from "@/modules/user/handlers/user-handler";
+import { roleClasses, roleNames } from "@/modules/user/models/user-model";
 import { Save } from "lucide-react";
+import { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight, FaAnglesRight } from "react-icons/fa6";
-import { useRouteFormStore } from "../store/route-form-store";
-import { ElementResponseDto, ElementStatusEnum } from "@/modules/element/models/element-model";
-import { Badge } from "@/components/ui/badge";
-import { roleClasses, roleNames } from "@/modules/user/models/user-model";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
 import { useCreateRoute } from "../handlers/route-handler";
+import { useRouteFormStore } from "../store/route-form-store";
 
 const steps = [
   { label: "Basic information", description: "Route information" },
@@ -133,7 +133,7 @@ export default function RouteRequestForm() {
     });
   };
 
-  const { data: elements } = useGetAllElements();
+  const { data: elements = [] } = useGetElementsByStatus("ACTIVE");
   const { data: company } = useGetAssignedCompany();
 
   return (

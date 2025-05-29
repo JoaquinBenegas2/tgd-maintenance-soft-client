@@ -5,15 +5,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Pen, Trash } from "lucide-react";
+import { LucidePower, LucidePowerOff, MoreHorizontal, Pen, Trash } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ComponentWithoutAssetResponseDto } from "../models/component-model";
+import ComponentActiveAlertDialog from "./component-active-alert-dialog";
 import ComponentDeleteAlertDialog from "./component-delete-alert-dialog";
 
 export default function ComponentActionsCell({ item }: { item: ComponentWithoutAssetResponseDto }) {
   const [deleteAlertDialogOpen, setDeleteAlertDialogOpen] = useState(false);
+  const [activeAlertDialogOpen, setActiveAlertDialogOpen] = useState(false);
 
   const pathname = usePathname();
 
@@ -34,6 +36,16 @@ export default function ComponentActionsCell({ item }: { item: ComponentWithoutA
               </div>
             </Link>
           </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setActiveAlertDialogOpen(true)} className="p-0">
+            <div className="flex items-center gap-2 cursor-pointer w-full px-2 py-1.5">
+              {item.status === "ACTIVE" ? (
+                <LucidePowerOff className="w-4 h-4" />
+              ) : (
+                <LucidePower className="w-4 h-4" />
+              )}
+              {item.status === "ACTIVE" ? "Deactivate" : "Activate"}
+            </div>
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setDeleteAlertDialogOpen(true)} className="p-0">
             <div className="flex items-center gap-2 text-red-600 cursor-pointer w-full px-2 py-1.5">
               <Trash className="w-4 h-4 text-red-600" />
@@ -48,6 +60,13 @@ export default function ComponentActionsCell({ item }: { item: ComponentWithoutA
         item={item}
         open={deleteAlertDialogOpen}
         setOpen={setDeleteAlertDialogOpen}
+      />
+
+      {/* Update Active Alert Dialog */}
+      <ComponentActiveAlertDialog
+        item={item}
+        open={activeAlertDialogOpen}
+        setOpen={setActiveAlertDialogOpen}
       />
     </>
   );

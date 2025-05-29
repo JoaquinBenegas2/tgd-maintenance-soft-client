@@ -60,3 +60,20 @@ export const useUpdateAssetComponent = () => {
     }
   );
 };
+
+export const useUpdateComponentStatus = () => {
+  return useCustomMutation<ComponentResponseDto, { id: number; status: "ACTIVE" | "INACTIVE" }>(
+    [QUERY_KEY],
+    ({ id, status }) => componentService.updateStatus(id, status),
+    {
+      onSuccess: () => {
+        toast.success("Estado del componente actualizado");
+        queryClient.invalidateQueries({ queryKey: ["assets"] });
+      },
+      onError: (err) => {
+        const errorResponseMessage = (err as any).response.data.message;
+        toast.error(errorResponseMessage);
+      },
+    }
+  );
+};

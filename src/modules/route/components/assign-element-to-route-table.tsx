@@ -1,13 +1,13 @@
 import CustomTable, { TableColumn } from "@/components/custom/table/app-custom-table";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useGetAllElements } from "@/modules/element/handlers/element-handler";
+import { useGetElementsByStatus } from "@/modules/element/handlers/element-handler";
 import { ElementResponseDto, ElementStatusEnum } from "@/modules/element/models/element-model";
+import { queryClient } from "@/providers/providers";
 import { Check, X } from "lucide-react";
 import { useState } from "react";
 import { useAssignElementToRoute, useUnassignElementFromRoute } from "../handlers/route-handler";
 import { RouteResponseDto } from "../models/route-model";
-import { Badge } from "@/components/ui/badge";
-import { queryClient } from "@/providers/providers";
 
 interface AssignElementToRouteTableProps {
   route?: RouteResponseDto;
@@ -15,7 +15,7 @@ interface AssignElementToRouteTableProps {
 export default function AssignElementToRouteTable({ route }: AssignElementToRouteTableProps) {
   const [loadingElementId, setLoadingElementId] = useState<number[]>([]);
 
-  const { data: elements, isLoading } = useGetAllElements();
+  const { data: elements, isLoading } = useGetElementsByStatus("ACTIVE");
 
   const { mutateAsync: assignElementToRouteAsync } = useAssignElementToRoute();
   const { mutateAsync: unassignElementFromRouteAsync } = useUnassignElementFromRoute();
