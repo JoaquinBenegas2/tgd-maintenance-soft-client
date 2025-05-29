@@ -74,17 +74,6 @@ export default function Navbar({ session }: NavbarProps) {
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link
-              href={plantPath ? `${plantPath}/settings` : "/settings"}
-              className="flex gap-3 cursor-pointer"
-            >
-              <span className="w-4">
-                <Settings />
-              </span>
-              <p>Configuración</p>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link
               href={plantPath ? `${plantPath}/help` : "/help"}
               className="flex gap-3 cursor-pointer"
             >
