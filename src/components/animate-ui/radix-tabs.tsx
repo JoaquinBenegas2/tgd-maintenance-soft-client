@@ -218,7 +218,7 @@ const TabsContents = React.forwardRef<HTMLDivElement, TabsContentsProps>(
     const content = React.isValidElement(children)
       ? React.cloneElement(children, {
           ref: containerRef,
-        })
+        } as any)
       : children;
 
     return (
