@@ -8,7 +8,8 @@ const nextConfig: NextConfig = {
         hostname: "s.gravatar.com",
       }
     ]
-  }
+  },
+  output: "standalone",
 };
 
 export default nextConfig;
