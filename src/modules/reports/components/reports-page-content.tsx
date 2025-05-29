@@ -11,7 +11,7 @@ import { KPIOverview } from "./kpi-overview";
 import { ReportsCharts } from "./reports-charts";
 import { ReportsFilterHeader } from "./reports-filter-header";
 import { useGetAllMaintenances } from "@/modules/maintenance/handlers/maintenance-handler";
-import { useGetAllRoutes, useGetDelayedRoutes } from "@/modules/route/handlers/route-handler";
+import { useGetAllRoutes, useGetDelayedRoutes, useGetRoutesByStatus } from "@/modules/route/handlers/route-handler";
 import { RouteResponseDto } from "@/modules/route/models/route-model";
 
 export interface ReportsFilters {
@@ -28,7 +28,7 @@ export function ReportsPageContent() {
 
   const { data: maintenances, isLoading } = useGetAllMaintenances();
   const { data: delayedRoutes, isLoading: delayedRoutesLoading } = useGetDelayedRoutes();
-  const { data: routes } = useGetAllRoutes();
+  const { data: routes, isLoading: routesLoading } = useGetRoutesByStatus("ACTIVE");
 
   const filteredMaintenances = useMemo(() => {
     if (!maintenances) return [];
@@ -179,7 +179,7 @@ export function ReportsPageContent() {
     });
   };
 
-  if (isLoading) {
+  if (isLoading || delayedRoutesLoading || routesLoading) {
     return (
       <PageContainer>
         <PageHeader title="Reports" description="Maintenance analysis and metrics" />
@@ -239,7 +239,7 @@ export function ReportsPageContent() {
         <ReportsCharts
           maintenances={filteredMaintenances}
           filters={filters}
-          routes={routes}
+          routes={routes || []}
         />
       </div>
     </PageContainer>

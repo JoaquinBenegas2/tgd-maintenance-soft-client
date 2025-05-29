@@ -191,6 +191,7 @@ export default function RouteRequestForm() {
                   ]}
                   rowSelection={elementRowSelection}
                   onRowSelectionChange={setElementRowSelection}
+                  showCheckbox
                 />
               </CardContent>
             </Card>
@@ -233,6 +234,7 @@ export default function RouteRequestForm() {
                   ]}
                   rowSelection={operatorRowSelection}
                   onRowSelectionChange={setOperatorRowSelection}
+                  showCheckbox
                 />
               </CardContent>
             </Card>

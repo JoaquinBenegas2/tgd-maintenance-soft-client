@@ -79,3 +79,25 @@ export const useUnassignElementFromRoute = () => {
     }
   );
 };
+
+export const useUpdateRouteStatus = () => {
+  return useCustomMutation<RouteResponseDto, { routeId: number; status: "ACTIVE" | "INACTIVE" }>(
+    [QUERY_KEY],
+    ({ routeId, status }) => routeService.updateStatus(routeId, status),
+    {
+      onSuccess: () => {
+        toast.success("Estado actualizado correctamente");
+      },
+    }
+  );
+};
+
+export const useGetRoutesByStatus = (status: "ACTIVE" | "INACTIVE") => {
+  return useCustomQuery<RouteResponseDto[]>(
+    [QUERY_KEY, status],
+    () => routeService.getAllByStatus(status),
+    {
+      enabled: !!status,
+    }
+  );
+};

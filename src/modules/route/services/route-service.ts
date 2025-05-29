@@ -1,6 +1,7 @@
 import { GenericService } from "@/lib/react-query/services/generic-service";
 import { ProgressRouteResponseDto, RouteRequestDto, RouteResponseDto } from "../models/route-model";
 import { axiosRequest } from "@/lib/axios/config/axios-config";
+import { AxiosRequestConfig } from "axios";
 
 const BASE_URL = "/routes";
 
@@ -38,6 +39,23 @@ class RouteService extends GenericService<RouteRequestDto, RouteResponseDto> {
     elementId: number
   ): Promise<RouteResponseDto> => {
     return await axiosRequest.delete(`${BASE_URL}/${routeId}/elements/${elementId}`);
+  };
+
+  updateStatus = async (
+    routeId: string | number,
+    status: "ACTIVE" | "INACTIVE"
+  ): Promise<RouteResponseDto> => {
+    return await axiosRequest.patch(`${this.baseUrl}/${routeId}/status`, { status });
+  };
+
+  getAllByStatus = async (
+    status: "ACTIVE" | "INACTIVE",
+    config?: AxiosRequestConfig
+  ): Promise<RouteResponseDto[]> => {
+    return await axiosRequest.get(this.baseUrl, {
+      params: { status },
+      ...config,
+    });
   };
 }
 
