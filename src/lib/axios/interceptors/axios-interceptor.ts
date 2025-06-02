@@ -4,8 +4,13 @@ import { getValidationError } from "../utils/get-validation-error";
 import { usePlantStore } from "@/stores/selected-plant-store";
 import { toast } from "sonner";
 
+const baseURL =
+  typeof window !== "undefined" && (window as any).env?.API_BASE_URL
+    ? (window as any).env?.API_BASE_URL
+    : process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseURL,
   withCredentials: true,
 });
 
