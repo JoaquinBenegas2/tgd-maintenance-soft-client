@@ -1,5 +1,6 @@
 import Providers from "@/providers/providers";
 import type { Metadata } from "next";
+import { PublicEnvScript } from "next-runtime-env";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 
@@ -21,6 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <PublicEnvScript />
+      </head>
       <body className={`${roboto.variable} font-sans antialiased`}>
         <Providers>{children}</Providers>
       </body>
