@@ -1,6 +1,6 @@
 "use client";
 
-import React, { HTMLProps, useCallback, useState } from "react";
+import React, { HTMLProps, useCallback, useEffect, useState } from "react";
 
 import {
   Table,
@@ -30,8 +30,9 @@ import { Input } from "@/components/ui/input";
 import clsx from "clsx";
 import { MdInfoOutline } from "react-icons/md";
 import "./app-custom-table.css";
-import RowFilters, { ActiveFilter, RowFilter } from "./row-filters";
+import RowFilters, { ActiveDateRangeFilter, ActiveFilter, RowFilter } from "./row-filters";
 import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
+import { format } from "date-fns";
 
 function IndeterminateCheckbox({
   indeterminate,
@@ -88,6 +89,7 @@ export interface CustomTableProps<T> {
   };
   availableRowFilters?: RowFilter[];
   rowSelection?: RowSelectionState;
+  initialRowFilters?: ActiveFilter[];
   onRowFiltersChange?: (filters: Record<string, string>) => void;
   onRowSelectionChange?: (values: RowSelectionState) => void;
   headerChildren?: React.ReactNode;
@@ -108,6 +110,7 @@ export default function CustomTable<T>({
   pagination: serverSidePagination,
   searchValue,
   onSearchValueChange: onServerSideSearchValueChange,
+  initialRowFilters,
   availableRowFilters,
   rowSelection: rowSelectionProp,
   onRowFiltersChange,
@@ -150,6 +153,8 @@ export default function CustomTable<T>({
   const [globalFilter, setGlobalFilter] = useState("");
 
   const [columnFilters, setColumnFilters] = useState<any[]>([]);
+
+  const [defaultActiveFilters] = useState<ActiveFilter[]>(() => initialRowFilters ?? []);
 
   const columnHelper = createColumnHelper<T>();
 
@@ -236,6 +241,7 @@ export default function CustomTable<T>({
             filters.push({
               id: col.accessorKey,
               label: typeof col.header === "string" ? col.header : col.accessorKey,
+              type: "select",
               options: Array.from(distinctValues).map((val) => ({
                 label: capitalize(val),
                 value: val,
@@ -261,10 +267,40 @@ export default function CustomTable<T>({
   /* Row Filter */
   const handleRowFiltersChange = useCallback(
     (filters: ActiveFilter[]) => {
-      const newColumnFilters = filters.map((filter) => ({
-        id: filter.id,
-        value: filter.selectedValue,
-      }));
+      const newColumnFilters: { id: string; value: string }[] = [];
+
+      filters.forEach((filter) => {
+        switch (filter.type) {
+          case "select":
+          case "date":
+            if (filter.selectedValue)
+              newColumnFilters.push({
+                id: filter.id,
+                value: filter.selectedValue,
+              });
+            break;
+
+          case "date-range":
+            // casteamos para TS
+            const rangeFilter = filter as ActiveDateRangeFilter;
+            const from = rangeFilter.selectedRange?.from;
+            const to = rangeFilter.selectedRange?.to;
+
+            if (from) {
+              newColumnFilters.push({
+                id: `${filter.id}_start`,
+                value: format(from, "yyyy-MM-dd"),
+              });
+            }
+            if (to) {
+              newColumnFilters.push({
+                id: `${filter.id}_end`,
+                value: format(to, "yyyy-MM-dd"),
+              });
+            }
+            break;
+        }
+      });
 
       const filtersRecord = Object.fromEntries(
         newColumnFilters.map((f) => (f.value ? [f.id, f.value] : []))
@@ -350,6 +386,10 @@ export default function CustomTable<T>({
     getFilteredRowModel: getFilteredRowModel(),
   });
 
+  useEffect(() => {
+    handleRowFiltersChange(defaultActiveFilters);
+  }, []);
+
   return (
     <div className={`${className} flex flex-col space-y-2`}>
       <div className="flex gap-3 justify-between items-center flex-col md:flex-row">
@@ -365,6 +405,7 @@ export default function CustomTable<T>({
               filters={availableRowFilters || getAvailableRowFilters(items, columns)}
               onFiltersChange={handleRowFiltersChange}
               resetPageIndex={() => serverSidePagination?.onPageChange(0)}
+              initialFilters={defaultActiveFilters}
             />
           )}
 

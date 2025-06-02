@@ -7,6 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Grip, Pen, Save, X } from "lucide-react";
 import { useState } from "react";
 import { useGetElementByIdComponentIdAndAssetId } from "../handlers/element-handler";
+import {
+  Tabs,
+  TabsContent,
+  TabsContents,
+  TabsList,
+  TabsTrigger,
+} from "@/components/animate-ui/radix-tabs";
+import { MaintenanceByList } from "@/modules/maintenance/components/maintenance-by-list";
+import { Separator } from "@/components/ui/separator";
 
 export default function ElementDetailPageContent() {
   const { assetId, componentId, elementId } = useParams();
@@ -80,6 +89,17 @@ export default function ElementDetailPageContent() {
         componentId={Number(componentId)}
         onExpose={setFormUtils}
       />
+      <Separator className="my-6" />
+      <Tabs defaultValue="maintenance" className="w-full flex flex-1">
+        <TabsList className="grid w-full grid-cols-1">
+          <TabsTrigger value="maintenance">Maintenance</TabsTrigger>
+        </TabsList>
+        <TabsContents className="mx-1 mt-2 flex flex-1">
+          <TabsContent value="maintenance" className="flex">
+            <MaintenanceByList by="element" id={element?.id || 0} />
+          </TabsContent>
+        </TabsContents>
+      </Tabs>
     </>
   );
 }

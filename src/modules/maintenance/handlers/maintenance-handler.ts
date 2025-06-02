@@ -1,9 +1,9 @@
-import { createReactQueryHandlers } from "@/lib/react-query/query-handler/create-query-handlers";
-import { maintenanceService } from "../services/maintenance-service";
 import { useCustomMutation, useCustomQuery } from "@/lib/react-query/custom/custom-query";
-import { MaintenanceAnswerRequestDto, MaintenanceResponseDto } from "../models/maintenance-model";
-import { getMonth, parseISO } from "date-fns";
+import { createReactQueryHandlers } from "@/lib/react-query/query-handler/create-query-handlers";
+import { format, getMonth, parseISO } from "date-fns";
 import { toast } from "sonner";
+import { MaintenanceAnswerRequestDto, MaintenanceResponseDto } from "../models/maintenance-model";
+import { maintenanceService } from "../services/maintenance-service";
 
 const QUERY_KEY = "maintenances";
 
@@ -49,5 +49,39 @@ export const useUpdateMaintenanceAnswers = () => {
         toast.success("Answers updated successfully");
       },
     }
+  );
+};
+
+export const useGetMaintenancesByElement = (elementId: number, dateFrom: Date, dateTo: Date) => {
+  const df = format(dateFrom, "yyyy-MM-dd");
+  const dt = format(dateTo, "yyyy-MM-dd");
+  return useCustomQuery<MaintenanceResponseDto[]>(
+    ["maintenances", "element", elementId, df, dt],
+    () => maintenanceService.getByElementAndDateRange(elementId, df, dt),
+    { enabled: Boolean(elementId) }
+  );
+};
+
+export const useGetMaintenancesByComponent = (
+  componentId: number,
+  dateFrom: Date,
+  dateTo: Date
+) => {
+  const df = format(dateFrom, "yyyy-MM-dd");
+  const dt = format(dateTo, "yyyy-MM-dd");
+  return useCustomQuery<MaintenanceResponseDto[]>(
+    ["maintenances", "component", componentId, df, dt],
+    () => maintenanceService.getByComponentAndDateRange(componentId, df, dt),
+    { enabled: Boolean(componentId) }
+  );
+};
+
+export const useGetMaintenancesByAsset = (assetId: number, dateFrom: Date, dateTo: Date) => {
+  const df = format(dateFrom, "yyyy-MM-dd");
+  const dt = format(dateTo, "yyyy-MM-dd");
+  return useCustomQuery<MaintenanceResponseDto[]>(
+    ["maintenances", "asset", assetId, df, dt],
+    () => maintenanceService.getByAssetAndDateRange(assetId, df, dt),
+    { enabled: Boolean(assetId) }
   );
 };
