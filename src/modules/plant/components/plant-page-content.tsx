@@ -3,8 +3,11 @@ import FlexContainer from "@/components/custom/flex-container/flex-container";
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import AvailablePlants from "./available-plants";
+import { auth } from "@/config/auth";
 
-export default function PlantPageContent() {
+export default async function PlantPageContent() {
+  const session = await auth();
+
   return (
     <>
       <Card className="min-h-64 relative">
@@ -20,7 +23,7 @@ export default function PlantPageContent() {
                   WebkitTextFillColor: "transparent",
               }}
             >
-              Welcome back, <span className="font-bold">User Name</span>!
+              Welcome back, <span className="font-bold">{session?.user?.name}</span>!
             </CardTitle>
             <CardDescription className="text-xl">
               Here you can handle your plants. Select one to continue!

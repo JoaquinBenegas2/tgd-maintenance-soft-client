@@ -28,7 +28,7 @@ export default function RouteDetailRequestForm({
     fields: [
       {
         name: "name",
-        label: "Nombre",
+        label: "Name",
         defaultValue: initialData?.name,
         disabled: !editMode,
         validations: { required: true },
@@ -37,7 +37,7 @@ export default function RouteDetailRequestForm({
       {
         name: "description",
         type: "textarea",
-        label: "Descripción",
+        label: "Description",
         defaultValue: initialData?.description,
         disabled: !editMode,
         loading: !initialData,
@@ -45,7 +45,7 @@ export default function RouteDetailRequestForm({
       {
         name: "periodicity_in_days",
         type: "number",
-        label: "Periodicidad (días)",
+        label: "Periodicity (days)",
         fieldSpan: 2,
         defaultValue: initialData?.periodicity_in_days.toString(),
         disabled: !editMode,
@@ -55,7 +55,7 @@ export default function RouteDetailRequestForm({
       {
         name: "start_date",
         type: "date",
-        label: "Fecha de inicio",
+        label: "Start Date",
         fieldSpan: 2,
         defaultValue: initialData?.start_date,
         disabled: !editMode,

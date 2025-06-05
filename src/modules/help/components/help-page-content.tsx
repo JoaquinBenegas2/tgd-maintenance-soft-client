@@ -20,27 +20,27 @@ export default function HelpPageContent() {
       <div className="space-y-6">
         {/* 🔐 Usuarios y roles */}
         <section>
-          <h2 className="text-xl font-semibold mb-2">Usuarios y roles</h2>
+          <h2 className="text-xl font-semibold mb-2">Users and roles</h2>
           <Accordion type="single" collapsible className="w-full space-y-2">
-            <AccordionItem value="usuario-1" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="usuario-1" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Cómo creo un nuevo usuario?
+                How do I create a new user?
               </AccordionTrigger>
               <AccordionContent>
-                Podés crear un nuevo usuario desde el panel de administración (previo a seleccionar
-                una planta), sección "Usuarios", haciendo clic en "Crear usuario". Debés completar
-                nombre, correo electrónico, asignarle un rol y crear una contraseña. Este usuario
-                pertenecerá a la empresa y se podrá asignar a cualquier planta de la misma.
+                You can create a new user from the administration panel (before selecting a site),
+                in the "Users" section, by clicking "Create User." You must complete the user's
+                name, email address, assign a role, and create a password. This user will belong to
+                the company and can be assigned to any site within it.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="usuario-2" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="usuario-2" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Qué rol debo asignar a cada usuario?
+                What role should I assign to each user?
               </AccordionTrigger>
               <AccordionContent>
-                El rol depende de sus tareas: "Supervisor" puede crear rutas y asignar
-                mantenimientos, "Operario" solo puede visualizar y completar mantenimientos
-                asignados. El "Administrador de plantas" gestiona toda la empresa.
+                The role depends on their duties: "Supervisor" can create routes and assign
+                maintenance; "Operator" can only view and complete assigned maintenance. The "Plant
+                Manager" manages the entire company.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -50,44 +50,43 @@ export default function HelpPageContent() {
 
         {/* 🛠️ Rutas de mantenimiento */}
         <section>
-          <h2 className="text-xl font-semibold mb-2">Rutas de mantenimiento</h2>
+          <h2 className="text-xl font-semibold mb-2">Maintenance routes</h2>
           <Accordion type="single" collapsible className="w-full space-y-2">
-            <AccordionItem value="ruta-1" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="ruta-1" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Qué es una ruta de mantenimiento?
+                What is a maintenance route?
               </AccordionTrigger>
               <AccordionContent>
-                Una ruta de mantenimiento es una planificación periódica de tareas sobre varios
-                elementos. Permite agrupar y asignar mantenimientos para facilitar su ejecución.
+                A maintenance route is a periodic schedule of tasks for various elements. It allows
+                maintenance to be grouped and assigned to facilitate execution.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="ruta-2" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="ruta-2" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Cómo asigno operadores a una ruta?
+                How do I assign operators to a route?
               </AccordionTrigger>
               <AccordionContent>
-                Desde la vista de detalle de una ruta, seleccioná la pestaña "Operadores" y usá el
-                botón "Asignar operadores" para seleccionar usuarios disponibles.
+                From a route's detail view, select the "Operators" tab and use the "Assign
+                Operators" button to select available users.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="ruta-3" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="ruta-3" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Cómo asigno elementos a una ruta?
+                How do I assign elements to a route?
               </AccordionTrigger>
               <AccordionContent>
-                Desde la vista de detalle de una ruta, seleccioná la pestaña "Elementos" y usá el
-                botón "Asignar elementos" para seleccionar los elementos disponibles.
+                From the route's detail view, select the "Elements" tab and use the "Assign
+                Elements" button to select the available elements.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="ruta-4" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="ruta-4" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Qué sucede si una ruta está atrasada?
+                What happens if a route is delayed?
               </AccordionTrigger>
               <AccordionContent>
-                Las rutas que se encuentran atrasadas se destacan en color rojo dentro del panel
-                principal del dashboard. Desde allí, los operarios pueden acceder directamente a las
-                tareas pendientes y completarlas. El sistema no permite reprogramar una ruta
-                vencida, solo finalizarla si aún no fue ejecutada.
+                Overdue routes are highlighted in red on the main dashboard. From there, operators
+                can directly access and complete pending tasks. The system does not allow
+                rescheduling an overdue route, only completing it if it has not yet been executed.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -97,38 +96,38 @@ export default function HelpPageContent() {
 
         {/* 🏭 Equipos y elementos */}
         <section>
-          <h2 className="text-xl font-semibold mb-2">Equipos y elementos</h2>
+          <h2 className="text-xl font-semibold mb-2">Equipment and elements</h2>
           <Accordion type="single" collapsible className="w-full space-y-2">
-            <AccordionItem value="equipo-1" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="equipo-1" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Cómo se registran nuevos equipos?
+                How do I register new teams?
               </AccordionTrigger>
               <AccordionContent>
-                Ingresá a la sección "Equipos", hacé clic en el botón "+", completá los datos como
-                nombre, sector y fabricante.
+                Go to the "Equipment" section, click the "+" button, and fill in the information
+                such as name, sector, and manufacturer.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="equipo-3" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="equipo-3" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Cómo creo un componente?
+                How do I create a component?
               </AccordionTrigger>
               <AccordionContent>
-                Los componentes se crean desde el detalle de un equipo. Dentro de la tabla
-                "Componentes", hacé clic en el botón "+" y completá los datos requeridos. El
-                componente se asignará automáticamente al equipo desde el cual fue creado.
+                Components are created from a piece of equipment detail. In the "Components" table,
+                click the "+" button and complete the required information. The component will be
+                automatically assigned to the piece of equipment from which it was created.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="equipo-4" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="equipo-4" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Cómo creo un elemento?
+                How do I create an item?
               </AccordionTrigger>
               <AccordionContent>
-                Los elementos se crean desde el detalle de un componente. Accedé al componente desde
-                la tabla que figura en el detalle del equipo, luego dirigite a la tabla
-                "Elementos" y hacé clic en el botón "+". El elemento quedará automáticamente
-                asignado a ese componente del equipo y disponible para ser asignado en rutas de mantenimiento.
+                Items are created from a component's details. Access the component from the table in
+                the equipment details, then go to the "Items" table and click the "+" button. The
+                item will be automatically assigned to that equipment component and available for
+                assignment in maintenance routes.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -138,24 +137,24 @@ export default function HelpPageContent() {
 
         {/* 📅 Mantenimientos */}
         <section>
-          <h2 className="text-xl font-semibold mb-2">Mantenimientos</h2>
+          <h2 className="text-xl font-semibold mb-2">Maintenance</h2>
           <Accordion type="single" collapsible className="w-full space-y-2">
-            <AccordionItem value="mant-1" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="mant-1" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Cómo se completa un mantenimiento?
+                How is maintenance completed?
               </AccordionTrigger>
               <AccordionContent>
-                El operario accede a su lista de tareas en el pane principal, selecciona el elemento pendiente,
-                completa el formulario y guarda los cambios.
+                The operator accesses their task list in the main panel, selects the pending item,
+                completes the form, and saves the changes.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="mant-2" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="mant-2" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿Qué ocurre si no se completa a tiempo?
+                What happens if it is not completed on time?
               </AccordionTrigger>
               <AccordionContent>
-                El mantenimiento pasará a estado "Atrasado". Esto genera una alerta en el sistema
-                para que el supervisor tome medidas.
+                The maintenance will be overdue. This will generate an alert in the system so the
+                supervisor can take action.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -165,14 +164,15 @@ export default function HelpPageContent() {
 
         {/* 🧾 Otros */}
         <section>
-          <h2 className="text-xl font-semibold mb-2">Otros</h2>
+          <h2 className="text-xl font-semibold mb-2">Others</h2>
           <Accordion type="single" collapsible className="w-full space-y-2">
-            <AccordionItem value="otros-2" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="otros-2" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                ¿El sistema envía notificaciones?
+                Does the system send notifications?
               </AccordionTrigger>
               <AccordionContent>
-                Sí, el sistema envía notificaciones por email. Se notifica ante el atraso de rutas y el registro de mantenimientos críticos.
+                Yes, the system sends email notifications. You are notified of route delays and
+                critical maintenance records.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -182,11 +182,11 @@ export default function HelpPageContent() {
 
         {/* 📜 Terminos y Condiciones */}
         <section>
-          <h2 className="text-xl font-semibold mb-2">Terminos y Condiciones</h2>
+          <h2 className="text-xl font-semibold mb-2">Terms and Conditions</h2>
           <Accordion type="single" collapsible className="w-full space-y-2">
-            <AccordionItem value="otros-1" className="bg-white px-4 py-1 border-none rounded-lg">
+            <AccordionItem value="otros-1" className="bg-accent px-4 py-1 border-none rounded-lg">
               <AccordionTrigger className="font-bold text-lg hover:no-underline data-[state=open]:text-sidebar-primary">
-                Ver terminos y condiciones
+                See terms and conditions
               </AccordionTrigger>
               <AccordionContent className="max-h-96 overflow-y-auto">
                 <TermsAndConditionsContent />

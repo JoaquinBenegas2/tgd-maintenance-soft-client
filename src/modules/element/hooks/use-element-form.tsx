@@ -88,16 +88,6 @@ export default function useElementForm({
         hideField: requestType === "create",
         loading: isLoading,
       },
-      {
-        name: "last_replacement_date",
-        type: "date",
-        label: "Last Replacement Date",
-        placeholder: "Last Replacement Date",
-        defaultValue: lastReplacementDate,
-        disabled: true,
-        hideField: requestType === "create",
-        loading: isLoading,
-      },
     ],
   };
 

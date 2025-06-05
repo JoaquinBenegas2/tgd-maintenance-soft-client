@@ -58,7 +58,7 @@ export default function Navbar({ session }: NavbarProps) {
               <span className="w-4">
                 <UserRound />
               </span>
-              <p>Perfil</p>
+              <p>Profile</p>
             </Link>
           </DropdownMenuItem>
           <div className="w-full my-1 px-2">
@@ -80,7 +80,7 @@ export default function Navbar({ session }: NavbarProps) {
               <span className="w-4">
                 <CircleHelp />
               </span>
-              <p>Ayuda</p>
+              <p>Help</p>
             </Link>
           </DropdownMenuItem>
           <div className="w-full my-1 px-2">

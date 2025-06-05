@@ -66,10 +66,10 @@ export default function MaintenanceTypeBarChart() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          <PencilRuler size={16} /> Total de mantenimientos este mes: {totalTasks}
+          <PencilRuler size={16} /> Total maintenance this month: {totalTasks}
         </div>
         <div className="flex items-center gap-2 leading-none text-muted-foreground">
-          <TrendingUp size={16} /> Tipo más común: {topType?.type} ({topType?.count} tareas)
+          <TrendingUp size={16} /> Most common type : {topType?.type} ({topType?.count} tareas)
         </div>
       </CardFooter>
     </Card>

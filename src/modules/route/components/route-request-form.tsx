@@ -46,27 +46,27 @@ export default function RouteRequestForm() {
     fields: [
       {
         name: "name",
-        label: "Nombre",
+        label: "Name",
         defaultValue: routeData.name,
         validations: { required: true },
       },
       {
         name: "description",
         type: "textarea",
-        label: "Descripción",
+        label: "Description",
         defaultValue: routeData.description,
       },
       {
         name: "periodicity_in_days",
         type: "number",
-        label: "Periodicidad (días)",
+        label: "Periodicity (days)",
         defaultValue: routeData.periodicity_in_days.toString(),
-        validations: { required: true },
+        validations: { required: true, min: 1 },
       },
       {
         name: "start_date",
         type: "date",
-        label: "Fecha de inicio",
+        label: "Start date",
         defaultValue: routeData.start_date,
         validations: { required: true },
       },

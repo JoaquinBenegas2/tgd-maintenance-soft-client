@@ -84,7 +84,7 @@ export function KPIOverview({
                   <p className="text-xs text-muted-foreground mt-1">{kpi.description}</p>
                   {kpi.variant !== "default" && (
                     <Badge variant={kpi.variant} className="mt-2">
-                      {kpi.variant === "destructive" ? "Atención" : "Bueno"}
+                      {kpi.variant === "destructive" ? "Attention" : "Good"}
                     </Badge>
                   )}
                 </div>

@@ -7,6 +7,7 @@ import { ElementStatusEnum, ElementWithoutComponentResponseDto } from "../models
 import ElementActionsCell from "./element-actions-cell";
 import ElementRequestDialog from "./element-request-dialog";
 import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
+import { DateCell } from "@/components/custom/cells/date-cell";
 
 interface ElementListProps {
   assetId?: number;
@@ -27,10 +28,8 @@ export default function ElementList({ assetId, component, isLoading }: ElementLi
     {
       header: "Last Maintenance",
       accessorKey: "last_maintenance_date",
-    },
-    {
-      header: "Last Replacement",
-      accessorKey: "last_replacement_date",
+      cellRenderer: (item) =>
+        item.last_maintenance_date ? <DateCell date={item.last_maintenance_date} /> : "-",
     },
     {
       header: "Status",

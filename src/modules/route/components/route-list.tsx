@@ -10,11 +10,14 @@ import { Badge } from "@/components/ui/badge";
 import RouteActionsCell from "./route-actions-cell";
 import { DateCell } from "@/components/custom/cells/date-cell";
 import WithPermission from "@/components/with-permission/with-permission";
+import { useHasRole } from "@/hooks/use-has-role/use-has-role";
 
 export default function RouteList() {
   const { data, isLoading } = useGetAllRoutes();
 
-  const columns: TableColumn<RouteResponseDto>[] = [
+  const isOperator = useHasRole("PLANT_OPERATOR");
+
+  const baseColumns: TableColumn<RouteResponseDto>[] = [
     { header: "Name", accessorKey: "name" },
     { header: "Description", accessorKey: "description" },
     {
@@ -37,12 +40,17 @@ export default function RouteList() {
           <Badge className="bg-red-600 hover:bg-red-500">Inactive</Badge>
         ),
     },
-    {
-      header: "Actions",
-      accessorKey: "actions",
-      cellRenderer: (item) => <RouteActionsCell item={item} />,
-    },
   ];
+
+  const actionColumn: TableColumn<RouteResponseDto> = {
+    header: "Actions",
+    accessorKey: "actions",
+    cellRenderer: (item) => <RouteActionsCell item={item} />,
+  };
+
+  const columns: TableColumn<RouteResponseDto>[] = isOperator
+    ? baseColumns
+    : [...baseColumns, actionColumn];
 
   return (
     <CustomTable

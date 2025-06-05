@@ -44,7 +44,7 @@ export function RouteDetailsDialog({
         <DialogHeader>
           <DialogTitle>{route.name}</DialogTitle>
           <DialogDescription>
-            Registra mantenimientos para los elementos de esta ruta
+            Perform maintenance for the elements of this route
           </DialogDescription>
         </DialogHeader>
 

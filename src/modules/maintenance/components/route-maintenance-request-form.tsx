@@ -23,16 +23,16 @@ import { useState } from "react";
 
 const steps = [
   {
-    label: "Tipo de mantenimiento",
-    description: "Tipo de mantenimiento a realizar",
+    label: "Maintenance type",
+    description: "Type of maintenance to be performed",
   },
   {
-    label: "Selección de formulario",
-    description: "Formulario de mantenimiento",
+    label: "Form selection",
+    description: "Maintenance form",
   },
   {
-    label: "Completar formulario",
-    description: "Rellena el formulario seleccionado",
+    label: "Complete form",
+    description: "Fill out the selected form",
   },
 ];
 
@@ -147,7 +147,7 @@ export default function RouteMaintenanceRequestForm({
             onCheckedChange={(checked) => setNotifySupervisor(checked as boolean)}
           />
           <Label htmlFor="notify-supervisor">
-            ¿Deseas notificar al supervisor que este mantenimiento es crítico?
+            Would you like to notify the supervisor that this maintenance is critical?
           </Label>
         </div>
         <Button variant="outline" disabled={isDisabledStep} onClick={prevStep}>

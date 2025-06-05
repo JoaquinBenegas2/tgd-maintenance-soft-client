@@ -77,8 +77,11 @@ export default function AIAssistantSheet({ open, onOpenChange }: AIAssistantShee
                                 <hr className="my-4 border-neutral-300 dark:border-neutral-700" />
                               ),
                               li: ({ children }) => (
-                                <li className="list-disc list-inside pl-4">{children}</li>
+                                <li className="list-disc list-outside ml-6 my-2">
+                                  <div className="[&>p]:inline [&>ul]:mt-1">{children}</div>
+                                </li>
                               ),
+                              p: ({ children }) => <p className={`${m.role === "user" ? "" : "mt-4"}`}>{children}</p>,
                             }}
                           >
                             {m.content.trim()}

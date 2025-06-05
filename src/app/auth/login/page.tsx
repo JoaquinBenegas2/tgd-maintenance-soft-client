@@ -30,7 +30,7 @@ export default function LoginPage() {
                 TGD MAINTENANCE SOFT
               </CardTitle>
             </div>
-            <CardDescription>Accede a tu cuenta para continuar</CardDescription>
+            <CardDescription>Log in to your account to continue</CardDescription>
           </CardHeader>
           <CardContent>
             <SignInButton className="w-full cursor-pointer" />

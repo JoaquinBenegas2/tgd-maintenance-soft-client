@@ -140,18 +140,18 @@ export function ReportsCharts({ maintenances, filters, routes }: ReportsChartsPr
     const totalPending = Math.max(totalPlanned - totalDone, 0);
 
     return [
-      { name: "Completados", value: totalDone },
-      { name: "Pendientes", value: totalPending },
+      { name: "Completed", value: totalDone },
+      { name: "Pending", value: totalPending },
     ];
   }, [routes, maintenances, filters]);
 
   const chartConfig = {
     count: {
-      label: "Cantidad",
+      label: "Quantity",
       color: "var(--chart-1)",
     },
     type: {
-      label: "Tipo",
+      label: "Type",
       color: "var(--chart-2)",
     },
     sector: {
