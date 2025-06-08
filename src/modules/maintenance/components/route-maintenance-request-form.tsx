@@ -7,7 +7,7 @@ import { ProgressElementResponseDto } from "@/modules/element/models/element-mod
 import { FormWithoutMaintenanceTypeResponseDto } from "@/modules/maintenance-form/models/maintenance-form-model";
 import { MaintenanceTypeWithFormsResponseDto } from "@/modules/maintenance-type/models/maintenance-type-model";
 import { ProgressRouteResponseDto } from "@/modules/route/models/route-model";
-import { Save } from "lucide-react";
+import { Loader2, Save } from "lucide-react";
 import { FaAngleLeft } from "react-icons/fa";
 import { useCreateMaintenance } from "../handlers/maintenance-handler";
 import { MaintenanceAnswerRequestDto } from "../models/maintenance-model";
@@ -46,7 +46,7 @@ export default function RouteMaintenanceRequestForm({
   onSubmit: () => void;
 }) {
   const { data: maintenanceTypes } = useGetMaintenanceTypesWithForms();
-  const { mutate: createMaintenance } = useCreateMaintenance();
+  const { mutate: createMaintenance, isPending: isCreating } = useCreateMaintenance();
   const [notifySupervisor, setNotifySupervisor] = useState(false);
 
   const { activeStep, nextStep, prevStep, resetSteps, isDisabledStep } = useStepper({
@@ -105,6 +105,7 @@ export default function RouteMaintenanceRequestForm({
         clickableSteps={false}
         labelOrientation="bottom"
       >
+
         {/* Step 1 */}
         <Step index={0} label={steps[0].label} description={steps[0].description}>
           {activeStep === 0 && (
@@ -116,6 +117,7 @@ export default function RouteMaintenanceRequestForm({
             </Card>
           )}
         </Step>
+
         {/* Step 2 */}
         <Step index={1} label={steps[1].label} description={steps[1].description}>
           {activeStep === 1 && (
@@ -126,6 +128,7 @@ export default function RouteMaintenanceRequestForm({
             </Card>
           )}
         </Step>
+
         {/* Step 3 */}
         <Step index={2} label={steps[2].label} description={steps[2].description}>
           {activeStep === 2 && (
@@ -138,6 +141,7 @@ export default function RouteMaintenanceRequestForm({
           )}
         </Step>
       </Stepper>
+
       {/* Navigation */}
       <div className="flex justify-end gap-4 mt-6">
         <div className="flex items-center space-x-2 mr-4">
@@ -154,8 +158,8 @@ export default function RouteMaintenanceRequestForm({
           <FaAngleLeft />
         </Button>
         {activeStep === steps.length - 1 && (
-          <Button form="maintenance-request-form">
-            <Save />
+          <Button form="maintenance-request-form" disabled={isCreating}>
+            {isCreating ? <Loader2 className="animate-spin" /> : <Save />}
           </Button>
         )}
       </div>

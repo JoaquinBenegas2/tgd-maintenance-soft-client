@@ -245,7 +245,7 @@ export default function RouteRequestForm() {
       {/* Navigation */}
       <div className="flex justify-end gap-4 mt-6">
         {activeStep === steps.length ? (
-          <Button onClick={handleSubmit}>Crear Ruta</Button>
+          <Button onClick={handleSubmit}>Create Route</Button>
         ) : (
           <>
             <Button variant="outline" disabled={isDisabledStep} onClick={prevStep}>

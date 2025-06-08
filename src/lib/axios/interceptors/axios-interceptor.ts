@@ -56,8 +56,8 @@ axiosInstance.interceptors.response.use(
     console.error("ERROR: ", errorMessage);
 
     if (error.response?.status === 409) {
-      toast.error("Error al eliminar", {
-        description: error.response?.data?.message || "No se pudo eliminar el recurso.",
+      toast.error("Error deleting resource", {
+        description: error.response?.data?.message || "An error occurred",
       });
     }
 

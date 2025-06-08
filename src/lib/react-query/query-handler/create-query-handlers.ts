@@ -130,7 +130,10 @@ export const createReactQueryHandlers = <Service extends GenericService<any, any
         optimisticUpdate: options?.optimisticUpdate ? options.optimisticUpdate : undefined,
         onSuccess: () => {
           toast.success("Updated successfully");
-        }
+        },
+        onError: (error: any) => {
+          toast.error(error.response?.data?.message || "An error occurred");
+        },
       }
     );
   };

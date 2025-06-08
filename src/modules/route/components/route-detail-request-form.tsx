@@ -4,6 +4,7 @@ import { RouteResponseDto } from "../models/route-model";
 import useCustomForm from "@/components/custom/form/hooks/use-custom-form";
 import { useUpdateRoute } from "../handlers/route-handler";
 import CustomForm from "@/components/custom/form/app-custom-form";
+import useUpdateRouteForm from "../hooks/use-update-route-form";
 
 interface RouteDetailRequestFormProps {
   initialData?: RouteResponseDto;
@@ -22,48 +23,11 @@ export default function RouteDetailRequestForm({
 }: RouteDetailRequestFormProps) {
   const { mutate: updateRoute, isPending: isUpdating } = useUpdateRoute();
 
-  const formConfig: CustomFormConfig = {
-    fieldClassName: "transition-all disabled:cursor-default disabled:opacity-75",
-    formColumns: 4,
-    fields: [
-      {
-        name: "name",
-        label: "Name",
-        defaultValue: initialData?.name,
-        disabled: !editMode,
-        validations: { required: true },
-        loading: !initialData,
-      },
-      {
-        name: "description",
-        type: "textarea",
-        label: "Description",
-        defaultValue: initialData?.description,
-        disabled: !editMode,
-        loading: !initialData,
-      },
-      {
-        name: "periodicity_in_days",
-        type: "number",
-        label: "Periodicity (days)",
-        fieldSpan: 2,
-        defaultValue: initialData?.periodicity_in_days.toString(),
-        disabled: !editMode,
-        validations: { required: true },
-        loading: !initialData,
-      },
-      {
-        name: "start_date",
-        type: "date",
-        label: "Start Date",
-        fieldSpan: 2,
-        defaultValue: initialData?.start_date,
-        disabled: !editMode,
-        validations: { required: true },
-        loading: !initialData,
-      },
-    ],
-  };
+  const { resetForm, ...restForm } = useUpdateRouteForm({
+    initialData: initialData,
+    editMode,
+    isLoading: !initialData,
+  });
 
   const onSubmit = (values: any) => {
     if (initialData?.id) {
@@ -80,8 +44,6 @@ export default function RouteDetailRequestForm({
       );
     }
   };
-
-  const { resetForm, ...restForm } = useCustomForm(formConfig);
 
   useEffect(() => {
     onExpose?.({ resetForm, isUpdating });

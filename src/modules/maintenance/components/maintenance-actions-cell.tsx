@@ -11,9 +11,10 @@ import { usePathname } from "next/navigation";
 import { MaintenanceResponseDto } from "../models/maintenance-model";
 import { useState } from "react";
 import MaintenanceDeleteAlertDialog from "./maintenance-delete-alert-dialog";
+import { usePlantPath } from "@/hooks/plant-path/use-plant-path";
 
 export default function MaintenanceActionsCell({ item }: { item: MaintenanceResponseDto }) {
-  const pathname = usePathname();
+  const plantPath = usePlantPath();
   const [deleteAlertDialogOpen, setDeleteAlertDialogOpen] = useState(false);
 
   return (
@@ -26,7 +27,7 @@ export default function MaintenanceActionsCell({ item }: { item: MaintenanceResp
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem className="p-0">
-            <Link href={`${pathname}/${item.id}`}>
+            <Link href={`${plantPath}/maintenance/${item.id}`}>
               <div className="flex items-center gap-2 cursor-pointer w-full px-2 py-1.5">
                 <Pen className="w-4 h-4" />
                 View Details
