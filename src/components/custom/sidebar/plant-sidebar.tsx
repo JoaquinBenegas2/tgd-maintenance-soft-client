@@ -10,6 +10,7 @@ import { SidebarItem } from "@/components/ui/sidebar/sidebar-item";
 import WithPermission from "@/components/with-permission/with-permission";
 import { usePlantPath } from "@/hooks/plant-path/use-plant-path";
 import { SignOutButton } from "@/modules/auth/components/sign-out-button";
+import { SupportButton } from "@/modules/support/components/support-button";
 import { usePlantStore } from "@/stores/selected-plant-store";
 import { Package, Tags, Wrench } from "lucide-react";
 import Image from "next/image";
@@ -120,6 +121,7 @@ export default function PlantSidebar() {
           className="hover:!text-primary hover:!bg-sidebar"
           onClick={handleGoBack}
         />
+        <SupportButton />
         <SignOutButton />
       </SidebarFooter>
     </Sidebar>
