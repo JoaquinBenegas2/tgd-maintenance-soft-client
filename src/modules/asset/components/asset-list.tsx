@@ -79,6 +79,7 @@ export default function AssetList() {
       header: "Actions",
       accessorKey: "actions",
       cellRenderer: (item) => <AssetActionsCell item={item} />,
+      excludeFromExcel: true,
     },
   ];
 
@@ -111,6 +112,7 @@ export default function AssetList() {
           </AssetRequestDialog>
         </div>
       }
+      showExcelReportButton={true}
     />
   );
 }

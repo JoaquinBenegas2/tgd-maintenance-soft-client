@@ -24,6 +24,7 @@ export default function MaintenanceList() {
       header: "Actions",
       accessorKey: "actions",
       cellRenderer: (item) => <MaintenanceActionsCell item={item} />,
+      excludeFromExcel: true,
     },
   ];
 
@@ -38,6 +39,7 @@ export default function MaintenanceList() {
       showColumnToggle={true}
       showRowFilters={true}
       showSearchBar={true}
+      showExcelReportButton={true}
     />
   );
 }

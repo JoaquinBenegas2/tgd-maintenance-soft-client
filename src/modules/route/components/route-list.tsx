@@ -46,6 +46,7 @@ export default function RouteList() {
     header: "Actions",
     accessorKey: "actions",
     cellRenderer: (item) => <RouteActionsCell item={item} />,
+    excludeFromExcel: true,
   };
 
   const columns: TableColumn<RouteResponseDto>[] = isOperator
@@ -74,6 +75,7 @@ export default function RouteList() {
       showColumnToggle={true}
       showRowFilters={true}
       showSearchBar={true}
+      showExcelReportButton={true}
     />
   );
 }

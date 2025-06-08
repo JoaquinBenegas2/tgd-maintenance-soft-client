@@ -26,13 +26,17 @@ import ColumnToggle from "./column-toggle";
 
 import Paginator from "@/components/custom/paginator/app-paginator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
+import exportToExcel from "@/utils/export-to-excel";
 import clsx from "clsx";
+import { format } from "date-fns";
 import { MdInfoOutline } from "react-icons/md";
 import "./app-custom-table.css";
 import RowFilters, { ActiveDateRangeFilter, ActiveFilter, RowFilter } from "./row-filters";
-import useIsMobile from "@/hooks/is-mobile/use-is-mobile";
-import { format } from "date-fns";
+import { Download } from "lucide-react";
+import TooltipButton from "../tooltip-button/tooltip-button";
 
 function IndeterminateCheckbox({
   indeterminate,
@@ -64,6 +68,7 @@ export interface TableColumn<T> {
   cellRenderer?: (item: T) => React.ReactNode;
   footer?: string | (() => React.ReactNode);
   columns?: TableColumn<any>[];
+  excludeFromExcel?: boolean;
 }
 
 export interface CustomTableProps<T> {
@@ -97,6 +102,7 @@ export interface CustomTableProps<T> {
   showRowFilters?: boolean;
   showColumnToggle?: boolean;
   showCheckbox?: boolean;
+  showExcelReportButton?: boolean;
   isDataLoading?: boolean;
 }
 
@@ -120,6 +126,7 @@ export default function CustomTable<T>({
   showRowFilters = true,
   showSearchBar = true,
   showCheckbox = false,
+  showExcelReportButton = false,
   isDataLoading,
 }: CustomTableProps<T>) {
   const isMobile = useIsMobile(768);
@@ -423,8 +430,21 @@ export default function CustomTable<T>({
         {/* Header */}
         {headerChildren}
 
-        {/* Column Filters */}
-        {showColumnToggle && <ColumnToggle table={table} />}
+        <div className="flex items-center gap-2">
+          {/* Column Filters */}
+          {showColumnToggle && <ColumnToggle table={table} />}
+
+          {showExcelReportButton && (
+            <TooltipButton
+              variant="ghost"
+              className="text-primary hover:text-primary/80"
+              onClick={() => exportToExcel(items, columns)}
+              tooltip="Export to Excel"
+            >
+              <Download className="w-4 h-4" />
+            </TooltipButton>
+          )}
+        </div>
       </div>
 
       {/* Table */}
