@@ -34,7 +34,7 @@ export default function RouteListItem({ route, delayed }: RouteListItemProps) {
         />
         <div className="flex-1">
           <p className="text-sm font-bold">{route.name}</p>
-          <p className="text-xs text-neutral-600">{route.description}</p>
+          <p className="text-xs text-neutral-600 dark:text-neutral-400">{route.description}</p>
         </div>
         <TooltipProvider>
           <Tooltip>

@@ -12,12 +12,18 @@ import { useState } from "react";
 import { ElementWithoutComponentResponseDto } from "../models/element-model";
 import ElementActiveAlertDialog from "./element-active-alert-dialog";
 import ElementDeleteAlertDialog from "./element-delete-alert-dialog";
+import { usePlantPath } from "@/hooks/plant-path/use-plant-path";
 
 export default function ElementActionsCell({ item }: { item: ElementWithoutComponentResponseDto }) {
   const [deleteAlertDialogOpen, setDeleteAlertDialogOpen] = useState(false);
   const [activeAlertDialogOpen, setActiveAlertDialogOpen] = useState(false);
 
   const pathname = usePathname();
+  const plantPath = usePlantPath();
+
+  const href = pathname.includes("/assets") && pathname.includes("/components")
+    ? `${pathname}/elements/${item.id}`
+    : `${plantPath}/elements/${item.id}`;
 
   return (
     <>
@@ -29,7 +35,7 @@ export default function ElementActionsCell({ item }: { item: ElementWithoutCompo
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem className="p-0">
-            <Link href={`${pathname}/elements/${item.id}`}>
+            <Link href={href}>
               <div className="flex items-center gap-2 cursor-pointer w-full px-2 py-1.5">
                 <Pen className="w-4 h-4" />
                 View Details

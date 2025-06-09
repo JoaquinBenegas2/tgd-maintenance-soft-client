@@ -12,7 +12,7 @@ import { usePlantPath } from "@/hooks/plant-path/use-plant-path";
 import { SignOutButton } from "@/modules/auth/components/sign-out-button";
 import { SupportButton } from "@/modules/support/components/support-button";
 import { usePlantStore } from "@/stores/selected-plant-store";
-import { Package, Tags, Wrench } from "lucide-react";
+import { Grip, Package, Puzzle, Tags, Wrench } from "lucide-react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
@@ -98,6 +98,20 @@ export default function PlantSidebar() {
               tooltip="Assets"
               href={`${basePath}/assets`}
               isActive={pathname.startsWith(`${basePath}/assets`)}
+            />
+            <SidebarItem
+              icon={<Puzzle className="h-5 w-5" />}
+              text="Components"
+              tooltip="Components"
+              href={`${basePath}/components`}
+              isActive={pathname.startsWith(`${basePath}/components`)}
+            />
+            <SidebarItem
+              icon={<Grip className="h-5 w-5" />}
+              text="Elements"
+              tooltip="Elements"
+              href={`${basePath}/elements`}
+              isActive={pathname.startsWith(`${basePath}/elements`)}
             />
           </SidebarGroup>
         </WithPermission>

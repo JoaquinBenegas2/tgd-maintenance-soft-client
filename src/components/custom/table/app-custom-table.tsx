@@ -437,7 +437,7 @@ export default function CustomTable<T>({
           {showExcelReportButton && (
             <TooltipButton
               variant="ghost"
-              className="text-primary hover:text-primary/80"
+              className="hover:text-primary"
               onClick={() => exportToExcel(items, columns)}
               tooltip="Export to Excel"
             >
@@ -531,9 +531,9 @@ export default function CustomTable<T>({
             ) : (
               <tr>
                 <td colSpan={columns.length + 1} className="py-4">
-                  <Alert variant="default" className="bg-sky-50 text-sky-700 border-sky-700">
+                  <Alert variant="default" className="bg-sky-500/15 text-sky-700 border-sky-700 dark:text-sky-300 dark:border-sky-600">
                     <MdInfoOutline className="h-4 w-4 inline-block mr-2" />
-                    <AlertDescription className="text-sky-700">No results.</AlertDescription>
+                    <AlertDescription className="text-sky-700 dark:text-sky-300">No results.</AlertDescription>
                   </Alert>
                 </td>
               </tr>

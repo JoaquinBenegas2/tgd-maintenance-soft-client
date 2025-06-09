@@ -19,6 +19,10 @@ export default function ComponentActionsCell({ item }: { item: ComponentWithoutA
 
   const pathname = usePathname();
 
+  const href = pathname.includes("/assets")
+  ? `${pathname}/components/${item.id}`
+  : `${pathname}/${item.id}`;
+
   return (
     <>
       <DropdownMenu>
@@ -29,7 +33,7 @@ export default function ComponentActionsCell({ item }: { item: ComponentWithoutA
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem className="p-0">
-            <Link href={`${pathname}/components/${item.id}`}>
+            <Link href={href}>
               <div className="flex items-center gap-2 cursor-pointer w-full px-2 py-1.5">
                 <Pen className="w-4 h-4" />
                 View Details
