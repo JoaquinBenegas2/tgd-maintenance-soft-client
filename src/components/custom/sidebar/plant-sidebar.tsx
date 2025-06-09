@@ -108,7 +108,14 @@ export default function PlantSidebar() {
               text="Maintenance"
               tooltip="Maintenance"
               href={`${basePath}/reports/maintenance`}
-              isActive={pathname.startsWith(`${basePath}/reports`)}
+              isActive={pathname.startsWith(`${basePath}/reports/maintenance`)}
+            />
+            <SidebarItem
+              icon={<RiSurveyLine className="h-5 w-5" />}
+              text="Forms"
+              tooltip="Forms"
+              href={`${basePath}/reports/forms`}
+              isActive={pathname.startsWith(`${basePath}/reports/forms`)}
             />
           </SidebarGroup>
         </WithPermission>

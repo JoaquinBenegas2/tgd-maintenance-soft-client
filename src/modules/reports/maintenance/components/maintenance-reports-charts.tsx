@@ -19,7 +19,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ReportsFilters } from "./reports-page-content";
+import { ReportsFilters } from "./maintenance-reports-page-content";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { PencilRuler } from "lucide-react";
 import { MdInfoOutline } from "react-icons/md";

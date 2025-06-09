@@ -3,68 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { MaintenanceAnswerResponseDto } from "@/modules/maintenance/models/maintenance-model";
 import { FormFieldType } from "../models/maintenance-form-model";
 
-export function generateColumnsFromAnswers2(
-  answers: MaintenanceAnswerResponseDto[]
-): ColumnDef<MaintenanceAnswerResponseDto>[] {
-  console.log({ answers});
-  
-
-  const uniqueFields = Array.from(
-    new Map(answers.map((ans) => [ans.form_field.id, ans.form_field])).values()
-  );
-
-  return uniqueFields.map((field) => ({
-    header: field.name,
-    accessorKey: `field_${field.id}`,
-    cellRenderer: (answer: any) => {
-      console.log({field, answer});
-      
-/*       const answer = row.original; */
-      if (answer.form_field.id !== field.id) return null;
-
-      switch (field.type) {
-        case FormFieldType.CHECKBOX:
-          return (
-            <Badge
-              className={
-                answer.value === "true"
-                  ? "bg-green-600 hover:bg-green-500"
-                  : "bg-red-600 hover:bg-red-500"
-              }
-            >
-              {answer.value === "true" ? "Yes" : "No"}
-            </Badge>
-          );
-
-        case FormFieldType.RADIO:
-        case FormFieldType.SELECT:
-        case FormFieldType.COMBOBOX:
-          const option = field.options.find((opt: any) => opt.id.toString() === answer.value);
-          return <span>{option?.value ?? answer.value}</span>;
-
-        case FormFieldType.DATE:
-          return <span>{new Date(answer.value).toLocaleDateString()}</span>;
-
-        case FormFieldType.FILE:
-          return (
-            <a
-              href={answer.value}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 underline"
-            >
-              View file
-            </a>
-          );
-
-        default:
-          return <span>{answer.value}</span>;
-      }
-    },
-  }));
-}
-
-
 export function generateColumnsFromAnswers(
   answers: MaintenanceAnswerResponseDto[]
 ): ColumnDef<Record<string, any>>[] {

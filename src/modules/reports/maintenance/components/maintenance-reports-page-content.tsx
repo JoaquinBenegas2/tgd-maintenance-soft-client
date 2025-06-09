@@ -3,16 +3,16 @@
 import PageContainer from "@/components/custom/page/app-page-container";
 import PageHeader from "@/components/custom/page/app-page-header";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useGetAllMaintenances } from "@/modules/maintenance/handlers/maintenance-handler";
 import type { MaintenanceResponseDto } from "@/modules/maintenance/models/maintenance-model";
+import { useGetDelayedRoutes, useGetRoutesByStatus } from "@/modules/route/handlers/route-handler";
+import { RouteResponseDto } from "@/modules/route/models/route-model";
 import { format, subWeeks } from "date-fns";
 import { es } from "date-fns/locale";
 import { useMemo, useState } from "react";
-import { KPIOverview } from "./kpi-overview";
-import { ReportsCharts } from "./reports-charts";
-import { ReportsFilterHeader } from "./reports-filter-header";
-import { useGetAllMaintenances } from "@/modules/maintenance/handlers/maintenance-handler";
-import { useGetAllRoutes, useGetDelayedRoutes, useGetRoutesByStatus } from "@/modules/route/handlers/route-handler";
-import { RouteResponseDto } from "@/modules/route/models/route-model";
+import { KPIOverview } from "./maintenance-kpi-overview";
+import { ReportsCharts } from "./maintenance-reports-charts";
+import { ReportsFilterHeader } from "./maintenance-reports-filter-header";
 
 export interface ReportsFilters {
   dateFrom: Date;
@@ -182,7 +182,7 @@ export function ReportsPageContent() {
   if (isLoading || delayedRoutesLoading || routesLoading) {
     return (
       <PageContainer>
-        <PageHeader title="Reports" description="Maintenance analysis and metrics" />
+        <PageHeader title="Maintenance reports" description="Maintenance analysis and metrics" />
         <div className="space-y-6">
           <Skeleton className="h-36 w-full" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -213,12 +213,10 @@ export function ReportsPageContent() {
   return (
     <PageContainer>
       <PageHeader
-        title="Reports"
-        description={`Maintenance analysis and metrics: ${format(
-          filters.dateFrom,
-          "dd/MM/yyyy",
-          { locale: es }
-        )} al ${format(filters.dateTo, "dd/MM/yyyy", { locale: es })}`}
+        title="Maintenance reports"
+        description={`Maintenance analysis and metrics: ${format(filters.dateFrom, "dd/MM/yyyy", {
+          locale: es,
+        })} to ${format(filters.dateTo, "dd/MM/yyyy", { locale: es })}`}
       />
 
       <div className="space-y-6">
