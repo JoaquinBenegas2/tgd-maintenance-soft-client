@@ -69,7 +69,7 @@ export default function MaintenanceTypeBarChart() {
           <PencilRuler size={16} /> Total maintenance this month: {totalTasks}
         </div>
         <div className="flex items-center gap-2 leading-none text-muted-foreground">
-          <TrendingUp size={16} /> Most common type : {topType?.type} ({topType?.count} tareas)
+          <TrendingUp size={16} /> Most common type : {topType?.type} ({topType?.count} tasks)
         </div>
       </CardFooter>
     </Card>
