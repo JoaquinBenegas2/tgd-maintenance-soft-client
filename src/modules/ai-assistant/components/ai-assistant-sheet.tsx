@@ -94,7 +94,7 @@ export default function AIAssistantSheet({ open, onOpenChange }: AIAssistantShee
                             size="sm"
                             className="mt-6"
                             onClick={() =>
-                              run("Ver más recomendaciones", "improvement-suggestions", m.content)
+                              run("See more recommendations", "improvement-suggestions", m.content)
                             }
                           >
                             See more recommendations
