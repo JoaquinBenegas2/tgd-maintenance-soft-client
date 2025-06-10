@@ -67,7 +67,7 @@ export const useUpdateComponentStatus = () => {
     ({ id, status }) => componentService.updateStatus(id, status),
     {
       onSuccess: () => {
-        toast.success("Estado del componente actualizado");
+        toast.success("Updated component status");
         queryClient.invalidateQueries({ queryKey: ["assets"] });
       },
       onError: (err) => {

@@ -86,7 +86,7 @@ export const useUpdateRouteStatus = () => {
     ({ routeId, status }) => routeService.updateStatus(routeId, status),
     {
       onSuccess: () => {
-        toast.success("Estado actualizado correctamente");
+        toast.success("Status updated successfully");
       },
     }
   );

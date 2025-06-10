@@ -36,7 +36,7 @@ export default function LoginPage() {
             <SignInButton className="w-full cursor-pointer" />
           </CardContent>
           <CardFooter className="flex justify-center">
-            <p>TGD S.A © - 35 AÑOS 1990 - 2025</p>
+            <p>TGD S.A © - 35 YEARS 1990 - 2025</p>
           </CardFooter>
         </Card>
       </div>

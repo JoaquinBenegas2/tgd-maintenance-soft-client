@@ -4,6 +4,7 @@ import { usePlantStore } from "@/stores/selected-plant-store";
 import { useSession } from "next-auth/react";
 import { useCallback, useRef, useState } from "react";
 import { QueryType } from "../models/ai-assistant";
+import { env } from "next-runtime-env";
 
 export type ChatMessage = {
   role: "user" | "assistant";
@@ -11,7 +12,7 @@ export type ChatMessage = {
   type?: QueryType;
 };
 
-const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+const apiUrl = env("NEXT_PUBLIC_API_BASE_URL");
 
 export const useAiGeneration = () => {
   const { data: session } = useSession();

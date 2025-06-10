@@ -10,6 +10,7 @@ import { PlantResponseDto } from "../models/plant-model";
 import { useAssignUserToPlant, useUnassignUserFromPlant } from "../handlers/plant-handler";
 import { useQueryClient } from "@tanstack/react-query";
 import { useHasRole } from "@/hooks/use-has-role/use-has-role";
+import { useSession } from "next-auth/react";
 
 interface AssignUserToPlantTableProps {
   plant?: PlantResponseDto;
@@ -26,6 +27,8 @@ export default function AssignUserToPlantTable({ plant }: AssignUserToPlantTable
   const { mutateAsync: unassignUserFromPlantAsync } = useUnassignUserFromPlant();
 
   const assignedUserIds = plant?.assigned_users?.map((u) => u.id) || [];
+
+  const { data: session } = useSession();
 
   const isUserPlantManager = useHasRole("PLANT_MANAGER");
 
@@ -58,7 +61,13 @@ export default function AssignUserToPlantTable({ plant }: AssignUserToPlantTable
         const isAssigned = assignedUserIds.includes(user.id);
         const isLoading = loadingUserId === user.id;
 
-        const disabled = isLoading || ((user.role === "PLANT_MANAGER" || user.role === "PLANT_SUPERVISOR") && !isUserPlantManager);
+        console.log({ user, session });
+
+        const disabled =
+          isLoading ||
+          ((user.role === "PLANT_MANAGER" || user.role === "PLANT_SUPERVISOR") &&
+            !isUserPlantManager) ||
+          user.email === session?.user?.email;
 
         const handleClick = async () => {
           setLoadingUserId(user.id);

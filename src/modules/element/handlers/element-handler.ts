@@ -79,7 +79,7 @@ export const useUpdateElementStatus = () => {
     ({ id, status }) => elementService.updateStatus(id, status),
     {
       onSuccess: () => {
-        toast.success("Estado del elemento actualizado");
+        toast.success("Updated item status");
         queryClient.invalidateQueries({ queryKey: ["routes"] });
       },
       onError: (err) => {

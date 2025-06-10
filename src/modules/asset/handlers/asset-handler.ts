@@ -3,6 +3,7 @@ import { assetService } from "../services/asset-service";
 import { useCustomMutation } from "@/lib/react-query/custom/custom-query";
 import { AssetResponseDto } from "../models/asset-model";
 import { toast } from "sonner";
+import { queryClient } from "@/providers/providers";
 
 const QUERY_KEY = "assets";
 
@@ -20,7 +21,9 @@ export const useUpdateAssetStatus = () => {
     ({ id, status }) => assetService.updateStatus(id, status),
     {
       onSuccess: () => {
-        toast.success("Estado del activo actualizado");
+        queryClient.invalidateQueries({queryKey: ["components"]});
+        queryClient.invalidateQueries({queryKey: ["elements"]});
+        toast.success("Updated asset status");
       },
     }
   );
