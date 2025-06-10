@@ -1,132 +1,123 @@
 export default function TermsAndConditionsContent() {
   return (
     <>
-      <h3 className="text-xl font-bold">Términos y Condiciones de Uso</h3>
-      {/* Introducción */}
+      <h3 className="text-xl font-bold">Terms and Conditions of Use</h3>
+
+      {/* Introduction */}
       <p className="mt-2">
-        Bienvenido a <span className="font-bold">TGD Maintenance Soft</span> proporcionado por{" "}
-        <span className="font-bold">TGD Company</span>. Nos complace ofrecerle acceso al Servicio
-        (como se define más abajo), sujeto a estos términos y condiciones (los "Términos de
-        Servicio") y a la Política de Privacidad correspondiente de TGD Company. Al acceder y
-        utilizar el Servicio, usted expresa su consentimiento, acuerdo y entendimiento de los
-        Términos de Servicio y la Política de Privacidad. Si no está de acuerdo con los Términos de
-        Servicio o la Política de Privacidad, no utilice el Servicio.
+        Welcome to <span className="font-bold">TGD Maintenance Soft</span> provided by{" "}
+        <span className="font-bold">TGD Company</span>. We are pleased to offer you access to the
+        Service (as defined below), subject to these terms and conditions (the "Terms of Service")
+        and TGD Company's corresponding Privacy Policy. By accessing and using the Service, you
+        express your consent, agreement, and understanding of the Terms of Service and the Privacy
+        Policy. If you do not agree with the Terms of Service or the Privacy Policy, do not use the
+        Service.
       </p>
       <p className="mt-2">
-        Si utiliza el Servicio está aceptando las modalidades operativas en vigencia descriptas más
-        adelante, las declara conocer y aceptar, incluidas las que se habiliten en el futuro y en
-        los términos y condiciones que a continuación se detallan:
+        By using the Service, you accept the current operational modalities described below and
+        declare that you understand and accept them, including those that may be enabled in the
+        future under the terms and conditions detailed below:
       </p>
 
-      {/* Operaciones habilitadas */}
-      <h4 className="text-lg font-bold mt-4">1. Operaciones habilitadas</h4>
+      {/* Enabled operations */}
+      <h4 className="text-lg font-bold mt-4">1. Enabled operations</h4>
       <p className="mt-2">
-        Las operaciones habilitadas son aquellas que estarán disponibles para los clientes, quienes
-        deberán cumplir los requisitos que se encuentren vigentes en su momento para operar el
-        Servicio. Las mismas podrán ser ampliadas o restringidas por el proveedor, comunicándolo
-        previamente con una antelación no menor a 60 días, y comprenden entre otras, sin que pueda
-        entenderse taxativamente, las que se indican a continuación:
+        The enabled operations are those available to clients, who must meet the applicable
+        requirements at the time to use the Service. These may be expanded or restricted by the
+        provider with prior notice of no less than 60 days, and include, among others, but not
+        limited to:
       </p>
       <ul className="list-disc list-inside pl-4">
-        <li>Registro y gestión de mantenimientos preventivos y correctivos.</li>
-        <li>Planificación de rutas de mantenimiento con asignación de operarios.</li>
+        <li>Recording and managing preventive and corrective maintenance tasks.</li>
+        <li>Planning maintenance routes with operator assignments.</li>
         <li>
-          Administración de equipos, componentes, elementos, sectores y fabricantes industriales.
+          Managing equipment, components, elements, sectors, and industrial manufacturers.
         </li>
-        <li>Carga y seguimiento de formularios por tipo de mantenimiento.</li>
-        <li>Generación de reportes e indicadores de desempeño (KPIs).</li>
+        <li>Filling and tracking forms based on maintenance types.</li>
+        <li>Generating reports and performance indicators (KPIs).</li>
         <li>
-          Administración de usuarios por planta, incluyendo roles como administrador de planta,
-          supervisor y operario.
+          Managing users per plant, including roles such as plant administrator, supervisor, and
+          operator.
         </li>
-        <li>Envío de notificaciones ante eventos específicos (correo electrónico).</li>
+        <li>Sending notifications for specific events (via email).</li>
       </ul>
 
-      {/* Transacciones */}
-      <h4 className="text-lg font-bold mt-4">2. Transacciones</h4>
+      {/* Transactions */}
+      <h4 className="text-lg font-bold mt-4">2. Transactions</h4>
       <p className="mt-2">
-        En ningún caso debe entenderse que la solicitud de un producto o servicio implica obligación
-        alguna para el acceso y uso del Servicio. Para operar el Servicio se requerirá siempre que
-        se trate de clientes de TGD Company, quienes podrán acceder mediante cualquier dispositivo
-        con conexión a la red Internet. El cliente deberá proporcionar el correo electrónico
-        registrado y la clave personal, que será provista por la aplicación como requisito previo a
-        la primera operación, en la forma que le sea requerida.
+        Requesting a product or service does not imply any obligation to access or use the Service.
+        To operate the Service, clients of TGD Company are required to use an internet-connected
+        device. The client must provide the registered email and a personal password, which will be
+        provided by the application before the first operation.
       </p>
       <p className="mt-2">
-        La clave personal y todo otro mecanismo adicional de autenticación provisto por TGD Company
-        tiene el carácter de secreto e intransferible, y por lo tanto el usuario asume las
-        consecuencias de su divulgación a terceros, liberando a TGD Company de toda responsabilidad
-        que de ello se derive.
+        The personal password and any additional authentication mechanisms provided by TGD Company
+        are confidential and non-transferable. The user assumes responsibility for disclosing such
+        data and releases TGD Company from any resulting liability.
       </p>
       <p className="mt-2">
-        En ningún caso TGD Company requerirá que le suministre la totalidad de los datos de
-        autenticación, ni enviará correos electrónicos solicitando información confidencial.
+        TGD Company will never request the complete set of authentication credentials, nor send
+        emails requesting confidential information.
       </p>
 
-      {/* Costo del servicio */}
-      <h4 className="text-lg font-bold mt-4">3. Costo del servicio</h4>
+      {/* Service fees */}
+      <h4 className="text-lg font-bold mt-4">3. Service fees</h4>
       <p className="mt-2">
-        TGD Company podrá cobrar comisiones por el mantenimiento y/o uso de este Servicio o los que
-        en el futuro implemente, entendiéndose facultado expresamente para efectuar los
-        correspondientes débitos en las cuentas del cliente, aún en descubierto, por lo que el
-        usuario presta para ello su expresa conformidad. En caso de cualquier modificación a la
-        presente previsión, TGD Company lo comunicará con al menos 60 días de antelación.
+        TGD Company may charge fees for the maintenance and/or use of this Service or any future
+        services implemented. The company is expressly authorized to debit the corresponding amounts
+        from the client’s accounts, even if overdrawn, and the user gives their explicit consent for
+        such actions. Any changes to this policy will be communicated at least 60 days in advance.
       </p>
 
-      {/* Vigencia */}
-      <h4 className="text-lg font-bold mt-4">4. Vigencia</h4>
+      {/* Validity */}
+      <h4 className="text-lg font-bold mt-4">4. Validity</h4>
       <p className="mt-2">
-        El Usuario podrá dejar sin efecto la relación que surja de la presente, en forma inmediata,
-        sin otra responsabilidad que la derivada de los gastos originados hasta ese momento.
+        The user may terminate the relationship derived from this agreement immediately, without
+        further responsibility other than the expenses incurred up to that point.
       </p>
       <p className="mt-2">
-        Si el cliente incumpliera cualquiera de las obligaciones asumidas en su relación contractual
-        con TGD Company, o de los presentes Términos y Condiciones, la empresa podrá decretar la
-        caducidad del presente Servicio en forma inmediata, sin que ello genere derecho a
-        indemnización o compensación alguna. TGD Company podrá dejar sin efecto la relación que
-        surja de la presente, con un preaviso mínimo de 60 días, sin otra responsabilidad.
-      </p>
-
-      {/* Validez de operaciones y notificaciones */}
-      <h4 className="text-lg font-bold mt-4">5. Validez de operaciones y notificaciones</h4>
-      <p className="mt-2">
-        Los registros emitidos por la aplicación serán prueba suficiente de las operaciones cursadas
-        por dicho canal. El usuario renuncia expresamente a cuestionar la idoneidad o habilidad de
-        ese medio de prueba. A los efectos del cumplimiento de disposiciones legales o
-        contractuales, se otorga a las notificaciones por este medio el mismo alcance de las
-        notificaciones mediante documento escrito.
+        If the client fails to comply with any of the obligations arising from their contractual
+        relationship with TGD Company or from these Terms and Conditions, the company may
+        immediately terminate the Service without compensation. TGD Company may also terminate the
+        relationship, providing at least 60 days’ notice, without further responsibility.
       </p>
 
-      {/* Propiedad Intelectual */}
-      <h4 className="text-lg font-bold mt-4">6. Propiedad Intelectual</h4>
+      {/* Validity of operations and notifications */}
+      <h4 className="text-lg font-bold mt-4">5. Validity of operations and notifications</h4>
       <p className="mt-2">
-        El software TGD Company y todo su contenido, incluyendo código, diseño, logotipos,
-        estructuras de datos y funcionalidades específicas para la gestión de mantenimiento
-        industrial, se encuentran protegidos por la ley 11.723 de propiedad intelectual de la
-        República Argentina.
-      </p>
-      <p className="mt-2">
-        Queda prohibida la reproducción total o parcial, modificación, distribución, transmisión o
-        cualquier otro uso no autorizado del contenido del sistema sin el consentimiento previo y
-        por escrito de TGD Company.
+        The records generated by the application will serve as sufficient proof of transactions made
+        through this channel. The user expressly waives the right to challenge the validity of such
+        evidence. Notifications issued through this means are considered equivalent to written
+        documents for legal or contractual purposes.
       </p>
 
-      {/* Privacidad de la información */}
-      <h4 className="text-lg font-bold mt-4">7. Privacidad de la información</h4>
+      {/* Intellectual property */}
+      <h4 className="text-lg font-bold mt-4">6. Intellectual property</h4>
       <p className="mt-2">
-        Para utilizar los Servicios ofrecidos por TGD Company, los Usuarios deberán facilitar
-        determinados datos de carácter personal. Su información personal se procesa y almacena en
-        servidores o medios magnéticos que mantienen altos estándares de seguridad y protección
-        tanto física como tecnológica.
+        The TGD Company software and all its content, including code, design, logos, data
+        structures, and features designed for industrial maintenance management, are protected under
+        Argentina’s Law 11.723 on intellectual property.
+      </p>
+      <p className="mt-2">
+        Reproducing, modifying, distributing, transmitting, or using any part of the system’s
+        content without prior written consent from TGD Company is strictly prohibited.
       </p>
 
-      {/* Legislación aplicable */}
-      <h3 className="text-lg font-bold mt-4">Legislación aplicable</h3>
+      {/* Privacy of information */}
+      <h4 className="text-lg font-bold mt-4">7. Privacy of information</h4>
       <p className="mt-2">
-        Este acuerdo se regirá e interpretará conforme a las leyes de la República Argentina. Ante
-        cualquier controversia, las partes se someten a la jurisdicción de los tribunales ordinarios
-        con asiento en la Ciudad Autónoma de Buenos Aires, renunciando expresamente a cualquier otro
-        fuero o jurisdicción.
+        To use the services offered by TGD Company, users must provide certain personal information.
+        Your personal data is processed and stored on servers or magnetic media that uphold high
+        standards of security and protection, both physical and technological.
+      </p>
+
+      {/* Applicable law */}
+      <h3 className="text-lg font-bold mt-4">Applicable law</h3>
+      <p className="mt-2">
+        This agreement shall be governed by and construed in accordance with the laws of the
+        Argentine Republic. In the event of any dispute, the parties submit to the jurisdiction of
+        the ordinary courts located in the Autonomous City of Buenos Aires, expressly waiving any
+        other jurisdiction.
       </p>
     </>
   );
