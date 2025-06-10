@@ -20,7 +20,7 @@ interface AIAssistantSheetProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const queryOptions: AIQuery[] = [{ type: "daily-summary", label: "Resumen técnico diario" }];
+const queryOptions: AIQuery[] = [{ type: "daily-summary", label: "Daily Technical Summary" }];
 
 export default function AIAssistantSheet({ open, onOpenChange }: AIAssistantSheetProps) {
   const { messages, run, isLoading } = useAiGeneration();
@@ -34,10 +34,9 @@ export default function AIAssistantSheet({ open, onOpenChange }: AIAssistantShee
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-[95%] sm:max-w-[640px]">
         <SheetHeader>
-          <SheetTitle>Asistente IA</SheetTitle>
+          <SheetTitle>AI Assistant</SheetTitle>
           <SheetDescription>
-            Herramienta que utiliza IA para responder a tus preguntas y ayudarte con el
-            mantenimiento de tu planta.
+            A tool that uses AI to answer your questions and help you with your plant maintenance.
           </SheetDescription>
         </SheetHeader>
 
@@ -81,7 +80,9 @@ export default function AIAssistantSheet({ open, onOpenChange }: AIAssistantShee
                                   <div className="[&>p]:inline [&>ul]:mt-1">{children}</div>
                                 </li>
                               ),
-                              p: ({ children }) => <p className={`${m.role === "user" ? "" : "mt-4"}`}>{children}</p>,
+                              p: ({ children }) => (
+                                <p className={`${m.role === "user" ? "" : "mt-4"}`}>{children}</p>
+                              ),
                             }}
                           >
                             {m.content.trim()}
@@ -96,7 +97,7 @@ export default function AIAssistantSheet({ open, onOpenChange }: AIAssistantShee
                               run("Ver más recomendaciones", "improvement-suggestions", m.content)
                             }
                           >
-                            Ver más recomendaciones
+                            See more recommendations
                           </Button>
                         )}
                       </div>

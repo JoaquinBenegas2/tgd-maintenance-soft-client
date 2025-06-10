@@ -40,7 +40,7 @@ export function RouteDetailsDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[1280px] min-h-[768px] flex flex-col overflow-x-hidden">
+      <DialogContent className="sm:max-w-[1280px] min-h-[768px] flex flex-col overflow-hidden">
         <DialogHeader>
           <DialogTitle>{route.name}</DialogTitle>
           <DialogDescription>

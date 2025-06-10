@@ -5,7 +5,7 @@ import {
   MaintenanceAnswerResponseDto,
   MaintenanceResponseDto,
 } from "@/modules/maintenance/models/maintenance-model";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 import { ReportsFilters } from "./form-reports-page-content";
 import GenericList from "@/components/custom/generic-list/generic-list";
 import { Card, CardContent } from "@/components/ui/card";
@@ -74,7 +74,7 @@ export default function GeneratedFormTabsContent({
         const answers =
           maintenanceByForm[form.id]?.map((m) => ({
             ...mapAnswersToRecord(m.answers),
-            maintenance_date: format(new Date(m.maintenance_date), "dd/MM/yyyy"),
+            maintenance_date: format(parse(m.maintenance_date, "yyyy-MM-dd", new Date()), "dd/MM/yyyy"),
             route: m.route.name,
             element: m.element.name,
           })) || [];

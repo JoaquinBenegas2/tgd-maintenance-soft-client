@@ -8,7 +8,6 @@ import { SidebarHeader } from "@/components/ui/sidebar/sidebar-header";
 import { SidebarItem } from "@/components/ui/sidebar/sidebar-item";
 import WithPermission from "@/components/with-permission/with-permission";
 import { SignOutButton } from "@/modules/auth/components/sign-out-button";
-import { SupportButton } from "@/modules/support/components/support-button";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { MdPeople } from "react-icons/md";
@@ -39,7 +38,6 @@ export default function AppSidebar() {
         </WithPermission>
       </SidebarContent>
       <SidebarFooter>
-        <SupportButton />
         <SignOutButton />
       </SidebarFooter>
     </Sidebar>
