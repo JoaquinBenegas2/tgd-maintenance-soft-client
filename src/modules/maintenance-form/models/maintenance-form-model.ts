@@ -28,6 +28,9 @@ export interface FormFieldResponseDto {
 
 export interface FormRequestDto {
   name: string;
+  description: string;
+  maintenanceTypeId: number;
+  fields: FieldBuilder[];
 }
 
 export interface FormResponseDto {
@@ -43,4 +46,14 @@ export interface FormWithoutMaintenanceTypeResponseDto {
   name: string;
   description: string;
   fields: FormFieldResponseDto[];
+}
+
+export type FieldType = "TEXT" | "TEXTAREA" | "NUMBER" | "DATE" | "SELECT";
+
+export interface FieldBuilder {
+  id: string;
+  name: string;
+  type: FieldType;
+  required: boolean;
+  options: string[];
 }

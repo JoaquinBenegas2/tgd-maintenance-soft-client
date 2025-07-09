@@ -10,8 +10,10 @@ import { Toaster } from "sonner";
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 30 * 1000, // 30 seconds
-      refetchInterval: 30 * 1000, // 30 seconds
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchInterval: false,
     },
   },
 });

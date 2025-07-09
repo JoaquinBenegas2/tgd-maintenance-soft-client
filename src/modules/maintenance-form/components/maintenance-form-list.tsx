@@ -5,6 +5,9 @@ import { useGetAllForms } from "../handlers/maintenance-form-handler";
 import { FormResponseDto } from "../models/maintenance-form-model";
 import MaintenanceFormActionsCell from "./maintenance-form-actions-cell";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import MaintenanceFormRequestDialog from "./maintenance-form-request-dialog";
 
 export default function MaintenanceFormList() {
   const { data, isLoading } = useGetAllForms();
@@ -32,6 +35,15 @@ export default function MaintenanceFormList() {
       items={data || []}
       columns={columns}
       isDataLoading={isLoading}
+      headerChildren={
+        <div className="w-full flex justify-end">
+          <MaintenanceFormRequestDialog>
+            <Button className="w-full md:w-auto">
+              <Plus />
+            </Button>
+          </MaintenanceFormRequestDialog>
+        </div>
+      }
       showColumnToggle={true}
       showRowFilters={true}
       showSearchBar={true}
