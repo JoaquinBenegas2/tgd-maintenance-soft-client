@@ -165,7 +165,7 @@ export function ReportsCharts({ maintenances, filters, routes }: ReportsChartsPr
       {/* Maintenance by Type Chart */}
       <Card>
         <CardHeader>
-          <CardTitle>Maintenance by Type</CardTitle>
+          <CardTitle>Maintenance by type</CardTitle>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig} className="h-[300px]">
@@ -196,7 +196,7 @@ export function ReportsCharts({ maintenances, filters, routes }: ReportsChartsPr
       {/* Maintenance by Sector Chart */}
       <Card>
         <CardHeader>
-          <CardTitle>Maintenance by Sector</CardTitle>
+          <CardTitle>Maintenance by sector</CardTitle>
         </CardHeader>
         <CardContent>
           {maintenanceBySectorData.length === 0 ? (
@@ -227,7 +227,7 @@ export function ReportsCharts({ maintenances, filters, routes }: ReportsChartsPr
       {/* Timeline Chart */}
       <Card>
         <CardHeader>
-          <CardTitle>Evolution Timeline</CardTitle>
+          <CardTitle>Evolution timeline</CardTitle>
         </CardHeader>
         <CardContent>
           {maintenanceTimelineData.length === 0 ? (

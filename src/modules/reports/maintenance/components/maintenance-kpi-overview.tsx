@@ -20,7 +20,7 @@ export function KPIOverview({
 }: KPIOverviewProps) {
   const kpiCards = [
     {
-      title: "Total Maintenance",
+      title: "Total maintenance",
       value: totalCount.toString(),
       icon: ClipboardList,
       description: "Registered in the period",
@@ -28,7 +28,7 @@ export function KPIOverview({
       variant: "default" as const,
     },
     {
-      title: "Overdue Maintenance",
+      title: "Overdue maintenance",
       value: overdueCount.toString(),
       icon: AlertTriangle,
       description: "They require attention",
@@ -36,7 +36,7 @@ export function KPIOverview({
       variant: overdueCount > 5 ? ("destructive" as const) : ("default" as const),
     },
     {
-      title: "Compliance Rate",
+      title: "Compliance rate",
       value: `${complianceRate}%`,
       icon: CheckCircle,
       description: "Maintenance completed",
@@ -44,7 +44,7 @@ export function KPIOverview({
       variant: complianceRate >= 80 ? ("secondary" as const) : ("destructive" as const),
     },
     {
-      title: "Active Routes",
+      title: "Active routes",
       value: activeRoutesCount.toString(),
       icon: Map,
       description: "Scheduled during this period",

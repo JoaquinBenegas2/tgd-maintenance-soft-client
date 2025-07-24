@@ -10,7 +10,7 @@ export default function DelayedRouteList() {
   return (
     <Card className="w-full col-span-1 md:col-span-2 xl:col-span-1">
       <CardHeader>
-        <CardTitle>Delayed Routes</CardTitle>
+        <CardTitle>Delayed routes</CardTitle>
         <CardDescription>Routes that are delayed</CardDescription>
       </CardHeader>
       <CardContent>

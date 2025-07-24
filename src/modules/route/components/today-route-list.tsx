@@ -10,7 +10,7 @@ export default function TodayRouteList() {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Today Routes</CardTitle>
+        <CardTitle>Today routes</CardTitle>
         <CardDescription>Routes to be completed today</CardDescription>
       </CardHeader>
       <CardContent>

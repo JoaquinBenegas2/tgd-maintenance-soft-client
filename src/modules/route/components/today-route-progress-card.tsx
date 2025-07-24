@@ -49,7 +49,7 @@ export default function TodayRouteProgressCard() {
   return (
     <Card className="flex flex-col col-span-1 w-full overflow-y-auto">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Today Progress</CardTitle>
+        <CardTitle>Today progress</CardTitle>
         <CardDescription>Based on all todays routes</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
