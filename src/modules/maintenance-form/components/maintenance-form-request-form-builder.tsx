@@ -31,7 +31,7 @@ type FormValues = {
 
 export default function MaintenanceFormRequestFormBuilder() {
   const { data: maintenanceTypes = [] } = useGetAllMaintenanceTypes();
-  const { mutate: createMaintenanceForm, isPending: isCreating } = useCreateForm();
+  const { mutateAsync: createMaintenanceForm, isPending: isCreating } = useCreateForm();
 
   const form = useForm<FormValues>({
     defaultValues: {
@@ -40,7 +40,8 @@ export default function MaintenanceFormRequestFormBuilder() {
       maintenanceTypeId: maintenanceTypes[0]?.id.toString() || "",
       fields: [{ id: uuidv4(), name: "", type: "TEXT", required: true, options: [] }],
     },
-    mode: 'onBlur',
+    mode: "onSubmit",
+    // No se puede validar el array aquí, se hace en el submit
   });
 
   const {
@@ -50,6 +51,9 @@ export default function MaintenanceFormRequestFormBuilder() {
     watch,
     setValue,
     formState: { errors },
+    reset,
+    setError,
+    clearErrors,
   } = form;
 
   const { fields, append, remove } = useFieldArray({ control, name: "fields" });
@@ -58,6 +62,7 @@ export default function MaintenanceFormRequestFormBuilder() {
   const appendOption = (fieldIndex: number) => {
     const opts = watch(`fields.${fieldIndex}.options`);
     setValue(`fields.${fieldIndex}.options`, [...opts, ""]);
+    clearErrors("fields");
   };
 
   const removeOption = (fieldIndex: number, optIndex: number) => {
@@ -66,21 +71,43 @@ export default function MaintenanceFormRequestFormBuilder() {
       `fields.${fieldIndex}.options`,
       opts.filter((_: any, i: number) => i !== optIndex)
     );
+    clearErrors("fields");
   };
 
-  const onSubmit = (data: FormValues) => {
-    createMaintenanceForm({
-      name: data.name,
-      description: data.description,
-      maintenanceTypeId: parseInt(data.maintenanceTypeId, 10),
-      fields: data.fields.map((f, idx) => ({
-        name: f.name,
-        type: f.type,
-        required: f.required,
-        order: idx,
-        options: f.type === "SELECT" ? f.options : [],
-      })),
-    } as any);
+  const onSubmit = async (data: FormValues) => {
+    // Validación custom antes de enviar
+    const selectFieldWithoutOptions = data.fields.find(
+      (f) => f.type === "SELECT" && (!f.options || f.options.length === 0 || f.options.every(opt => !opt.trim()))
+    );
+    console.log({selectFieldWithoutOptions});
+
+    if (selectFieldWithoutOptions) {
+      setError("fields", { type: "manual", message: "All select fields must have at least one option." });
+      return;
+    }
+    try {
+      await createMaintenanceForm({
+        name: data.name,
+        description: data.description,
+        maintenanceTypeId: parseInt(data.maintenanceTypeId, 10),
+        fields: data.fields.map((f, idx) => ({
+          name: f.name,
+          type: f.type,
+          required: f.required,
+          order: idx,
+          options: f.type === "SELECT" ? f.options : [],
+        })),
+      } as any);
+      // Si no hubo error, resetea
+      reset({
+        name: "",
+        description: "",
+        maintenanceTypeId: maintenanceTypes[0]?.id.toString() || "",
+        fields: [{ id: uuidv4(), name: "", type: "TEXT", required: true, options: [] }],
+      });
+    } catch (e) {
+      // Manejo de error opcional
+    }
   };
 
   return (
@@ -184,13 +211,21 @@ export default function MaintenanceFormRequestFormBuilder() {
                   removeOption={removeOption}
                   watch={watch}
                   errors={errors}
+                  isSubmitted={form.formState.isSubmitted}
                 />
               ))}
             </SortableContext>
           </DndContext>
         </div>
 
+        {errors.fields && (
+          <FormMessage className="text-red-500 text-sm mt-1">
+            {errors.fields.message}
+          </FormMessage>
+        )}
+
         <Button
+          type="button"
           onClick={() =>
             append({ id: uuidv4(), name: "", type: "TEXT", required: false, options: [] })
           }

@@ -33,6 +33,7 @@ interface SortableFieldProps {
   removeOption: (fieldIndex: number, optIndex: number) => void;
   watch: UseFormWatch<FormValues>;
   errors: FieldErrors<FormValues>;
+  isSubmitted: boolean;
 }
 
 export default function SortableField({
@@ -45,6 +46,7 @@ export default function SortableField({
   removeOption,
   watch,
   errors,
+  isSubmitted,
 }: SortableFieldProps) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: fieldItem.id,
@@ -53,6 +55,8 @@ export default function SortableField({
     transform: CSS.Transform.toString(transform),
     transition,
   };
+
+  console.log(isSubmitted);
 
   const type = watch(`fields.${index}.type`);
   const options = watch(`fields.${index}.options`);
@@ -96,9 +100,9 @@ export default function SortableField({
             <Input
               {...register(`fields.${index}.name`, { required: "Field name is required" })}
               placeholder="Field name"
-              className={fieldErrors?.name ? "border-red-500" : ""}
+              className={fieldErrors?.name && isSubmitted ? "border-red-500" : ""}
             />
-            {fieldErrors?.name && (
+            {isSubmitted && fieldErrors?.name && (
               <FormMessage className="text-red-500 text-sm mt-1">
                 {fieldErrors.name.message as string}
               </FormMessage>
@@ -133,7 +137,7 @@ export default function SortableField({
             {type === "SELECT" && (
               <FormItem className="gap-1">
                 <Label>Options</Label>
-                <Button variant={"ghost"} className="border-1" onClick={() => appendOption(index)}>
+                <Button type="button" variant={"ghost"} className="border-1" onClick={() => appendOption(index)}>
                   <Plus />
                 </Button>
               </FormItem>
@@ -144,6 +148,7 @@ export default function SortableField({
         {/* Delete button */}
         <div className="flex flex-col justify-end ml-4">
           <Button
+            type="button"
             disabled={index === 0}
             variant="outline"
             size="icon"
@@ -167,15 +172,15 @@ export default function SortableField({
                       validate: (v) => !!v || "Option cannot be empty",
                     })}
                     placeholder="Option value"
-                    className={optError ? "border-red-500" : ""}
+                    className={optError && isSubmitted ? "border-red-500" : ""}
                   />
-                  {optError && (
+                  {isSubmitted && optError && (
                     <FormMessage className="text-red-500 text-sm mt-1">
                       {(optError as any).message}
                     </FormMessage>
                   )}
                 </div>
-                <Button variant="destructive" size="icon" onClick={() => removeOption(index, idx)}>
+                <Button type="button" variant="destructive" size="icon" onClick={() => removeOption(index, idx)}>
                   <X />
                 </Button>
               </div>
